@@ -1,0 +1,101 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+  </section>
+  
+  <section class="content">
+  
+    <div class="jumbotron welcome-jumbotron">
+       <h3>Energia Consumo</h3>
+       <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+          [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+       <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+       <div class="grid-containert"  >
+        <div class="grid-item">
+          <h6>Energia Água</h6>
+        </div>
+        
+        <div class="grid-item">
+            <h6>Energia Esgoto</h6>
+        </div>
+        
+
+      </div>
+        <div class="grid-container2"  >
+       <div class="grid-item">
+            <h6>Orçado:</h6>
+        </div>
+        <div class="grid-item" >
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+            size="30" pInputText disabled="disabled" [(ngModel)]="orcagua" readonly="readonly"  />
+        </div>
+        <div class="grid-item">
+            <h6>Orçado:</h6>
+        </div>
+        <div class="grid-item" >
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+            size="30" pInputText disabled="disabled" [(ngModel)]="orcesgoto" readonly="readonly"  />
+        </div>
+        <div class="grid-item">
+            <h6>Realizado:</h6>
+        </div>
+        <div class="grid-item">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+            id="real" type="text" size="30" [(ngModel)]="realiagua" style="background: white !important;" pInputText pKeyFilter="num"/>
+        </div>
+        <div class="grid-item">
+            <h6>Realizado:</h6>
+        </div>
+        <div class="grid-item">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+            id="real" type="text" size="30" [(ngModel)]="realiesgoto" style="background: white !important;" pInputText pKeyFilter="num"/>
+        </div>
+
+        <div class="grid-item">
+                <h6>Previsão:</h6>
+            </div>
+        <div class="grid-item">
+                <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                id="prevagua" type="text" size="30" [(ngModel)]="forecastagua" style="background: white !important;" pInputText pKeyFilter="num"/>
+            </div>
+
+            <div class="grid-item">
+                    <h6>Previsão:</h6>
+                </div>
+            <div class="grid-item">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="prevesgoto" type="text" size="30" [(ngModel)]="forecastesgoto" style="background: white !important;" pInputText pKeyFilter="num"/>
+                </div>
+
+      </div>
+      <h6>Comentários</h6>
+
+      <div class="grid-containerc"  >
+          <div class="grid-item">
+              <textarea id= "com" [rows]="5" [cols]="45" pInputTextarea autoResize="autoResize" 
+              style="text-align: center; background: white !important;" [(ngModel)]="comentagua"> </textarea>
+          </div>
+          
+          <div class="grid-item">
+              <textarea id= "com" [rows]="5" [cols]="45" pInputTextarea autoResize="autoResize" 
+              style="text-align: center; background: white !important;" [(ngModel)]="comentesgoto"> </textarea>
+          </div>
+
+      </div>
+
+      <div Style="padding-top: 10px !important;">
+          <p-button icon="pi pi-check" label="Enviar" 
+          (click)="enviar(orcagua, orcesgoto, realiagua, realiesgoto, comentagua, comentesgoto, forecastagua, forecastesgoto)"></p-button>
+     </div>
+
+    </div>
+  <!--</form>-->
+  
+  </section>
+  <!-- FIM DO CONTEÚDO -->

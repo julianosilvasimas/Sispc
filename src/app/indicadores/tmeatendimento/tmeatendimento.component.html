@@ -1,0 +1,58 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+  </section>
+  
+  <section class="content">
+  
+    <div class="jumbotron welcome-jumbotron">
+       <h3>TME Atendimento</h3>
+       <p-toast [style]="{marginTop: '80px'}"></p-toast>
+       <div>
+          <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+          [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+       </div>
+       <div class="grid-container2"  >
+        <div class="grid-item">
+          <h6>Orcado:</h6>
+        </div>
+        
+        <div class="grid-item">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            size="30" pInputText disabled="disabled" [(ngModel)]="orcado" readonly="readonly"  />
+        </div>
+        
+       <div class="grid-item">
+            <h6>Atendentes:</h6>
+        </div>
+        <div class="grid-item" >
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            size="30"  [(ngModel)]="atendente" pInputText pKeyFilter="num"/>
+        </div>
+        <div class="grid-item">
+            <h6>Realizado:</h6>
+        </div>
+        <div class="grid-item">
+            <p-inputMask class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" mask="99:99:99"
+             id="real" type="text" size="28" [(ngModel)]="realizado"  pInputText pKeyFilter="num"></p-inputMask>
+        </div>
+        <div class="grid-item">
+            <h6>Atendimentos:</h6>
+        </div>
+        <div class="grid-item">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            size="30"  [(ngModel)]="atendimento" pInputText pKeyFilter="num"/>
+        </div>
+      </div>
+      <h6>Comentários</h6>
+      <textarea id= "com" [rows]="5" [cols]="100" pInputTextarea autoResize="autoResize" 
+      style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+      
+      <div Style="padding-top: 10px !important;">
+            <p-button icon="pi pi-check" label="Enviar"  (click)="enviar(orcado, realizado, coment, atendente, atendimento)"></p-button>
+       </div>
+
+    </div>
+  <!--</form>-->
+  
+  </section>
+  <!-- FIM DO CONTEÚDO -->

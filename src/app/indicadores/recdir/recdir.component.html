@@ -1,0 +1,53 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+</section>
+
+<section class="content">
+
+  <div class="jumbotron welcome-jumbotron">
+     <h3>Receita Direta - Ciclo</h3>
+     <p-toast [style]="{marginTop: '80px'}"></p-toast>
+     
+     <div class="grid-container">
+      <div class="grid-item">
+        <h6>Ciclo:</h6>
+      </div>
+      
+      <div class="grid-item">
+          <p-autoComplete [(ngModel)]="brand" [suggestions]="filteredBrands" (completeMethod)="filterBrands($event)" [size]="25"
+          [minLength]="1"  [dropdown]="true" (onSelect)="pesquisar(brand)"> 
+          <ng-template let-brand pTemplate="item">
+              <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                 <div style="font-size:18px ;float:right ;margin:10px 10px 0 0">{{brand}}</div>
+              </div>
+          </ng-template>
+      </p-autoComplete>
+      </div>
+     <div class="grid-item">
+          <h6>Orçado:</h6>
+      </div>
+      <div class="grid-item">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" 
+            size="30" disabled="disabled" [(ngModel)]="orcado" readonly="readonly"  />
+      </div>
+      <div class="grid-item">
+          <h6>Realizado:</h6>
+      </div>
+      <div class="grid-item">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched"
+            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" 
+            size="30" [(ngModel)]="realizado" style="background: white !important;" pInputText pKeyFilter="num"/>
+      </div>
+    </div>
+    <h6>Comentários</h6>
+    <textarea [rows]="5" [cols]="90" pInputTextarea autoResize="autoResize" [(ngModel)]="coment"></textarea>
+    
+    <div Style="padding-top: 10px !important;">
+            <p-button icon="pi pi-check" label="Enviar"  (click)="enviar(orcado, realizado, coment)"></p-button>
+       </div>
+
+  </div>
+
+</section>
+<!-- FIM DO CONTEÚDO -->
