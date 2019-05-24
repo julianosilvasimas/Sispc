@@ -13,3 +13,9 @@ export interface Indicadores{
     comentario: string,
     forecast: number,
 }
+
+export interface Precos{
+    id: number,
+    produto: string,
+    preco: number
+}

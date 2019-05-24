@@ -83,6 +83,9 @@ export class TopoComponent implements OnInit {
                       {label: 'Energia Kwh',
                       routerLink: '/energia',
                       icon: 'pi pi-fw pi-plus'},
+                      {label: 'Custos Op. Água',
+                      routerLink: '/custosopa',
+                      icon: 'pi pi-fw pi-plus'},
               ]
             },
               {label: 'Serviços',
@@ -110,6 +113,14 @@ export class TopoComponent implements OnInit {
                       routerLink: '/percentprazo',
                       icon: 'pi pi-fw pi-plus'},
               ]},
+              {label: 'Imports',
+              icon: 'pi pi-fw pi-upload',
+              items: [
+                      {label: 'Update via Csv',
+                      routerLink: '/import',
+                      icon: 'pi pi-fw pi-plus'},
+              ]
+            },
           ];
       
   }

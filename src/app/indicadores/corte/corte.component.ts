@@ -61,7 +61,7 @@ export class CorteComponent implements OnInit, OnChanges {
       invalidDate.setDate(today.getDate() - 1);
       this.invalidDates = [today,invalidDate];
 
-      this.indicador = "Ligacoes Qtd"
+      this.indicador = "Cortes"
   }
 
 

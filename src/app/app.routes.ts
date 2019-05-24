@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router'
+import {Routes, RouterModule} from '@angular/router'
 
 import {IndicadoresComponent} from './indicadores/indicadores.component';
 import { RecdirComponent } from './indicadores/recdir/recdir.component';
@@ -26,6 +26,8 @@ import { EnergiaComponent } from './indicadores/energia/energia.component';
 import { EnergiavalComponent } from './indicadores/energiaval/energiaval.component';
 import { FiscvalComponent } from './indicadores/fiscval/fiscval.component';
 import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component';
+import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
+import { ImportcsvComponent } from './importcsv/importcsv.component';
 
 
 export const ROUTES: Routes = [
@@ -55,4 +57,6 @@ export const ROUTES: Routes = [
     {path: 'energiaval', component: EnergiavalComponent},
     {path: 'fiscval', component: FiscvalComponent},
     {path: 'manutagua', component: ManutaguaComponent},
+    {path: 'custosopa', component: CustosopaguaComponent},
+    {path: 'import',   component: ImportcsvComponent}
 ]

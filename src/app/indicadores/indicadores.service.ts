@@ -1,5 +1,5 @@
 import{Injectable} from '@angular/core'
-import {Indicadores} from './indicadores.model'
+import {Indicadores, Precos} from './indicadores.model'
 
 
 import {API_CONFIG} from '../app.api'
@@ -25,9 +25,37 @@ export class IndicadoresService{
       return  this.http.get(`${API_CONFIG}/inddiarios/${indicador}/${filtro}/${referencia}`) 
       .pipe(map((res : Indicadores[]) => res, catchError(ErrorHandler.handleError)))
     }
-    
 
-    indicadoresByDay(id: any, orcado: Number, real: Number, pdd: Number, atendente: Number, atendimento: Number, coment: string, forecast: Number): Observable<any>{
+    // Busca da lista de precos de produto
+    precos(): Observable<Precos[]>{
+      return  this.http.get(`${API_CONFIG}/precos`) 
+      .pipe(map((res : Precos[]) => res, catchError(ErrorHandler.handleError)))
+   }
+
+    // Busca de precos de produto por id
+    precosById(id : string): Observable<Precos[]>{
+      return  this.http.get(`${API_CONFIG}/precos/${id}`) 
+      .pipe(map((res : Precos[]) => res, catchError(ErrorHandler.handleError)))
+   }
+    
+   // Método put para tabela de preços
+   precosUpdate(id: any, produto: string, preco: number): Observable<any>{
+    const headers = new HttpHeaders()
+    .set("Content-Type", "application/json",
+    );
+    let bodyObj = {
+                    "id": id,
+                    "produto": produto,
+                    "preco": preco
+                   };
+   
+    return this.http.put(`${API_CONFIG}/precos/${id}`,JSON.stringify(bodyObj) , {headers},)
+                    .pipe(map(this.extractData),
+                    catchError(ErrorHandler.handleError))
+  }
+
+  // Método put para tabela de indicadores diário
+  indicadoresByDay(id: any, orcado: Number, real: Number, pdd: Number, atendente: Number, atendimento: Number, coment: string, forecast: Number): Observable<any>{
         const headers = new HttpHeaders()
         .set("Content-Type", "application/json",
         );

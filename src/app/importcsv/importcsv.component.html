@@ -1,0 +1,53 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+</section>
+
+<section class="content">
+
+  <div class="jumbotronop welcome-jumbotron">
+<h4>Clique ou Arraste o arquivo para caixa abaixo</h4>
+<table>
+  <tr>
+      <td>
+        <!-- value={{selectedImageFile}} se der problemas -->
+          <input style="margin-left: 450px; padding: 5px" type="file" 
+              #fileImportInput
+              name="File Upload" 
+              id="txtFileUpload" 
+              class="btn btn-primary" 
+              (change)="fileChangeListener($event)" 
+              accept=".csv"
+              
+              />
+      </td>
+      <td style="padding: 5px;">
+          <input type="button" 
+              name="Reset" 
+              id="txtFileReset" 
+              class="btn btn-primary" 
+              (click)="fileReset()" 
+              value="Reset"/>
+      </td>
+  </tr>
+</table>
+
+<div>
+  <table class="table table-responsive table-hover" border="1" 
+      style="width : 70%; background-color:white; padding-left: 3px; margin-left: 180px;">
+      <tbody>
+          <ng-container *ngFor="let csvRec of csvRecords;let i=index">
+              <tr>
+                  <ng-container *ngFor="let data of csvRec;let j=index"> 
+                      <td>{{data}}</td>
+                  </ng-container>
+              </tr>
+          </ng-container>
+      </tbody>
+  </table>
+</div>
+
+</div>
+<!--</form>-->
+
+</section>
+<!-- FIM DO CONTEÚDO -->

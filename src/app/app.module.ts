@@ -39,6 +39,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {DropdownModule} from 'primeng/dropdown';
+import {TabViewModule} from 'primeng/tabview';
 
 import {IndicadoresService} from 'src/app/indicadores/indicadores.service';
 import { RecindComponent } from './indicadores/recind/recind.component';
@@ -54,6 +55,11 @@ import { EnergiaComponent } from './indicadores/energia/energia.component';
 import { EnergiavalComponent } from './indicadores/energiaval/energiaval.component';
 import { FiscvalComponent } from './indicadores/fiscval/fiscval.component';
 import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component';
+import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
+import { ImportcsvComponent } from './importcsv/importcsv.component';
+import { FileUtil } from './importcsv/file.util';
+import { CommonModule } from '@angular/common';
+import {Constants} from './importcsv/importcsv.constants';
 
 @NgModule({
   declarations: [
@@ -85,6 +91,8 @@ import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component'
     EnergiavalComponent,
     FiscvalComponent,
     ManutaguaComponent,
+    CustosopaguaComponent,
+    ImportcsvComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,10 +120,14 @@ import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component'
     MessagesModule,
     MessageModule,
     ToastModule,
-    DropdownModule
+    DropdownModule,
+    TabViewModule,
+    CommonModule
   ],
   providers: [
-    IndicadoresService
+    IndicadoresService,
+    Constants,
+    FileUtil
   ],
   bootstrap: [
     AppComponent,
