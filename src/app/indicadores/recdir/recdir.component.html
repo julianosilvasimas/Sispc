@@ -39,12 +39,22 @@
             currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" 
             size="30" [(ngModel)]="realizado" style="background: white !important;" />
       </div>
+
+      <div class="grid-item">
+            <h6>Previsão(Mês):</h6>
+        </div>
+        <div class="grid-item">
+              <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched"
+              currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" 
+              size="30" [(ngModel)]="forecast" style="background: white !important;" />
+        </div>
+      
     </div>
     <h6>Comentários</h6>
     <textarea [rows]="5" [cols]="90" pInputTextarea autoResize="autoResize" [(ngModel)]="coment"></textarea>
     
     <div Style="padding-top: 10px !important;">
-            <p-button icon="pi pi-check" label="Enviar"  (click)="enviar(orcado, realizado, coment)"></p-button>
+            <p-button icon="pi pi-check" label="Enviar"  (click)="enviar(orcado, realizado, coment, forecast)"></p-button>
        </div>
 
   </div>

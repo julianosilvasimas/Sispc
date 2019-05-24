@@ -83,12 +83,12 @@ export class EnergiaComponent implements OnInit, OnChanges {
 
 
   enviar(orcagua, orcesgoto, realiagua, realiesgoto, comentagua, comentesgoto, foreagua, foreesgoto){
-    
+    /*
     this.hoje = new Date();
     if (this.hoje.valueOf() - this.date6.valueOf() > parseFloat(`${API_BLOCK}`)){
         this.messageService.add({severity:'warn', summary: 'Alerta!', detail:'Não é possível edição anterior a 3 dias!!!', life: 5000});
     }else{
-
+*/
     //Pesquisa para captura do id e dos dados do formulário
       console.log("Enviando Dados!")
     this.IndicadoresService.indicadores(this.filtro, this.indicador1)
@@ -153,7 +153,7 @@ export class EnergiaComponent implements OnInit, OnChanges {
 
 
     //*****************************************************************//
-    }
+    //}   <- se colocar o if de bloqueio de data
     }
 
  //*****************************************************************//

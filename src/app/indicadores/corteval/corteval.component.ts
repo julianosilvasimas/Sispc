@@ -75,7 +75,7 @@ export class CortevalComponent implements OnInit, OnChanges {
 //**************************************************************//
 
 
-  enviar(orc, real, com){
+  enviar(orc, real, com, fcst){
     
     this.hoje = new Date();
     if (this.hoje.valueOf() - this.date6.valueOf() > parseFloat(`${API_BLOCK}`)){
@@ -94,7 +94,7 @@ export class CortevalComponent implements OnInit, OnChanges {
         this.atendente = 0
         this.atendimento = 0
         this.coment = com
-        this.forecast = 0
+        this.forecast = fcst.valueOf()
 
     //Enviando dados para o Backend
     this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
@@ -131,6 +131,7 @@ export class CortevalComponent implements OnInit, OnChanges {
       this.orcado = indicadores[0].orcado
       this.realizado = indicadores[0].reali
       this.coment = indicadores[0].comentario
+      this.forecast = indicadores[0].forecast
       console.log("requisicao bem sucedida!", indicadores[0]);
       },
       

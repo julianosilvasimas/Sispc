@@ -78,7 +78,7 @@ ngOnChanges(changes: SimpleChanges) {
 //**************************************************************//
 
 
-enviar(orc, real, com){
+enviar(orc, real, com, fcst){
   
   
 
@@ -94,7 +94,7 @@ enviar(orc, real, com){
       this.atendente = 0
       this.atendimento = 0
       this.coment = com
-      this.forecast = 0
+      this.forecast = fcst.valueOf()
 
 
   //Enviando dados para o Backend
@@ -131,6 +131,7 @@ this.IndicadoresService.indicadoresCiclo(brands, this.indicador, this.referencia
     this.orcado = indicadores[0].orcado
     this.realizado = indicadores[0].reali
     this.coment = indicadores[0].comentario
+    this.forecast = indicadores[0].forecast
     console.log("requisicao bem sucedida!", indicadores[0]);
     },
     
