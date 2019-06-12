@@ -1,0 +1,93 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+</section>
+
+<section class="content">
+
+  <div class="jumbotron welcome-jumbotron">
+      <h3>Utilização de Veículos(S/GPS)</h3>
+      
+        <div class="grid-containert"  >
+
+            <div class="grid-item">
+                <h6>Data</h6>
+              </div>
+              
+              <div class="grid-item">
+                  <h6>Placa</h6>
+              </div> 
+
+          <div class="grid-item">
+              <p-calendar class="ppcal" [(ngModel)]="date6" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+              [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Selecione a data" ></p-calendar>
+           <p-toast [style]="{marginTop: '80px'}"></p-toast>
+          </div>
+          
+          <div class="grid-item">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+              type="text" size="30" [(ngModel)]="placa" style="background: white !important;" placeholder="Digite a placa" />
+          </div> 
+        </div>
+
+      
+
+       <div class="grid-containert"  >
+
+          <div class="grid-item">
+              <h6>Condutor</h6>
+            </div>
+            
+            <div class="grid-item">
+                <h6>Km Inicial</h6>
+            </div> 
+      
+       <div class="grid-item" >
+        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+        type="text" size="30" [(ngModel)]="condutor" style="background: white !important;" placeholder="Nome do Condutor" />
+       </div>
+       
+       <div class="grid-item" >
+        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+        currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2, suffix: ' Km' }" 
+        type="text" size="30" [(ngModel)]="inicio" style="background: white !important;" placeholder="Hodômetro Inicial" />
+       </div>
+
+       <div class="grid-item">
+        <h6>KM Final</h6>
+      </div>
+      
+      <div class="grid-item">
+          <h6>Distância Percorrida</h6>
+      </div> 
+
+ <div class="grid-item" >
+  <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, inicio)"
+  currencyMask [options]="{ prefix: ' ', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix: ' Km'}" 
+  type="text" size="30" [(ngModel)]="fim" style="background: white !important;" placeholder="Hodômetro Final" />
+ </div>
+ 
+ <div class="grid-item" >
+  <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+  currencyMask [options]="{ prefix: ' ', thousands: '', decimal: ',', align: 'center' , precision: 2, suffix: ' Km' }" 
+  type="text" size="30" [(ngModel)]="km" style="background: #E2E2E2 !important;"  />
+ </div>
+
+
+
+     </div>
+
+     <div Style="padding-top: 40px !important;">
+         <p-button icon="pi pi-check" label="Enviar" 
+         (click)="enviar( placa, condutor ,date6,  inicio, fim , km )"></p-button>
+    </div>
+
+   </div>
+
+
+    
+<!--</form>-->
+
+</section>
+<!-- FIM DO CONTEÚDO -->
+
+

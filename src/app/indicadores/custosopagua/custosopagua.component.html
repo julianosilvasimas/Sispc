@@ -111,7 +111,7 @@
                   </div>
                   <div class="grid-item-aba" >
                       <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Pac(Sulfato)')"
-                      currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                      currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
                       id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
                        pInputText pKeyFilter="num" style= "width: 180px !important"/>
                   </div>
@@ -168,7 +168,7 @@
                     </div>
                     <div class="grid-item-aba" >
                         <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Fluor')"
-                        currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                        currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
                         id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
                          pInputText pKeyFilter="num" style= "width: 180px !important"/>
                     </div>
@@ -224,7 +224,7 @@
                     </div>
                     <div class="grid-item-aba" >
                         <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Cal')"
-                        currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                        currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
                         id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
                          pInputText pKeyFilter="num" style= "width: 180px !important"/>
                     </div>
@@ -280,7 +280,7 @@
                     </div>
                     <div class="grid-item-aba" >
                         <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Cloro')"
-                        currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                        currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
                         id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
                          pInputText pKeyFilter="num" style= "width: 180px !important"/>
                     </div>
@@ -336,7 +336,7 @@
                     </div>
                     <div class="grid-item-aba" >
                         <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Polimero')"
-                        currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                        currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
                         id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
                          pInputText pKeyFilter="num" style= "width: 180px !important"/>
                     </div>
@@ -365,6 +365,10 @@
           </p-tabPanel>
 
           <p-tabPanel header="Turbidez" rightIcon="pi pi-fw pi-clock">
+                <div class="grid-item">
+                        <p-dropdown [options]="items"  [(ngModel)]="item" placeholder="Por favor, selecione o setor" optionLabel="label"></p-dropdown>
+                        <!--<p>Item selecionado: {{item ? item.supervisao : 'none'}}</p>  (onHide)="pesquisar(date6, item.supervisao)" -->
+                      </div> 
               <div class="grid-containerop" >
                   <div class="grid-containerop" >
                   <div class="grid-item-aba">

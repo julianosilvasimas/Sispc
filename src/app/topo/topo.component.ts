@@ -113,6 +113,33 @@ export class TopoComponent implements OnInit {
                       routerLink: '/percentprazo',
                       icon: 'pi pi-fw pi-plus'},
               ]},
+              {label: 'Administrativo',
+              icon: 'pi pi-fw pi-sitemap',
+              items: [
+                      {label: 'Cedoc',
+                      routerLink: '/cedoc',
+                      icon: 'pi pi-fw pi-plus'},
+                      {label: 'Transporte',
+                      routerLink: '/veiculosutil',
+                      icon: 'pi pi-fw pi-plus'},
+                      {label: 'Facilities',
+                      //routerLink: '/**',
+                      icon: 'pi pi-fw pi-plus'},
+                      {label: 'Contratos e Medições',
+                      //routerLink: '/**',
+                      icon: 'pi pi-fw pi-plus'},
+              ]
+            },
+
+              {label: 'Comunicação',
+              icon: 'pi pi-fw pi-volume-up',
+              items: [
+                      {label: 'Noticias',
+                      routerLink: '/noticias',
+                      icon: 'pi pi-fw pi-plus'},
+              ]
+            },
+
               {label: 'Imports',
               icon: 'pi pi-fw pi-upload',
               items: [
@@ -120,7 +147,7 @@ export class TopoComponent implements OnInit {
                       routerLink: '/import',
                       icon: 'pi pi-fw pi-plus'},
               ]
-            },
+            }
           ];
       
   }

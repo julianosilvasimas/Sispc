@@ -5,13 +5,19 @@ import { MessageService } from 'primeng/api';
 import { API_BLOCK } from '../../app.api';
 
 @Component({
-  selector: 'app-tmaatendimento',
-  templateUrl: './tmaatendimento.component.html',
-  styleUrls: ['./tmaatendimento.component.css'],
+  selector: 'app-noticias',
+  templateUrl: './noticias.component.html',
+  styleUrls: ['./noticias.component.css'],
   providers: [MessageService]
 })
-export class TmaatendimentoComponent implements OnInit, OnChanges {
- 
+export class NoticiasComponent implements OnInit, OnChanges {
+
+  //positivo = reali
+  //negativo = forecast
+  //neutro = pecld
+  //meta = orcado
+
+
   indicador: string;
   date6: Date;
   dates: Date[];
@@ -71,7 +77,7 @@ export class TmaatendimentoComponent implements OnInit, OnChanges {
       invalidDate.setDate(today.getDate() - 1);
       this.invalidDates = [today,invalidDate];
 
-      this.indicador = "TMA Atendimento"
+      this.indicador = "Noticias"
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -87,24 +93,11 @@ export class TmaatendimentoComponent implements OnInit, OnChanges {
     this.convertido = this.hora.valueOf()  + this.minuto.valueOf() + this.segundo.valueOf()
   }
 
-  // recebe segundos e converte formato hora
-  segHora(seg){
-    this.segundo = parseInt(seg) % 60;
-    this.segundo = parseInt(this.segundo.toString())
-    this.minutos = parseInt(seg) / 60;
-    this.minuto = this.minutos % 60;
-    this.minuto = parseInt(this.minuto.toString())
-    this.hora = this.minutos / 60;
-    this.hora = parseInt(this.hora.toString())
-    var reserv = new Date(0,0,0,this.hora,this.minuto,this.segundo)
-    this.hms = reserv.toTimeString().substring(0,8);
-    console.log("Aqui agora: ", this.hms); // deve mostrar "01:16:07"
-  }
 
 //**************************************************************//
 
 
-  enviar(orc, real, com, atd, atm){
+  enviar(orc, real, com, fcst, pdd){
    
     this.hoje = new Date();
     if (this.hoje.valueOf() - this.date6.valueOf() > parseFloat(`${API_BLOCK}`)){
@@ -117,15 +110,14 @@ export class TmaatendimentoComponent implements OnInit, OnChanges {
     .subscribe(
       indicadores  => {
         this.id = indicadores[0].id
-        this.horaSeg(orc)
-        this.orcado = this.convertido
-        this.horaSeg(real)
-        this.realizado = this.convertido
-        this.pdd = 0
-        this.atendente = atd.valueOf()
-        this.atendimento = atm.valueOf()
+        
+        this.orcado = orc.valueOf()
+        this.realizado = real.valueOf()
+        this.pdd = pdd.valueOf()
+        this.atendente = 0
+        this.atendimento = 0
         this.coment = com
-        this.forecast = 0
+        this.forecast = fcst.valueOf()
 
     //Enviando dados para o Backend
     this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
@@ -158,13 +150,10 @@ export class TmaatendimentoComponent implements OnInit, OnChanges {
   .subscribe(
     indicadores  => {
       indicadores => this.indicadores = indicadores[0].data
-      this.tempo = indicadores[0].tempo
-      this.segHora(indicadores[0].orcado)
-      this.orcado = this.hms
-      this.segHora(indicadores[0].reali)
-      this.realizado = this.hms
-      this.atendente = indicadores[0].atendente
-      this.atendimento = indicadores[0].atendimento
+      this.realizado = indicadores[0].reali
+      this.orcado = indicadores[0].orcado
+      this.forecast = indicadores[0].forecast
+      this.pdd = indicadores[0].pecld
       this.coment = indicadores[0].comentario
       console.log("requisicao bem sucedida!", indicadores[0]);
       },
@@ -178,7 +167,5 @@ export class TmaatendimentoComponent implements OnInit, OnChanges {
 //*************************************************************************//
     }
   
-  
-
-}
-
+ 
+  }

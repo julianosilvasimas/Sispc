@@ -60,6 +60,9 @@ import { ImportcsvComponent } from './importcsv/importcsv.component';
 import { FileUtil } from './importcsv/file.util';
 import { CommonModule } from '@angular/common';
 import {Constants} from './importcsv/importcsv.constants';
+import { CedocComponent } from './indicadores/cedoc/cedoc.component';
+import { NoticiasComponent } from './indicadores/noticias/noticias.component';
+import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veiculoutilizacao.component';
 
 @NgModule({
   declarations: [
@@ -93,13 +96,16 @@ import {Constants} from './importcsv/importcsv.constants';
     ManutaguaComponent,
     CustosopaguaComponent,
     ImportcsvComponent,
+    CedocComponent,
+    NoticiasComponent,
+    VeiculoutilizacaoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ButtonModule,
-    MenubarModule,
+    MenubarModule, 
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
     CalendarModule,
     FormsModule,

@@ -28,6 +28,9 @@ import { FiscvalComponent } from './indicadores/fiscval/fiscval.component';
 import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component';
 import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
 import { ImportcsvComponent } from './importcsv/importcsv.component';
+import { CedocComponent } from './indicadores/cedoc/cedoc.component';
+import { NoticiasComponent } from './indicadores/noticias/noticias.component';
+import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veiculoutilizacao.component';
 
 
 export const ROUTES: Routes = [
@@ -58,5 +61,8 @@ export const ROUTES: Routes = [
     {path: 'fiscval', component: FiscvalComponent},
     {path: 'manutagua', component: ManutaguaComponent},
     {path: 'custosopa', component: CustosopaguaComponent},
-    {path: 'import',   component: ImportcsvComponent}
+    {path: 'import',   component: ImportcsvComponent},
+    {path: 'cedoc',   component: CedocComponent},
+    {path: 'noticias',   component: NoticiasComponent},
+    {path: 'veiculosutil',   component: VeiculoutilizacaoComponent}
 ]

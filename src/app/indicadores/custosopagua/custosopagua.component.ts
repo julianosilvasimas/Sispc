@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Indicadores } from '../indicadores.model';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { IndicadoresService } from './../indicadores.service';
 
 
@@ -46,12 +46,22 @@ export class CustosopaguaComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
   invalidDates: Array<Date>
+
+  items: SelectItem[];
+  item: String;
+
+
   @Input() indicadores : Indicadores
 
   constructor(
               private IndicadoresService: IndicadoresService,
               private messageService: MessageService
-  ) { }
+  ) { 
+    this.items = [
+      {label: 'Água Tratada', value: ''},
+      {label: 'Água Bruta', value: 'Bruta'}
+    ];
+  }
 
   ngOnInit() {
       let today = new Date();

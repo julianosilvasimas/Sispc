@@ -1,3 +1,5 @@
+import { SelectItem } from 'primeng/api';
+
 export interface Indicadores{
     id: number,
     area: string,
@@ -18,4 +20,19 @@ export interface Precos{
     id: number,
     produto: string,
     preco: number
+}
+
+export interface Supervisoes{
+    id: number,
+    codSupervisao: string,
+    supervisao: string
+}
+
+export interface UtilizacaoVeiculos{
+    placa: string,
+    motorista: string,
+    motor_ligado: string,
+    hodometro_inicial: string,
+    hodometro_final: string,
+    distancia_km: string,
 }

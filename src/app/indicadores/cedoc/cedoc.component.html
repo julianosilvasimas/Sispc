@@ -1,0 +1,90 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+</section>
+
+<section class="content">
+
+  <div class="jumbotron welcome-jumbotron">
+      <h3>Documentos Cedoc</h3>
+      
+        <div class="grid-containert"  >
+          <div class="grid-item">
+              <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6, item.supervisao)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+              [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Selecione a data" ></p-calendar>
+           <p-toast [style]="{marginTop: '80px'}"></p-toast>
+          </div>
+          
+          <div class="grid-item">
+            <p-dropdown [options]="items"  (onHide)="pesquisar(date6, item.supervisao)" [(ngModel)]="item" placeholder="Por favor, selecione o setor" optionLabel="supervisao"></p-dropdown>
+            <!--<p>Item selecionado: {{item ? item.supervisao : 'none'}}</p>-->
+          </div> 
+        </div>
+
+
+       <div class="grid-containert"  >
+
+          <div class="grid-item">
+              <h6>Fora do Prazo</h6>
+            </div>
+            
+            <div class="grid-item">
+                <h6>Dentro do Prazo</h6>
+            </div> 
+      
+       <div class="grid-item" >
+        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+        currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0 }" 
+        id="dentropend" type="text" size="30" [(ngModel)]="realizado" style="background: white !important;" placeholder="Quantidade" />
+       </div>
+       
+       <div class="grid-item" >
+        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+        currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0 }" 
+        id="dentroexec" type="text" size="30" [(ngModel)]="orcado" style="background: white !important;" placeholder="Quantidade" />
+       </div>
+
+       <div class="grid-item">
+        <h6>Fora do Prazo(2018)</h6>
+      </div>
+      
+      <div class="grid-item">
+          <h6>Dentro do Prazo(2018)</h6>
+      </div> 
+
+ <div class="grid-item" >
+  <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+  currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0 }" 
+  id="dentro" type="text" size="30" [(ngModel)]="pdd" style="background: white !important;" placeholder="Quantidade" />
+ </div>
+ 
+ <div class="grid-item" >
+  <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+  currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0 }" 
+  id="dent" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;" placeholder="Quantidade" />
+ </div>
+
+     </div>
+     <h6>Comentários</h6>
+
+     <div class="grid-containerc"  >
+         <div class="grid-item">
+             <textarea id= "com" [rows]="5" [cols]="100" pInputTextarea autoResize="autoResize" 
+             style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+         </div>
+
+     </div>
+
+     <div Style="padding-top: 10px !important;">
+         <p-button icon="pi pi-check" label="Enviar" 
+         (click)="enviar(orcado , realizado, pdd , forecast, item.supervisao , coment )"></p-button>
+    </div>
+
+   </div>
+
+
+    
+<!--</form>-->
+
+</section>
+<!-- FIM DO CONTEÚDO -->
+

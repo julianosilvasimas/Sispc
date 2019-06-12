@@ -75,74 +75,72 @@ export class LigacoescvComponent implements OnInit, OnChanges {
 //**************************************************************//
 
 
-  enviar(orc, real, com){
+enviar(orc, real, com){
     
-    this.hoje = new Date();
-    if (this.hoje.valueOf() - this.date6.valueOf() > parseFloat(`${API_BLOCK}`)){
-        this.messageService.add({severity:'warn', summary: 'Alerta!', detail:'Não é possível edição anterior a 2 dias!!!', life: 5000});
-    }else{
+  this.hoje = new Date();
+  if (this.hoje.valueOf() - this.date6.valueOf() > parseFloat(`${API_BLOCK}`)){
+      this.messageService.add({severity:'warn', summary: 'Alerta!', detail:'Não é possível edição anterior a 2 dias!!!', life: 5000});
+  }else{
 
-    //Pesquisa para captura do id e dos dados do formulário
-      console.log("Enviando Dados!")
-    this.IndicadoresService.indicadores(this.filtro, this.indicador)
-    .subscribe(
-      indicadores  => {
-        this.id = indicadores[0].id
-        this.orcado = orc.valueOf()
-        this.realizado = real.valueOf()
-        this.pdd = 0
-        this.atendente = 0
-        this.atendimento = 0
-        this.coment = com
-        this.forecast = 0
-
-    //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
-    .subscribe(
-        response => {
-          if(response === null){
-            console.log("OK!!!!!!")
-            this.messageService.add({severity:'success', summary: 'Sucesso!', detail:'Dados enviados corretamente!!!', life: 5000});
-          }
-        },
-        error =>  { 
-          this.messageService.add({severity:'error', summary: "Dados não Enviados!", detail:error.message, life: 5000});
-          console.log(error)
-    }
-        );
-      })
-
-    }
-    }
-
- //*****************************************************************//
-
-
- pesquisar(date6){
-
-  this.filtro = date6.toISOString().substr(0,10)
-
-  //********************************************************************//
+  //Pesquisa para captura do id e dos dados do formulário
+    console.log("Enviando Dados!")
   this.IndicadoresService.indicadores(this.filtro, this.indicador)
   .subscribe(
     indicadores  => {
-      indicadores => this.indicadores = indicadores[0].data
-      this.tempo = indicadores[0].tempo
-      this.orcado = indicadores[0].orcado
-      this.realizado = indicadores[0].reali
-      this.coment = indicadores[0].comentario
-      console.log("requisicao bem sucedida!", indicadores[0]);
-      },
-      
-      error  => {
-      console.log("Erro: ", error);
-      this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
-      }
-    );
-  
-//*************************************************************************//
-    }
-  
-  
+      this.id = indicadores[0].id
+      this.orcado = orc.valueOf()
+      this.realizado = real.valueOf()
+      this.pdd = this.pdd
+      this.atendente = 0
+      this.atendimento = 0
+      this.coment = com
+      this.forecast = 0
 
+  //Enviando dados para o Backend
+  this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+  .subscribe(
+      response => {
+        if(response === null){
+          console.log("OK!!!!!!")
+          this.messageService.add({severity:'success', summary: 'Sucesso!', detail:'Dados enviados corretamente!!!', life: 5000});
+        }
+      },
+      error =>  { 
+        this.messageService.add({severity:'error', summary: "Dados não Enviados!", detail:error.message, life: 5000});
+        console.log(error)
+  }
+      );
+    })
+
+  }
+  }
+
+//*****************************************************************//
+
+
+pesquisar(date6){
+
+this.filtro = date6.toISOString().substr(0,10)
+
+//********************************************************************//
+this.IndicadoresService.indicadores(this.filtro, this.indicador)
+.subscribe(
+  indicadores  => {
+    indicadores => this.indicadores = indicadores[0].data
+    this.tempo = indicadores[0].tempo
+    this.orcado = indicadores[0].orcado
+    this.realizado = indicadores[0].reali
+    this.pdd = indicadores[0].pecld
+    this.coment = indicadores[0].comentario
+    console.log("requisicao bem sucedida!", indicadores[0]);
+    },
+    
+    error  => {
+    console.log("Erro: ", error);
+    this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
+    }
+  );
+
+//*************************************************************************//
+  }
 }

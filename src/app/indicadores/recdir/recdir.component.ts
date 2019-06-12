@@ -52,7 +52,7 @@ export class RecdirComponent implements OnInit, OnChanges {
       ngOnInit() {
       
      
-      this.referencia = '2019-05-01'
+      this.referencia = '2019-06-01'
       this.indicador = "Receita Direta - Ciclo"
   }
 

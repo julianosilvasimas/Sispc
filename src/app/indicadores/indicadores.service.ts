@@ -1,5 +1,5 @@
 import{Injectable} from '@angular/core'
-import {Indicadores, Precos} from './indicadores.model'
+import {Indicadores, Precos, Supervisoes, UtilizacaoVeiculos} from './indicadores.model'
 
 
 import {API_CONFIG} from '../app.api'
@@ -25,6 +25,12 @@ export class IndicadoresService{
       return  this.http.get(`${API_CONFIG}/inddiarios/${indicador}/${filtro}/${referencia}`) 
       .pipe(map((res : Indicadores[]) => res, catchError(ErrorHandler.handleError)))
     }
+
+    // Busca da lista de supervisoes
+    supervisoes(): Observable<Supervisoes[]>{
+      return  this.http.get(`${API_CONFIG}/supervisoes`) 
+      .pipe(map((res : Supervisoes[]) => res, catchError(ErrorHandler.handleError)))
+   }
 
     // Busca da lista de precos de produto
     precos(): Observable<Precos[]>{
@@ -79,6 +85,22 @@ export class IndicadoresService{
         return body;
       }
 
-    }
+    InputVeiculosUtilizacao(placa: String, motorista: String, motor_ligado: Date, hodometro_inicial: Number, hodometro_final: Number, 
+      distancia_km: Number): Observable<any>{
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-    
+        return this.http.post<UtilizacaoVeiculos>(`${API_CONFIG}/veiculos_utilizacao`,
+        {placa: placa, motorista: motorista, motor_ligado: motor_ligado, hodometro_inicial: hodometro_inicial, hodometro_final: hodometro_final, 
+          distancia_km: distancia_km},
+        { observe: 'response'})
+        .pipe(
+          map((response) => ({data: response.headers, 
+                              status: response.status,
+                              statusTexto: response.statusText})) 
+      );
+    }  
+
+
+    }
