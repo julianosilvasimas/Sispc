@@ -15,9 +15,7 @@ export class CustosopaguaComponent implements OnInit {
   indicadore: string[];
   precoPQ: string[];
   indicador: string;
-  filtro: string;
-  index: number;
-
+  
 
   id: number;
   pac: number;
@@ -37,16 +35,9 @@ export class CustosopaguaComponent implements OnInit {
   coment : string;
   forecast : number;
 
-
   aData: Date;
-  checkData: Date
   date6: Date;
-  dates: Date[];
-  rangeDates: Date[];
-  minDate: Date;
-  maxDate: Date;
-  invalidDates: Array<Date>
-
+  
   items: SelectItem[];
   item: String;
 
@@ -64,59 +55,46 @@ export class CustosopaguaComponent implements OnInit {
   }
 
   ngOnInit() {
-      let today = new Date();
-      let month = today.getMonth();
-      let year = today.getFullYear();
-      let prevMonth = (month === 0) ? 11 : month -1;
-      let prevYear = (prevMonth === 11) ? year - 1 : year;
-      let nextMonth = (month === 11) ? 0 : month + 1;
-      let nextYear = (nextMonth === 0) ? year + 1 : year;
-      this.minDate = new Date();
-      this.minDate.setMonth(prevMonth);
-      this.minDate.setFullYear(prevYear);
-      this.maxDate = new Date();
-      this.maxDate.setMonth(nextMonth);
-      this.maxDate.setFullYear(nextYear);
-      let invalidDate = new Date();
-      invalidDate.setDate(today.getDate() - 1);
-      this.invalidDates = [today,invalidDate];
+      
+    this.indicadore = ["Preços","Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero",
+     "Turbidez", "Cor", "pH", "Cloro Ind", "Fluor Ind","Metas"];
+    this.precoPQ = ["Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero","Sal"];
+    
+    let today = new Date();
+    let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
+    let dataajustada= new Date(dataInicio.getFullYear() +"-"+ (dataInicio.getMonth() + 1)  +"-"+ dataInicio.getDate());
+    this.date6 = dataajustada;
 
-      this.indicadore = ["Preços","Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero", "Turbidez", "Cor", "pH", "Cloro Ind", "Fluor Ind","Metas"];
-      this.precoPQ = ["Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero","Sal"];
-
+    this.aData = dataajustada;
+ 
 //**************************Carga dos Preços na inicialização do painel******************************************//
-  this.IndicadoresService.precos()
-  .subscribe(
-    precos  => {
-      precos => this.indicadores = precos.data
+    this.IndicadoresService.precos()
+      .subscribe(
+        precos  => {
+        precos => this.indicadores = precos.data
       
-      this.pac = precos[0].preco
-      this.fluor = precos[1].preco
-      this.cal = precos[2].preco
-      this.cloro = precos[3].preco
-      this.polimero = precos[4].preco
-      this.sal = precos[5].preco
+        this.pac = precos[0].preco
+        this.fluor = precos[1].preco
+        this.cal = precos[2].preco
+        this.cloro = precos[3].preco
+        this.polimero = precos[4].preco
+        this.sal = precos[5].preco
       
-      console.log("requisicao bem sucedida!", precos);
+        console.log("requisicao bem sucedida!", precos);
       },
       
       error  => {
-      console.log("Erro: ", error);
-      this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
+        console.log("Erro: ", error);
+        this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
       }
     );
   
 //**************************************************************************************************************//
   }  // Aqui termina o On Init
 
-  gravarData(date6){ 
-    this.aData = date6;
-    if (this.aData != this.checkData){
-      var nomeInd = this.indicadore[this.index];
-      this.checkData = this.aData;
-
-      this.pesquisar(this.aData, nomeInd);
-    }
+  gravarData(date6){
+      this.aData = date6;
+      this.pesquisar(this.aData, (this.indicador+" "+this.item).trim());
   }
  
   // Função para calcular custo do produto químico
@@ -217,14 +195,10 @@ export class CustosopaguaComponent implements OnInit {
 
  pesquisar(date, ind){
 
-    if (date == "undefined"){
-      this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:"Não existe um data selecionada!", life: 5000});
-    }  // Não funcionou!!!!
-
-    this.filtro = date.toISOString().substr(0,10)
+   var filtro = date.toISOString().substr(0,10)
 
   //********************************************************************//
-  this.IndicadoresService.indicadores(this.filtro, ind)
+  this.IndicadoresService.indicadores(filtro, ind)
   .subscribe(
     indicadores  => {
       indicadores => this.indicadores = indicadores[0].data
@@ -245,15 +219,23 @@ export class CustosopaguaComponent implements OnInit {
     );
 
   }
+
   
   //Método "Vigia" Alteração da aba
   handleChange(e) {
-    this.index = e.index;
-    var nomeInd = this.indicadore[this.index];
-    this.checkData = this.aData;
-
-    this.pesquisar(this.aData, nomeInd);
+    this.item = '';
+    this.indicador = this.indicadore[e.index];
+    
+    this.pesquisar(this.aData, (this.indicador+" "+this.item).trim());
 }
+
+  combo(e){
+    var indTemp = '';
+    indTemp = (this.indicador +" "+ this.item).trim();
+    this.pesquisar(this.aData,indTemp)
+
+    return indTemp;
+  }
 
 //*********************************************************************************************************************************************//
 //****************************************Métodos para Gravar os dados no banco****************************************************************//

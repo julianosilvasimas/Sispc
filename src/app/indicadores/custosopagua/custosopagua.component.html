@@ -366,8 +366,12 @@
 
           <p-tabPanel header="Turbidez" rightIcon="pi pi-fw pi-clock">
                 <div class="grid-item">
-                        <p-dropdown [options]="items"  [(ngModel)]="item" placeholder="Por favor, selecione o setor" optionLabel="label"></p-dropdown>
-                        <!--<p>Item selecionado: {{item ? item.supervisao : 'none'}}</p>  (onHide)="pesquisar(date6, item.supervisao)" -->
+                        <p-dropdown [options]="items" (onHide)="combo($event)" [(ngModel)]="item" [style]="{'width':'200px'}">
+                         <ng-template let-item pTemplate="selectedItem">
+                                <span >{{item.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                       
                       </div> 
               <div class="grid-containerop" >
                   <div class="grid-containerop" >
@@ -415,6 +419,14 @@
           </p-tabPanel>
 
           <p-tabPanel header="Cor" rightIcon="pi pi-fw pi-clock">
+                <div class="grid-item">
+                        <p-dropdown [options]="items" (onHide)="combo($event)" [(ngModel)]="item" [style]="{'width':'200px'}">
+                         <ng-template let-item pTemplate="selectedItem">
+                                <span >{{item.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                       
+                      </div> 
               <div class="grid-containerop" >
                   <div class="grid-containerop" >
                   <div class="grid-item-aba">
@@ -461,6 +473,14 @@
           </p-tabPanel>
 
           <p-tabPanel header="Ph" rightIcon="pi pi-fw pi-clock">
+                <div class="grid-item">
+                        <p-dropdown [options]="items" (onHide)="combo($event)" [(ngModel)]="item" [style]="{'width':'200px'}">
+                         <ng-template let-item pTemplate="selectedItem">
+                                <span >{{item.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                       
+                      </div> 
               <div class="grid-containerop" >
                   <div class="grid-containerop" >
                   <div class="grid-item-aba">

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Indicadores } from './../indicadores.model';
 import { IndicadoresService } from './../indicadores.service';
 import { MessageService } from 'primeng/api';
@@ -10,17 +10,13 @@ import { API_BLOCK } from '../../app.api';
   styleUrls: ['./energia.component.css'],
   providers: [MessageService]
 })
-export class EnergiaComponent implements OnInit, OnChanges {
+export class EnergiaComponent implements OnInit {
 
   indicador1: string;
   indicador2: string;
 
   date6: Date;
-  dates: Date[];
-  rangeDates: Date[];
-  minDate: Date;
-  maxDate: Date;
-  invalidDates: Array<Date>
+  
   @Input() indicadores : Indicadores
   
   angular: any;
@@ -48,36 +44,17 @@ export class EnergiaComponent implements OnInit, OnChanges {
               private messageService: MessageService
     ) {}
 
-      ngOnInit() {
+  ngOnInit() {
       
-      let today = new Date();
-      let month = today.getMonth();
-      let year = today.getFullYear();
-      let prevMonth = (month === 0) ? 11 : month -1;
-      let prevYear = (prevMonth === 11) ? year - 1 : year;
-      let nextMonth = (month === 11) ? 0 : month + 1;
-      let nextYear = (nextMonth === 0) ? year + 1 : year;
-      this.minDate = new Date();
-      this.minDate.setMonth(prevMonth);
-      this.minDate.setFullYear(prevYear);
-      this.maxDate = new Date();
-      this.maxDate.setMonth(nextMonth);
-      this.maxDate.setFullYear(nextYear);
-      let invalidDate = new Date();
-      invalidDate.setDate(today.getDate() - 1);
-      this.invalidDates = [today,invalidDate];
+    let today = new Date();
+    let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
+    let dataajustada= new Date(dataInicio.getFullYear() +"-"+ (dataInicio.getMonth() + 1)  +"-"+ dataInicio.getDate());
+    this.date6 = dataajustada;
 
-      this.indicador1 = "Energia kW Agua"
-      this.indicador2 = "Energia kW Esgoto"
+    this.indicador1 = "Energia kW Agua"
+    this.indicador2 = "Energia kW Esgoto"
+    this.pesquisar(this.date6);
   }
-
-
-  ngOnChanges(changes: SimpleChanges) {
-    // changes.prop contains the old and the new value...
-    console.log(changes)
-  }
-
-
 
 //**************************************************************//
 
@@ -88,7 +65,7 @@ export class EnergiaComponent implements OnInit, OnChanges {
     if (this.hoje.valueOf() - this.date6.valueOf() > parseFloat(`${API_BLOCK}`)){
         this.messageService.add({severity:'warn', summary: 'Alerta!', detail:'Não é possível edição anterior a 3 dias!!!', life: 5000});
     }else{
-*/
+    */
     //Pesquisa para captura do id e dos dados do formulário
       console.log("Enviando Dados!")
     this.IndicadoresService.indicadores(this.filtro, this.indicador1)

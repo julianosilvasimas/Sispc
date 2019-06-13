@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Indicadores } from './../indicadores.model';
 import { IndicadoresService } from './../indicadores.service';
 import { MessageService } from 'primeng/api';
@@ -11,16 +11,12 @@ import {API_BLOCK} from '../../app.api'
   styleUrls: ['./arrecadacao.component.css'],
   providers: [MessageService]
 })
-export class ArrecadacaoComponent implements OnInit, OnChanges {
+export class ArrecadacaoComponent implements OnInit {
 
   
   indicador: string;
   date6: Date;
-  dates: Date[];
-  rangeDates: Date[];
-  minDate: Date;
-  maxDate: Date;
-  invalidDates: Array<Date>
+ 
   @Input() indicadores : Indicadores
   
   angular: any;
@@ -44,35 +40,16 @@ export class ArrecadacaoComponent implements OnInit, OnChanges {
               private messageService: MessageService
     ) {}
 
-      ngOnInit() {
+  ngOnInit() {
       
-      let today = new Date();
-      let month = today.getMonth();
-      let year = today.getFullYear();
-      let prevMonth = (month === 0) ? 11 : month -1;
-      let prevYear = (prevMonth === 11) ? year - 1 : year;
-      let nextMonth = (month === 11) ? 0 : month + 1;
-      let nextYear = (nextMonth === 0) ? year + 1 : year;
-      this.minDate = new Date();
-      this.minDate.setMonth(prevMonth);
-      this.minDate.setFullYear(prevYear);
-      this.maxDate = new Date();
-      this.maxDate.setMonth(nextMonth);
-      this.maxDate.setFullYear(nextYear);
-      let invalidDate = new Date();
-      invalidDate.setDate(today.getDate() - 1);
-      this.invalidDates = [today,invalidDate];
+    let today = new Date();
+    let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
+    let dataajustada= new Date(dataInicio.getFullYear() +"-"+ (dataInicio.getMonth() + 1)  +"-"+ dataInicio.getDate());
+    this.date6 = dataajustada;
 
-      this.indicador = "Arrecadacao"
+    this.indicador = "Arrecadacao";
+    this.pesquisar(this.date6);
   }
-
-
-  ngOnChanges(changes: SimpleChanges) {
-    // changes.prop contains the old and the new value...
-    console.log(changes)
-  }
-
-
 
 //**************************************************************//
 
@@ -119,7 +96,6 @@ export class ArrecadacaoComponent implements OnInit, OnChanges {
     }
 
  //*****************************************************************//
-
 
  pesquisar(date6){
 

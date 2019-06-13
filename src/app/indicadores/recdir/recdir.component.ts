@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Indicadores } from './../indicadores.model';
 import { IndicadoresService } from './../indicadores.service';
 import { MessageService } from 'primeng/api';
@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./recdir.component.css'],
   providers: [MessageService]
 })
-export class RecdirComponent implements OnInit, OnChanges {
+export class RecdirComponent implements OnInit{
 
   brands: string[] = ['1','2','3','4','5','6','7','8','9','10', '11','12','13',
     '14','15','16','17','18','19','20','21'];
@@ -19,12 +19,7 @@ export class RecdirComponent implements OnInit, OnChanges {
   log: string[]= [];
 
   indicador: string;
-  date6: Date;
-  dates: Date[];
-  rangeDates: Date[];
-  minDate: Date;
-  maxDate: Date;
-  invalidDates: Array<Date>
+ 
   @Input() indicadores : Indicadores
   
   angular: any;
@@ -49,11 +44,13 @@ export class RecdirComponent implements OnInit, OnChanges {
               private messageService: MessageService
     ) {}
 
-      ngOnInit() {
-      
-     
-      this.referencia = '2019-06-01'
-      this.indicador = "Receita Direta - Ciclo"
+  ngOnInit() {
+    let today = new Date();
+    let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
+    let dataajustada= new Date(dataInicio.getFullYear() +"-"+ (dataInicio.getMonth() +1)  +"- 01");
+    this.referencia = dataajustada.toISOString().substr(0,10)
+    console.log('Referência: '+this.referencia)  
+    this.indicador = "Receita Direta - Ciclo"
   }
 
 
@@ -67,13 +64,6 @@ filterBrands(event) {
         }
     }
 }
-
-ngOnChanges(changes: SimpleChanges) {
-  // changes.prop contains the old and the new value...
-  console.log(changes)
-}
-
-
 
 //**************************************************************//
 

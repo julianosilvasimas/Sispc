@@ -15,7 +15,8 @@
           </div>
           
           <div class="grid-item">
-            <p-dropdown [options]="items"  (onHide)="pesquisar(date6, item.supervisao)" [(ngModel)]="item" placeholder="Por favor, selecione o setor" optionLabel="supervisao"></p-dropdown>
+            <p-dropdown [options]="items"  (onHide)="pesquisar(date6, item.supervisao)" filter="true"
+            [(ngModel)]="item" placeholder="Por favor, selecione o setor" optionLabel="supervisao"></p-dropdown>
             <!--<p>Item selecionado: {{item ? item.supervisao : 'none'}}</p>-->
           </div> 
         </div>

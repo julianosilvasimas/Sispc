@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input,} from '@angular/core';
 import { Indicadores, Supervisoes } from './../indicadores.model';
 import { IndicadoresService } from './../indicadores.service';
 import { MessageService, SelectItem } from 'primeng/api';
@@ -15,11 +15,7 @@ export class CedocComponent implements OnInit {
 
   indicador: string;
   date6: Date;
-  dates: Date[];
-  rangeDates: Date[];
-  minDate: Date;
-  maxDate: Date; 
-  invalidDates: Array<Date>
+  
   @Input() indicadores : Indicadores
   
   angular: any;
@@ -40,72 +36,28 @@ export class CedocComponent implements OnInit {
 
   items: SelectItem[];
   item: Supervisoes;
-  
+
 
   constructor(private IndicadoresService: IndicadoresService,
-              private messageService: MessageService
-    ) {
-           //**************************Carga das supervisoes para o filtro******************************************//
-           this.items = []
+              private messageService: MessageService) {
+    //**************************Carga das supervisoes para o filtro******************************************//
+    this.items = []
       
-           this.IndicadoresService.supervisoes()
-           .subscribe(
-             Supervisoes  => {
-               Supervisoes => this.indicadores = Supervisoes.data
-               /*
-               supervisoes.forEach(element => {
-                 this.items.push(element['supervisao']);
-               });
-               */
-
-
-               this.items = Object.assign([], Supervisoes)
-             //console.log("requisicao bem sucedida!", supervisoes);
-               
-               },
-               
-               error  => {
-               console.log("Erro: ", error);
-               this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
-               }
-             );
-         
- 
-            
-             //********************************************************************************************************** */
+    this.IndicadoresService.supervisoes()
+      .subscribe(
+        Supervisoes  => {
+          Supervisoes => this.indicadores = Supervisoes.data
+            this.items = Object.assign([], Supervisoes)
+        },
+        error  => {
+          console.log("Erro: ", error);
+          this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
+        }
+      );
+    //********************************************************************************************************** */
     }
 
-      ngOnInit() {
-      
-      let today = new Date();
-      let month = today.getMonth();
-      let year = today.getFullYear();
-      let prevMonth = (month === 0) ? 11 : month -1;
-      let prevYear = (prevMonth === 11) ? year - 1 : year;
-      let nextMonth = (month === 11) ? 0 : month + 1;
-      let nextYear = (nextMonth === 0) ? year + 1 : year;
-      this.minDate = new Date();
-      this.minDate.setMonth(prevMonth);
-      this.minDate.setFullYear(prevYear);
-      this.maxDate = new Date();
-      this.maxDate.setMonth(nextMonth);
-      this.maxDate.setFullYear(nextYear);
-      let invalidDate = new Date();
-      invalidDate.setDate(today.getDate() - 1);
-      this.invalidDates = [today,invalidDate];
-
-  }
-
-
-  ngOnChanges(changes: SimpleChanges) {
-    // changes.prop contains the old and the new value...
-    console.log(changes)
-  }
-
-
-
-//**************************************************************//
-
+  ngOnInit() {}
 
   enviar(dentroprazo, foraprazo, foraprazo2018, dentroprazo2018, indicador, coment){    
 
@@ -117,7 +69,7 @@ export class CedocComponent implements OnInit {
     }else{
 
     //Pesquisa para captura do id e dos dados do formulário
-      console.log("Enviando Dados!")
+    console.log("Enviando Dados!")
     this.IndicadoresService.indicadores(this.filtro, this.indicador)
     .subscribe(
       indicadores  => {
@@ -152,34 +104,35 @@ export class CedocComponent implements OnInit {
  //*****************************************************************//
 
 
- pesquisar(date6: Date, indicador: string){
+ pesquisar(date6: Date, indicador: string){ 
+  if(this.item['supervisao'] ==="undefined"){
+    //Desenvolver retirada de erro ao selecionar a data sem selecionar o setor, dessa forma não funcionou
+  }else{
+    this.indicador = "Cedoc - "+ indicador
+    console.log('indicador é: '+ indicador)
+    this.filtro = date6.toISOString().substr(0,10)
 
-  this.indicador = "Cedoc - "+ indicador
-  console.log('indicador é: '+ indicador)
-  this.filtro = date6.toISOString().substr(0,10)
-
-  //********************************************************************//
-  this.IndicadoresService.indicadores(this.filtro, this.indicador)
-  .subscribe(
-    indicadores  => {
-      indicadores => this.indicadores = indicadores[0].data
-      this.tempo = indicadores[0].tempo
-      this.orcado = indicadores[0].orcado 
-      this.realizado = indicadores[0].reali 
-      this.pdd = indicadores[0].pecld 
-      this.coment = indicadores[0].comentario
-      this.forecast = indicadores[0].forecast 
-      console.log("requisicao bem sucedida!", indicadores[0]);
-      },
-      
-      error  => {
-      console.log("Erro: ", error);
-      this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
-      }
-    );
-  
+    //********************************************************************//
+    this.IndicadoresService.indicadores(this.filtro, this.indicador)
+      .subscribe(
+        indicadores  => {
+          indicadores => this.indicadores = indicadores[0].data
+          this.tempo = indicadores[0].tempo
+          this.orcado = indicadores[0].orcado 
+          this.realizado = indicadores[0].reali 
+          this.pdd = indicadores[0].pecld 
+          this.coment = indicadores[0].comentario
+          this.forecast = indicadores[0].forecast 
+          console.log("requisicao bem sucedida!", indicadores[0]);
+        },
+        error  => {
+          console.log("Erro: ", error);
+          this.messageService.add({severity:'error', summary: "Falha na Consulta!", detail:error.message, life: 5000});
+        }
+      );
+  }
 //*************************************************************************//
-    }
+}
   
   
 
