@@ -31,6 +31,8 @@ import { ImportcsvComponent } from './importcsv/importcsv.component';
 import { CedocComponent } from './indicadores/cedoc/cedoc.component';
 import { NoticiasComponent } from './indicadores/noticias/noticias.component';
 import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veiculoutilizacao.component';
+import { PrintdeliberacaoComponent } from './gestaodeliberacao/printdeliberacao/printdeliberacao.component';
+import { PainelprocessoComponent } from './gestaodeliberacao/painelprocesso/painelprocesso.component';
 
 
 export const ROUTES: Routes = [
@@ -64,5 +66,7 @@ export const ROUTES: Routes = [
     {path: 'import',   component: ImportcsvComponent},
     {path: 'cedoc',   component: CedocComponent},
     {path: 'noticias',   component: NoticiasComponent},
-    {path: 'veiculosutil',   component: VeiculoutilizacaoComponent}
+    {path: 'veiculosutil',   component: VeiculoutilizacaoComponent},
+    {path: 'painelprocess',   component: PainelprocessoComponent},
+    {path: 'printdelib',   component: PrintdeliberacaoComponent}
 ]

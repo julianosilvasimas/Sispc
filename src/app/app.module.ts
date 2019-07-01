@@ -40,6 +40,10 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {DropdownModule} from 'primeng/dropdown';
 import {TabViewModule} from 'primeng/tabview';
+import {FieldsetModule} from 'primeng/fieldset';
+import {CheckboxModule} from 'primeng/checkbox';
+import {TableModule} from 'primeng/table';
+import {SpinnerModule} from 'primeng/spinner';
 
 import {IndicadoresService} from 'src/app/indicadores/indicadores.service';
 import { RecindComponent } from './indicadores/recind/recind.component';
@@ -63,6 +67,10 @@ import {Constants} from './importcsv/importcsv.constants';
 import { CedocComponent } from './indicadores/cedoc/cedoc.component';
 import { NoticiasComponent } from './indicadores/noticias/noticias.component';
 import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veiculoutilizacao.component';
+import { GestaodeliberacaoComponent } from './gestaodeliberacao/gestaodeliberacao.component';
+import { PainelprocessoComponent } from './gestaodeliberacao/painelprocesso/painelprocesso.component';
+import {GestaoDeliberacaoService} from './gestaodeliberacao/gestaodeliberacao.service';
+import { PrintdeliberacaoComponent } from './gestaodeliberacao/printdeliberacao/printdeliberacao.component'; 
 
 @NgModule({
   declarations: [
@@ -99,9 +107,12 @@ import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veic
     CedocComponent,
     NoticiasComponent,
     VeiculoutilizacaoComponent,
+    GestaodeliberacaoComponent,
+    PainelprocessoComponent,
+    PrintdeliberacaoComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ButtonModule,
@@ -111,6 +122,7 @@ import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veic
     FormsModule,
     MultiSelectModule,
     AutoCompleteModule,
+    FieldsetModule,
     InputTextModule,
     InputTextareaModule,
     CurrencyMaskModule,
@@ -128,10 +140,14 @@ import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veic
     ToastModule,
     DropdownModule,
     TabViewModule,
-    CommonModule
+    TableModule,
+    SpinnerModule,
+    CommonModule,
+    CheckboxModule
   ],
   providers: [
     IndicadoresService,
+    GestaoDeliberacaoService,
     Constants,
     FileUtil
   ],

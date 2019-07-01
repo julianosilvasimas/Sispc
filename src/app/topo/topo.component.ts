@@ -128,8 +128,8 @@ export class TopoComponent implements OnInit {
                       {label: 'Contratos e Medições',
                       //routerLink: '/**',
                       icon: 'pi pi-fw pi-plus'},
-              ]
-            },
+                      ]
+                },
 
               {label: 'Comunicação',
               icon: 'pi pi-fw pi-volume-up',
@@ -145,6 +145,15 @@ export class TopoComponent implements OnInit {
               items: [
                       {label: 'Update via Csv',
                       routerLink: '/import',
+                      icon: 'pi pi-fw pi-plus'},
+              ]
+            },
+
+            {label: 'Comissão de Fraudes',
+              icon: 'pi pi-fw pi-ban',
+              items: [
+                      {label: 'Gestão de Deliberação',
+                      routerLink: '/painelprocess',
                       icon: 'pi pi-fw pi-plus'},
               ]
             }

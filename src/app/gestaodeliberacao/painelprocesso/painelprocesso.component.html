@@ -1,0 +1,149 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+</section>
+ 
+<section class="content">
+
+  <div class="jumbotronop welcome-jumbotron">
+    <h3>Gestão de Deliberação</h3>
+    <p-toast [style]="{left: '42%', top: '90.3%'}" (onClose)="limpar()"></p-toast>
+    
+    <div class="divisa">
+      <p-fieldset legend="Info Processo" [toggleable]="true">
+            <div class="ui-g-4">N° Termo de Ocorrência</div>
+            <div class="ui-g-4">N° do Processo</div>
+            <div class="ui-g-4">Status Notificação</div>
+
+            <div class="ui-g-4">
+              <input type="text" [(ngModel)]="termo" pInputText (blur)="pesquisarNot(termo)"  style="width: 70% !important;"/>
+            </div>
+            <div class="ui-g-4">
+              <input type="text" [(ngModel)]="processo" pInputText  style="width: 70% !important;"/>
+            </div>
+            <div class="ui-g-4">
+              <p-dropdown styleClass="combobox"  placeholder="Aguardando Comparecimento" ></p-dropdown>
+            </div>
+      </p-fieldset>
+    </div>
+
+    <div class="divisa">
+        <p-fieldset legend="Info Cliente" [toggleable]="true">
+          <div class="divisa1">
+            <div class="ui-g-2">Matrícula</div>
+            <div class="ui-g-2">Contrato</div>
+            <div class="ui-g-2">CPF/CNPJ</div>
+            <div class="ui-g-2">N° Hidrômetro</div>
+            <div class="ui-g-2">Status Ligação</div>
+            <div class="ui-g-2">Status Contrato</div>
+
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="matricula"/>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="contrato"/>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="cpf"/>   <!--<p-inputMask [(ngModel)]="cpf" style="width: 100% !important;" mask="999.999.999-99"></p-inputMask>-->
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="hd"/>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="statusLigacao"/>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="statusContrato"/>
+            </div>
+          </div>    
+            <div class="divisa1">
+            <div class="ui-g-3">Nome</div>
+            <div class="ui-g-3">Rua</div>
+            <div class="ui-g-3">Bairro</div>
+            <div class="ui-g-3">Cidade</div>
+
+            <div class="ui-g-3">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="nome"/>
+            </div>
+            <div class="ui-g-3">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="rua"/>
+            </div>
+            <div class="ui-g-3">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="bairro"/>
+            </div>
+            <div class="ui-g-3">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="cidade"/>
+            </div>
+          </div>
+          <div class="ui-g-6">
+              <p-checkbox name="group1" value=1 label="Cliente estava Presente?" [(ngModel)]="checkPresenca" inputId="pres"></p-checkbox>
+          </div>
+          <div class="ui-g-6">
+              <p-checkbox name="group2" value=1 label="Cliente era o titular?" [(ngModel)]="checkTitular" inputId="tit"></p-checkbox>
+          </div>  
+        </p-fieldset>
+    </div>
+<!--VAL_CUSTOS,	VAL_DIF_CONSUMO,	VAL_MULTA,	VAL_TOTAL	,VAL_TROCA_HD-->
+    <div class="divisa">
+        <p-fieldset legend="Info Notificação" [toggleable]="true">
+           <div class="divisa1">
+            <div class="ui-g-2">Valor Custos</div>
+            <div class="ui-g-2">Valor Multa</div>
+            <div class="ui-g-2">Valor Troca HD</div>
+            <div class="ui-g-2">Valor Retroativo</div>
+            <div class="ui-g-2">Meses Retroativo</div>
+            <div class="ui-g-2">Valor Total</div>
+
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="valCusto"/>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="valMulta"/>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="valTroca"/>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="valRetro"/>
+            </div>
+            <div class="ui-g-2">
+                    <p-spinner [(ngModel)]="mesRetroativo" [min]="0"></p-spinner>
+            </div>
+            <div class="ui-g-2">
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="valTotal"/>
+            </div>
+          </div> 
+          <div class="ui-g-6">Ocorrências
+              <p-table [value]="fraudes">
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th style="width: 100px; text-align: center;">Código</th>
+                          <th style="text-align: center;">Fraude</th>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-fraudes>
+                      <tr>
+                          <td>{{fraudes.codigo}}</td>
+                          <td>{{fraudes.fraude}}</td>
+                      </tr>
+                  </ng-template>
+              </p-table>
+          </div>
+          <div class="ui-g-6">
+                 Desconto<br>
+                <input type="text" pInputText  style="width: 40% !important;" [(ngModel)]="valDesconto"/><br><br>
+              <p-checkbox name="group3" value=1 label="Clientes apresentou a carta defesa?" [(ngModel)]="checkCarta" inputId="cart"></p-checkbox><br><br>
+              <p-checkbox name="group4" value=1 label="Carta  apresentada era procedente?" [(ngModel)]="checkProcedente" inputId="proc"></p-checkbox>
+          </div> 
+        </p-fieldset>
+    </div>
+                   
+    <div Style="padding-top: 10px !important;">
+        <p-button icon="pi pi-check" label="Enviar" (click)="enviar()" ></p-button>
+   </div>
+
+  </div>
+  <!--</form>-->
+    
+</section>
+ <!-- FIM DO CONTEÚDO -->
+    
