@@ -1,0 +1,22 @@
+#imagem {
+    margin-top: -700px;
+    margin-left: 400px;
+    float:center;
+    width: 280px;
+    height: 300px;
+   /* opacity: 0.0;
+    filter: alpha(opacity=0);*/
+}
+
+#assinatura {
+    margin-top: -400px;
+    float:center;
+    width: 50px;
+   /* opacity: 0.0;
+    filter: alpha(opacity=0);*/
+}
+    
+#texto {
+    position: absolute;
+    margin-top: -130px;
+}

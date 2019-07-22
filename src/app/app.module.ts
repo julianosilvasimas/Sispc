@@ -70,7 +70,9 @@ import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veic
 import { GestaodeliberacaoComponent } from './gestaodeliberacao/gestaodeliberacao.component';
 import { PainelprocessoComponent } from './gestaodeliberacao/painelprocesso/painelprocesso.component';
 import {GestaoDeliberacaoService} from './gestaodeliberacao/gestaodeliberacao.service';
-import { PrintdeliberacaoComponent } from './gestaodeliberacao/printdeliberacao/printdeliberacao.component'; 
+import { PrintdeliberacaoComponent } from './gestaodeliberacao/printdeliberacao/printdeliberacao.component';
+import { LoginComponent } from './login/login.component'; 
+
 
 @NgModule({
   declarations: [
@@ -110,6 +112,7 @@ import { PrintdeliberacaoComponent } from './gestaodeliberacao/printdeliberacao/
     GestaodeliberacaoComponent,
     PainelprocessoComponent,
     PrintdeliberacaoComponent,
+    LoginComponent,
   ],
   imports: [
   BrowserModule,
@@ -148,6 +151,7 @@ import { PrintdeliberacaoComponent } from './gestaodeliberacao/printdeliberacao/
   providers: [
     IndicadoresService,
     GestaoDeliberacaoService,
+    PrintdeliberacaoComponent,
     Constants,
     FileUtil
   ],

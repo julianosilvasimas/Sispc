@@ -37,7 +37,7 @@ export class CustosopaguaComponent implements OnInit {
 
   aData: Date;
   date6: Date;
-  
+   
   items: SelectItem[];
   item: String;
 

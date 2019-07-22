@@ -79,7 +79,7 @@ export class EnergiavalComponent implements OnInit {
         this.id = indicadores[0].id
         this.orcagua = orcagua.valueOf()
         this.realiagua = realiagua.valueOf()
-        this.pdd = 0
+        this.pdd = indicadores[0].pecld
         this.atendente = 0
         this.atendimento = 0
         this.comentagua = comentagua
@@ -110,7 +110,7 @@ export class EnergiavalComponent implements OnInit {
         this.id = indicadores[0].id
         this.orcesgoto = orcesgoto.valueOf()
         this.realiesgoto = realiesgoto.valueOf()
-        this.pdd = 0
+        this.pdd = indicadores[0].pecld
         this.atendente = 0
         this.atendimento = 0
         this.comentesgoto = comentesgoto

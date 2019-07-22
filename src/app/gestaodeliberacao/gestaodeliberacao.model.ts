@@ -31,13 +31,28 @@ export interface InputDelib{
     cartaProcedente: string
 }
 
+export interface Teste{
+    ask: string,
+    bid: string,
+    epoch: string,
+    id: string,
+    quote: string,
+    symbol: string,
+}
+
+export interface Irregs{
+    codigo: string,
+    fraude: string,
+    valor: string
+}
+
 export interface Process{
     carta: string,
     cartaProcedente: string,
     contrato: number,
     dataAviso1: number,
     dataAviso2: number,
-    dataAviso3: number,
+    dataAviso3: Date,
     dataJulgado: number,
     deliberacao: number,
     idIrregularidade: number,
@@ -45,5 +60,17 @@ export interface Process{
     num_ligacao: number,
     processo: string,
     titular: string,
-    usuarioPresente: string
+    usuarioPresente: string,
+    ro: string,
+    num_termo: string
+}
+
+export interface Entrega{
+    matricula: number,
+    nome: string,
+    rua: string,
+    numero: string,
+    complemento: string,
+    bairro: string,
+    cidade: string
 }

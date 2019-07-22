@@ -1,12 +1,29 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GestaoDeliberacaoService } from './../gestaodeliberacao.service';
 import{Delib} from './../gestaodeliberacao.model';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
+import { PrintdeliberacaoComponent } from './../printdeliberacao/printdeliberacao.component';
 
 @Component({
   selector: 'app-painelprocesso',
   templateUrl: './painelprocesso.component.html',
   styleUrls: ['./painelprocesso.component.css'],
+  styles: [`
+        :host ::ng-deep button {
+            margin-right: .25em;
+        }
+
+        :host ::ng-deep .custom-toast .ui-toast-message {
+            color: #ffffff;
+            background: #FC466B;
+            background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+            background: linear-gradient(to right, #3F5EFB, #FC466B);
+        }
+
+        :host ::ng-deep .custom-toast .ui-toast-close-icon {
+            color: #ffffff;
+        }
+    `],
   providers: [MessageService]
  })
 export class PainelprocessoComponent implements OnInit {
@@ -14,6 +31,9 @@ export class PainelprocessoComponent implements OnInit {
   fraudes: any[];
   irregs: any[];
   @Input() deliberacao: Delib
+  modelo: string;
+  dataDefesa: Date;
+  dataJulgado: Date;
 
   processo: string;
   termo: string;
@@ -27,6 +47,7 @@ export class PainelprocessoComponent implements OnInit {
   statusContrato: string;
   nome: string;
   rua: string;
+  ruaResumida: string;
   bairro: string;
   cidade: string;
   valCusto: number;
@@ -35,12 +56,27 @@ export class PainelprocessoComponent implements OnInit {
   valRetro: number;
   valTotal: number;
   valDesconto: number;
+  ndeliberacao: number;
+
+  irreg1: any;
+  irreg2: any;
+  irreg2vai: any;
+  irreg3: any;
+  irreg3vai: any;
+  textoMulta: string
 
   mesRetroativo: number;
   checkTitular: any;
   checkPresenca: any;
   checkCarta: any;
   checkProcedente: any;
+  checkOcorrencia: any;
+
+  ruaEntrega: string;
+  numeroEntrega: string;
+  complementoEntrega: string;
+  bairroEntrega: string;
+  cidadeEntrega: string;
 
   cliente:string;
 
@@ -49,10 +85,22 @@ export class PainelprocessoComponent implements OnInit {
   mat: string;
   del: string;
 
+  items: SelectItem[];
+  item: string;
+  
+
   constructor(
     private service: GestaoDeliberacaoService,
-    private messageService: MessageService
-     ) { }
+    private print: PrintdeliberacaoComponent,
+    private messageService: MessageService) { 
+      this.items = [
+        {label: 'Aguardando Comparecimento', value: 'Aguardand'},
+        {label: 'À revelia', value: 'revelia'},
+        {label: 'Cancelado', value: 'Canc'},
+        {label: 'Negociado', value: 'Negoc'}
+      ];
+      this.item = 'Aguardand'
+     }
 
   ngOnInit() {
     this.mesRetroativo = null;
@@ -60,50 +108,126 @@ export class PainelprocessoComponent implements OnInit {
     this.checkPresenca = [];
     this.checkCarta = [];
     this.checkPresenca = [];
+    this.checkOcorrencia = []
   }
 
+  combo(e){
+   console.log(this.item)
+   this.pesquisarNot(this.termo)
+  }
   
+
+  imprimir(){
+    //Checando o modelo de carta a ser usado
+    if(this.checkCarta == 1){
+      if(this.checkProcedente == 1){
+        this.modelo = 'DP'
+      }else{
+        this.modelo = 'DI'
+      }
+    }else{
+      if(this.checkPresenca == 1){
+        this.modelo = 'SD'
+      }else{
+        this.modelo = 'A'
+      }
+    } 
+
+    
+    //definindo descriçao de irregularidades e retroativo
+    if(this.irreg2 === undefined || this.irreg2 === null){
+      this.irreg2 = '';
+    }else{
+      this.irreg2 =', '+this.irreg2
+    }
+
+    if(this.irreg3 === undefined || this.irreg3 === null){
+      this.irreg3 = '';
+    }else{
+      this.irreg3 =', '+this.irreg3
+    }
+    const numero = require('numero-por-extenso');
+    var meses
+    if(this.mesRetroativo == 1){
+      meses = 'mês'
+    }else{
+      meses = 'meses'
+    }
+
+    // Definindo texto do valor da multa
+    if(this.valMulta == this.valTotal){
+      this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),' 
+    }else{
+      if(this.valRetro > 0){
+        if(this.valTroca > 0){
+          this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+
+          ' acrescido do valor de R$ '+this.valRetro.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valRetro, numero.estilo.monetario)+'),' +'equivalente a '+this.mesRetroativo+' '+meses+' de consumo retroativo'+
+          ', bem como o valor de R$ '+this.valTroca.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTroca, numero.estilo.monetario)+'),' +' referente ao novo hidrômetro' +
+          'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
+        }else{
+          this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+ 
+          ' acrescido do valor de R$ '+this.valRetro.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valRetro, numero.estilo.monetario)+'),' +'equivalente a '+this.mesRetroativo+' '+meses+' de consumo retroativo '+
+          'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
+        }
+      }else{
+        if(this.valTroca > 0){
+          this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+
+          ', bem como o valor de R$ '+this.valTroca.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTroca, numero.estilo.monetario)+'),' +' referente ao novo hidrômetro' +
+          'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
+        }
+      }
+    }
+    
+   
+    this.print.criaPDF(this.modelo,  ("000000" + this.ndeliberacao).slice(-6)+'/'+this.ano ,this.rua, this.bairro, this.cidade,
+     this.dataJulgado,this.processo, this.termo, new Date(this.dataNotificacao), this.matricula.toString(), this.irreg1,this.irreg2 , this.irreg3 ,
+     this.cliente ,this.textoMulta,  this.mesRetroativo,this.dataDefesa, this.checkOcorrencia, this.hd,this.ruaResumida, 
+     this.ruaEntrega, this.numeroEntrega, this.complementoEntrega, this.bairroEntrega, this.cidadeEntrega
+     );
+  }
 
   pesquisarNot(termo: string){
     this.irregs = [
-      { codigo: '105' , fraude: 'MULTA BY-PASS RAMAL 3/4-RES' , valor: '600.84'},
-      { codigo: '143' , fraude: 'MULTA DANOS REDE PUBLICA-RES' , valor: '1976.34'},
-      { codigo: '150' , fraude: 'MULTA LIG. CLANDESTINA AGUA 3/4-RES' , valor: '600.84'},
-      { codigo: '164' , fraude: 'MULTA VIOLACAO DE CORTE CAVALETE 3/4"' , valor: '400.57'},
-      { codigo: '171' , fraude: 'MULTA VIOLACAO/DANOS HD 3/4-RES' , valor: '400.57'},
-      { codigo: '179' , fraude: 'MULTA VIOLACAO DE CORTE RAMAL 3/4"' , valor: '583.69'},
-      { codigo: '181' , fraude: 'MULTA DERIV. P/SUPRIM. IMOVEL 3/4 -RES' , valor: '150.2'},
-      { codigo: '186' , fraude: 'MULTA INTERC. ALIM. 3/4' , valor: '400.54'},
-      { codigo: '205' , fraude: 'MULTA BY-PASS RAMAL 3/4-RES - DEL 3119 20%' , valor: '480.67'},
-      { codigo: '243' , fraude: 'MULTA DANOS REDE PUBLICA-RES - DEL 3119 20%' , valor: '1581.07'},
-      { codigo: '250' , fraude: 'MULTA LIG. CLANDESTINA AGUA 3/4-RES - DEL 3119 20%' , valor: '480.67'},
-      { codigo: '264' , fraude: 'MULTA VIOLACAO DE CORTE CAVALETE 3/4" - DEL 3119 20%' , valor: '320.46'},
-      { codigo: '271' , fraude: 'MULTA VIOLACAO/DANOS HD 3/4-RES - DEL 3119 20%' , valor: '320.46'},
-      { codigo: '279' , fraude: 'MULTA VIOLACAO DE CORTE RAMAL 3/4" - DEL 3119 20%' , valor: '466.95'},
-      { codigo: '281' , fraude: 'MULTA DERIV. P/SUPRIM. IMOVEL 3/4 -RES - DEL 3119 20%' , valor: '120.16'},
-      { codigo: '286' , fraude: 'MULTA INTERC. ALIM. 3/4 - DEL 3119 20%' , valor: '320.43'},
-      { codigo: '405' , fraude: 'MULTA BY-PASS RAMAL 3/4-RES - DEL 3119 40%' , valor: '360.5'},
-      { codigo: '443' , fraude: 'MULTA DANOS REDE PUBLICA-RES - DEL 3119 40%' , valor: '1185.8'},
-      { codigo: '450' , fraude: 'MULTA LIG. CLANDESTINA AGUA 3/4-RES - DEL 3119 40%' , valor: '360.5'},
-      { codigo: '464' , fraude: 'MULTA VIOLACAO DE CORTE CAVALETE 3/4" - DEL 3119 40%' , valor: '240.34'},
-      { codigo: '471' , fraude: 'MULTA VIOLACAO/DANOS HD 3/4-RES - DEL 3119 40%' , valor: '240.34'},
-      { codigo: '479' , fraude: 'MULTA VIOLACAO DE CORTE RAMAL 3/4" - DEL 3119 40%' , valor: '350.21'},
-      { codigo: '481' , fraude: 'MULTA DERIV. P/SUPRIM. IMOVEL 3/4 -RES - DEL 3119 40%' , valor: '90.12'},
-      { codigo: '486' , fraude: 'MULTA INTERC. ALIM. 3/4 - DEL 3119 40%' , valor: '240.32'},
+      { codigo: '105' , fraude: 'INTERVENÇÃO NO RAMAL PREDIAL E NO COLETOR PREDIAL' , valor: '600.84'},
+      { codigo: '143' , fraude: 'INTERVENÇÃO DE QUALQUER MODO NAS INSTALAÇÕES DO SERVIÇO PÚBLICO DE ÁGUA OU DE ESGOTO SANITÁRIO' , valor: '1976.34'},
+      { codigo: '150' , fraude: 'LIG. CLANDESTINA AGUA 3/4-RES' , valor: '600.84'},
+      { codigo: '164' , fraude: '"' , valor: '400.57'},
+      { codigo: '171' , fraude: 'VIOLAÇÃO OU RETIRADA DE HIDROMETRO OU DE LIMITADOR DE CONSUMO' , valor: '400.57'},
+      { codigo: '179' , fraude: 'VIOLACAO DE CORTE RAMAL 3/4"' , valor: '583.69'},
+      { codigo: '181' , fraude: 'DERIV. P/SUPRIM. IMOVEL 3/4 -RES' , valor: '150.2'},
+      { codigo: '186' , fraude: 'INTERC. ALIM. 3/4' , valor: '400.54'},
+      { codigo: '205' , fraude: 'INTERVENÇÃO NO RAMAL PREDIAL E NO COLETOR PREDIAL' , valor: '480.67'},
+      { codigo: '243' , fraude: 'INTERVENÇÃO DE QUALQUER MODO NAS INSTALAÇÕES DO SERVIÇO PÚBLICO DE ÁGUA OU DE ESGOTO SANITÁRIO ' , valor: '1581.07'},
+      { codigo: '250' , fraude: 'LIG. CLANDESTINA AGUA 3/4-RES ' , valor: '480.67'},
+      { codigo: '264' , fraude: 'VIOLACAO DE CORTE CAVALETE 3/4" ' , valor: '320.46'},
+      { codigo: '271' , fraude: 'VIOLAÇÃO OU RETIRADA DE HIDROMETRO OU DE LIMITADOR DE CONSUMO ' , valor: '320.46'},
+      { codigo: '279' , fraude: 'VIOLACAO DE CORTE RAMAL 3/4" ' , valor: '466.95'},
+      { codigo: '281' , fraude: 'DERIV. P/SUPRIM. IMOVEL 3/4 -RES ' , valor: '120.16'},
+      { codigo: '286' , fraude: 'INTERC. ALIM. 3/4 ' , valor: '320.43'},
+      { codigo: '405' , fraude: 'INTERVENÇÃO NO RAMAL PREDIAL E NO COLETOR PREDIAL ' , valor: '360.5'},
+      { codigo: '443' , fraude: 'INTERVENÇÃO DE QUALQUER MODO NAS INSTALAÇÕES DO SERVIÇO PÚBLICO DE ÁGUA OU DE ESGOTO SANITÁRIO ' , valor: '1185.8'},
+      { codigo: '450' , fraude: 'LIG. CLANDESTINA AGUA 3/4-RES ' , valor: '360.5'},
+      { codigo: '464' , fraude: 'VIOLACAO DE CORTE CAVALETE 3/4" ' , valor: '240.34'},
+      { codigo: '471' , fraude: 'VIOLAÇÃO OU RETIRADA DE HIDROMETRO OU DE LIMITADOR DE CONSUMO ' , valor: '240.34'},
+      { codigo: '479' , fraude: 'VIOLACAO DE CORTE RAMAL 3/4" ' , valor: '350.21'},
+      { codigo: '481' , fraude: 'DERIV. P/SUPRIM. IMOVEL 3/4 -RES ' , valor: '90.12'},
+      { codigo: '486' , fraude: 'INTERC. ALIM. 3/4 ' , valor: '240.32'},
     ];
    
-
+    this.limpar();
     // Realiza a busca da notificação
-      this.service.notificacao(termo)
+      this.service.notificacao(termo,this.item )
         .subscribe(
           delib  => {
             try{
               delib => this.deliberacao = delib.data
+              
               this.idIrregularidade = delib[0].idIrregularidade
 
               this.termo = delib[0].num_termo_ocorrencia
               this.contrato = delib[0].contrato["contrato"]
               this.matricula = delib[0].contrato["matricula"]
+              this.enderecoentrega(this.matricula)
               this.cpf = delib[0].contrato["num_doc_1"]
               this.hd = delib[0].contrato["num_medidor"]
               this.statusLigacao = delib[0].contrato["sit_lig"]
@@ -111,12 +235,13 @@ export class PainelprocessoComponent implements OnInit {
               this.nome = delib[0].contrato["nom_cliente"]
               this.cliente = delib[0].contrato["nom_cliente"]
               this.rua = delib[0].contrato["nom_logradouro"] +" , "+ delib[0].contrato["nro"] 
-              + " "+ delib[0].contrato["dsc_complemento"]
+              + " "+ delib[0].contrato["dsc_complemento"].trim()
+              
+              this.ruaResumida = delib[0].contrato["nom_logradouro"] +" , "+ delib[0].contrato["nro"] 
               this.bairro = delib[0].contrato["nom_bairro"]
               this.cidade = delib[0].contrato["cidade"]
               //verificar como fazer a data notificaçao
               this.dataNotificacao = delib[0].dat_notificacao
-              console.log(this.dataNotificacao)
 
               this.valCusto = delib[0].val_custos
               this.valMulta = delib[0].val_multa
@@ -129,12 +254,43 @@ export class PainelprocessoComponent implements OnInit {
               for (var i in this.irregs){
                 if(delib[0].cod_ocorrencia_1.toString() === this.irregs[i].codigo.toString()){
                 this.fraudes.push(this.irregs[i]);
+                this.irreg1 = this.irregs[i].fraude;
               }else if(delib[0].cod_ocorrencia_2.toString() === this.irregs[i].codigo.toString()){
                 this.fraudes.push(this.irregs[i]);
+                this.irreg2 = this.irregs[i].fraude;
               }else if(delib[0].cod_ocorrencia_3.toString() === this.irregs[i].codigo.toString()){
                 this.fraudes.push(this.irregs[i]);
+                this.irreg3 = this.irregs[i].fraude;
               }
             }
+
+            
+            this.service.processo(this.idIrregularidade)
+            .subscribe(
+              processo  => {
+                try{
+                this.processo = processo[0].processo;
+                this.dataJulgado = new Date(processo[0].dataJulgado);
+                this.ndeliberacao = processo[0].deliberacao;
+                this.formatarProcesso()
+                this.checkCarta = processo[0].carta;
+                this.checkPresenca = processo[0].usuarioPresente;
+                this.checkProcedente = processo[0].cartaProcedente;
+                this.mesRetroativo = processo[0].mesRetroativo;
+                this.checkOcorrencia = processo[0].ro;
+                this.dataDefesa = new Date(processo[0].dataAviso3);
+                if(this.cliente === processo[0].titular){
+                this.checkTitular = 1;
+                }else{
+                  if (processo[0].titular === undefined){
+                  }else{
+                  this.cliente = processo[0].titular;
+                  }
+                }
+              }catch(e){}
+              },
+            );
+
           }catch(e){
             this.messageService.add({severity:'error', summary: 'Notificação não encontrada!', 
             detail:"já existe o termo "+this.termo+" na base de dados!", life: 60000});
@@ -149,7 +305,7 @@ export class PainelprocessoComponent implements OnInit {
         }
       );
   }
- // 0000.00-000000/000000
+ 
   formatarProcesso(){
     this.ano = this.processo.substring(0,4);
     this.mes = this.processo.substring(4,6);
@@ -203,14 +359,14 @@ export class PainelprocessoComponent implements OnInit {
               console.log(processo);
             }catch(e){
 
-              this.service.InputDeliberacao(this.idIrregularidade,	null,	null,	 null,	
+              this.service.InputDeliberacao(this.idIrregularidade,	null,	null,	 this.dataDefesa,	
                 this.mesRetroativo,
-                n,	p,	this.contrato,	this.matricula, c, cp)
+                n,	p,	this.contrato,	this.matricula, c, cp, this.checkOcorrencia.toString(), this.termo)
               .subscribe(
                 response => {
                   if(response.status === 201){
-                    this.messageService.add({severity:'success', summary: 'Sucesso!', 
-                    detail:'Dados enviados corretamente!!!', life: 60000});
+                    this.messageService.add({sticky: true, severity:'success', summary: 'Dados Salvos!', 
+                    detail:'Dados enviados com sucesso!'});
                     console.log('Dados enviados com sucesso!')
                   }
                 },
@@ -229,23 +385,66 @@ export class PainelprocessoComponent implements OnInit {
           }
 
         );
-      await delay(300);
+      await delay(500);
       this.service.processo(this.idIrregularidade)
         .subscribe(
           processo  => {
             this.processo = processo[0].processo;
+            this.dataJulgado = new Date(processo[0].dataJulgado);
+            this.ndeliberacao = processo[0].deliberacao;
             this.formatarProcesso()
+            if (window.confirm("Você Deseja imprimir esse processo?")) { 
+              this.imprimir();
+            } 
           },
         );
+         
   }
 
+  enderecoentrega(matricula: number){
+    this.service.endentrega(matricula)
+    .subscribe(
+      endentrega =>{
+        this.ruaEntrega = endentrega['rua'];
+        this.numeroEntrega = endentrega['numero'];
+        this.complementoEntrega = endentrega['complemento'];
+        this.bairroEntrega = endentrega['bairro'];
+        this.cidadeEntrega = endentrega['cidade'];;
+      },
+      error =>{
+        console.log(error);
+      }
+    );
+  }
 
+  pesquisarProcesso(e){
+    
+    this.service.idProcesso(e)
+    .subscribe(
+      processo =>{
+        var objeto
+        objeto = processo
+        this.processo = objeto['processo'];
+        this.dataJulgado = new Date(objeto['dataJulgado']);
+        this.ndeliberacao = objeto['deliberacao'];
+        this.idIrregularidade = objeto['idIrregularidade'];
+        this.termo = objeto['num_termo'];
+        this.pesquisarNot(this.termo)
+      },
+      error=>{}
+    );   
+  }
 
   limpar(){
+
+    this.fraudes = [];
+    this.deliberacao = null;
+    this.modelo = null;
+    this.dataDefesa = null;
+
     this.processo = null;
-    this.termo = null;
     this.idIrregularidade = null;
-    this.dataNotificacao= null;
+    this.dataNotificacao = null;
     this.matricula = null;
     this.contrato = null;
     this.cpf = null;
@@ -254,6 +453,7 @@ export class PainelprocessoComponent implements OnInit {
     this.statusContrato = null;
     this.nome = null;
     this.rua = null;
+    this.ruaResumida = null,
     this.bairro = null;
     this.cidade = null;
     this.valCusto = null;
@@ -262,13 +462,35 @@ export class PainelprocessoComponent implements OnInit {
     this.valRetro = null;
     this.valTotal = null;
     this.valDesconto = null;
+    this.ndeliberacao = null;
+
+    this.irreg1 = null;
+    this.irreg2 = undefined;
+    this.irreg2vai = undefined;
+    this.irreg3 = undefined;
+    this.irreg3vai = undefined;
+    this.textoMulta = null;
+
     this.mesRetroativo = null;
     this.checkTitular = [];
     this.checkPresenca = [];
     this.checkCarta = [];
-    this.checkPresenca = [];
+    this.checkProcedente = [];
+    this.checkOcorrencia = [];
+
     this.cliente = null;
-    this.fraudes = [];
+
+    this.ano = null;
+    this.mes = null;
+    this.mat = null;
+    this.del = null;
+
+    this.ruaEntrega = null;
+    this.numeroEntrega =null;
+    this.complementoEntrega = null;
+    this.bairroEntrega = null;
+    this.cidadeEntrega = null;
+    
   }
  
 }

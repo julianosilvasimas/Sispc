@@ -1,10 +1,11 @@
 <!-- INÍCIO DO CONTEÚDO -->
+
 <section class="content-header">
 </section>
  
 <section class="content">
 
-  <div class="jumbotronop welcome-jumbotron">
+  <div class="jumbotronop welcome-jumbotron" style="position: relative;">
     <h3>Gestão de Deliberação</h3>
     <p-toast [style]="{left: '42%', top: '90.3%'}" (onClose)="limpar()"></p-toast>
     
@@ -18,10 +19,15 @@
               <input type="text" [(ngModel)]="termo" pInputText (blur)="pesquisarNot(termo)"  style="width: 70% !important;"/>
             </div>
             <div class="ui-g-4">
-              <input type="text" [(ngModel)]="processo" pInputText  style="width: 70% !important;"/>
+              <input type="text" [(ngModel)]="processo" pInputText (blur)="pesquisarProcesso(processo)"  style="width: 70% !important;"/>
             </div>
             <div class="ui-g-4">
-              <p-dropdown styleClass="combobox"  placeholder="Aguardando Comparecimento" ></p-dropdown>
+              
+              <p-dropdown styleClass="combobox" [options]="items"  [(ngModel)]="item" (onHide)="combo($event)" placeholder="Aguardando Comparecimento" >  <!--[style]="{'width':'200px'}"-->
+                <ng-template let-item pTemplate="selectedItem">
+                        <span >{{item.label}}</span>
+                    </ng-template>
+                </p-dropdown>
             </div>
       </p-fieldset>
     </div>
@@ -78,8 +84,11 @@
               <p-checkbox name="group1" value=1 label="Cliente estava Presente?" [(ngModel)]="checkPresenca" inputId="pres"></p-checkbox>
           </div>
           <div class="ui-g-6">
-              <p-checkbox name="group2" value=1 label="Cliente era o titular?" [(ngModel)]="checkTitular" inputId="tit"></p-checkbox>
-          </div>  
+            <p-checkbox name="group2" value=1 label="Houve Registro de Ocorrência?" [(ngModel)]="checkOcorrencia" inputId="ocr"></p-checkbox>
+        </div> 
+        <div class="ui-g-6" *ngIf="checkPresenca == 1">
+            <p-checkbox name="group2" value=1 label="Cliente era o titular?" [(ngModel)]="checkTitular" inputId="tit"></p-checkbox>
+        </div> 
         </p-fieldset>
     </div>
 <!--VAL_CUSTOS,	VAL_DIF_CONSUMO,	VAL_MULTA,	VAL_TOTAL	,VAL_TROCA_HD-->
@@ -132,18 +141,39 @@
                  Desconto<br>
                 <input type="text" pInputText  style="width: 40% !important;" [(ngModel)]="valDesconto"/><br><br>
               <p-checkbox name="group3" value=1 label="Clientes apresentou a carta defesa?" [(ngModel)]="checkCarta" inputId="cart"></p-checkbox><br><br>
+              <div *ngIf="checkCarta == 1">
+                    <p-calendar class="ppcal" [(ngModel)]="dataDefesa" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+                    [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true"  ></p-calendar><br><br>
               <p-checkbox name="group4" value=1 label="Carta  apresentada era procedente?" [(ngModel)]="checkProcedente" inputId="proc"></p-checkbox>
+            </div>
           </div> 
         </p-fieldset>
     </div>
                    
     <div Style="padding-top: 10px !important;">
-        <p-button icon="pi pi-check" label="Enviar" (click)="enviar()" ></p-button>
+        <p-button icon="pi pi-trash" label="Limpar" class="ui-button-danger" (click)="limpar()" Style=" color: #F94C35 !important;"></p-button>
+        <p-button icon="pi pi-check" label="Enviar" class="ui-button-success" (click)="enviar()" Style="padding-left: 5px !important"></p-button>
+        <p-button icon="pi pi-print" label="Imprimir" (click)="imprimir()" Style="padding-left: 5px !important;"></p-button>
    </div>
 
   </div>
   <!--</form>-->
     
 </section>
+<div id="branco">
+    <img id="imagem" src="assets/images/blank.png"/>
+</div>
+<div id="capa">
+    <img id="imagem" src="assets/images/ModeloCapa.png"/>
+</div>
+<div id="aviso">
+    <img id="imagem" src="assets/images/modeloAR.png"/>
+</div>
+<div id="img">
+        <img id="imagem" src="assets/images/modelCarta.png"/>
+    </div>
+    <div id="img2">
+        <img id="imagem" src="assets/images/modelCarta2.png"/>
+    </div> 
  <!-- FIM DO CONTEÚDO -->
     
