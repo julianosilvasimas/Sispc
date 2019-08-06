@@ -7,7 +7,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-corte',
   templateUrl: './corte.component.html',
-  styleUrls: ['./corte.component.css'],
   providers: [MessageService]
 })
 export class CorteComponent implements OnInit {
@@ -52,7 +51,7 @@ export class CorteComponent implements OnInit {
 //**************************************************************//
 
 
-  enviar(orc, real, com){
+  enviar(orc, real, reat, com){
     
     this.hoje = new Date();
     if (this.hoje.valueOf() - this.date6.valueOf() > parseFloat(`${API_BLOCK}`)){
@@ -67,14 +66,14 @@ export class CorteComponent implements OnInit {
         this.id = indicadores[0].id
         this.orcado = orc.valueOf()
         this.realizado = real.valueOf()
-        this.pdd = 0
+        this.pdd = reat.valueOf()
         this.atendente = 0
         this.atendimento = 0
         this.coment = com
         this.forecast = 0
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){
@@ -107,6 +106,7 @@ export class CorteComponent implements OnInit {
         this.tempo = indicadores[0].tempo
         this.orcado = indicadores[0].orcado
         this.realizado = indicadores[0].reali
+        this.pdd = indicadores[0].pecld
         this.coment = indicadores[0].comentario
         console.log("requisicao bem sucedida!", indicadores[0]);
         },

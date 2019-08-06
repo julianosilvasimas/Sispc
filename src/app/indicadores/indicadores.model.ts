@@ -14,6 +14,7 @@ export interface Indicadores{
     atendimento: number,
     comentario: string,
     forecast: number,
+    colaborador: string
 }
 
 export interface Precos{

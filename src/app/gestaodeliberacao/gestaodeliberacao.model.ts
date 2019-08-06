@@ -62,7 +62,8 @@ export interface Process{
     titular: string,
     usuarioPresente: string,
     ro: string,
-    num_termo: string
+    num_termo: string,
+    colaborador: string
 }
 
 export interface Entrega{

@@ -7,7 +7,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-religacao',
   templateUrl: './religacao.component.html',
-  styleUrls: ['./religacao.component.css'],
   providers: [MessageService]
 })
 export class ReligacaoComponent implements OnInit {
@@ -74,7 +73,7 @@ export class ReligacaoComponent implements OnInit {
         this.forecast = 0
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){

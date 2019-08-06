@@ -7,7 +7,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-percentprazo',
   templateUrl: './percentprazo.component.html',
-  styleUrls: ['./percentprazo.component.css'],
   providers: [MessageService]
 })
 export class PercentprazoComponent implements OnInit {
@@ -74,7 +73,7 @@ export class PercentprazoComponent implements OnInit {
         this.forecast = fora.valueOf()/100          //fora pendente
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast,  sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){

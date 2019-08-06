@@ -52,7 +52,7 @@ export class GestaoDeliberacaoService{
      //Inputar os dados de Deliberação
      InputDeliberacao(idIrregularidade: number,	dataAviso1: Date,	dataAviso2: Date,	dataAviso3: Date,	mesRetroativo: number,
             titular: string,	usuarioPresente: string,	contrato: number,	num_ligacao: number,
-            	carta: string,	cartaProcedente: string, ro: string, num_termo: string): Observable<any>{
+            	carta: string,	cartaProcedente: string, ro: string, num_termo: string, colaborador: string): Observable<any>{
           let headers = new HttpHeaders();
           headers = headers.set('Content-Type', 'application/json; charset=utf-8');
           headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -60,7 +60,7 @@ export class GestaoDeliberacaoService{
           return this.http.post<InputDelib>(`${API_CONFIG}/gestaodeliberacao`,
           {idIrregularidade: idIrregularidade,	dataAviso1: dataAviso1,	dataAviso2: dataAviso2,	dataAviso3: dataAviso3,	mesRetroativo: mesRetroativo,
             titular: titular,	usuarioPresente: usuarioPresente,	contrato: contrato,	num_ligacao: num_ligacao,
-            	carta: carta,	cartaProcedente: cartaProcedente, ro: ro, num_termo: num_termo},
+            	carta: carta,	cartaProcedente: cartaProcedente, ro: ro, num_termo: num_termo, colaborador: colaborador},
           { observe: 'response'})
           .pipe(
             map((response) => ({data: response.headers, 

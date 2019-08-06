@@ -7,7 +7,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-energiaval',
   templateUrl: './energiaval.component.html',
-  styleUrls: ['./energiaval.component.css'],
   providers: [MessageService]
 })
 export class EnergiavalComponent implements OnInit {
@@ -16,11 +15,6 @@ export class EnergiavalComponent implements OnInit {
   indicador2: string;
 
   date6: Date;
-  dates: Date[];
-  rangeDates: Date[];
-  minDate: Date;
-  maxDate: Date;
-  invalidDates: Array<Date>
   @Input() indicadores : Indicadores
   
   angular: any;
@@ -86,7 +80,7 @@ export class EnergiavalComponent implements OnInit {
         this.forecastagua = foreagua.valueOf()
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcagua, this.realiagua, this.pdd, this.atendente, this.atendimento, this.comentagua, this.forecastagua)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcagua, this.realiagua, this.pdd, this.atendente, this.atendimento, this.comentagua, this.forecastagua, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){
@@ -117,7 +111,7 @@ export class EnergiavalComponent implements OnInit {
         this.forecastesgoto =  foreesgoto.valueOf()
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcesgoto, this.realiesgoto, this.pdd, this.atendente, this.atendimento, this.comentesgoto, this.forecastesgoto)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcesgoto, this.realiesgoto, this.pdd, this.atendente, this.atendimento, this.comentesgoto, this.forecastesgoto, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){

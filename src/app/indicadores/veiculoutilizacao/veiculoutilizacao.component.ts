@@ -6,7 +6,6 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-veiculoutilizacao',
   templateUrl: './veiculoutilizacao.component.html',
-  styleUrls: ['./veiculoutilizacao.component.css'],
   providers: [MessageService]
 })
 

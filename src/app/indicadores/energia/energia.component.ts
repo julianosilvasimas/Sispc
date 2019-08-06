@@ -7,7 +7,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-energia',
   templateUrl: './energia.component.html',
-  styleUrls: ['./energia.component.css'],
   providers: [MessageService]
 })
 export class EnergiaComponent implements OnInit {
@@ -82,7 +81,7 @@ export class EnergiaComponent implements OnInit {
 
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcagua, this.realiagua, this.pdd, this.atendente, this.atendimento, this.comentagua, this.forecastagua)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcagua, this.realiagua, this.pdd, this.atendente, this.atendimento, this.comentagua, this.forecastagua, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){
@@ -113,7 +112,7 @@ export class EnergiaComponent implements OnInit {
         this.forecastesgoto =  foreesgoto.valueOf()
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcesgoto, this.realiesgoto, this.pdd, this.atendente, this.atendimento, this.comentesgoto, this.forecastesgoto)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcesgoto, this.realiesgoto, this.pdd, this.atendente, this.atendimento, this.comentesgoto, this.forecastesgoto, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){

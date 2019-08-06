@@ -8,7 +8,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-cedoc',
   templateUrl: './cedoc.component.html',
-  styleUrls: ['./cedoc.component.css'],
   providers: [MessageService]
 })
 export class CedocComponent implements OnInit { 
@@ -83,7 +82,7 @@ export class CedocComponent implements OnInit {
         this.forecast = dentroprazo2018.valueOf()           
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){

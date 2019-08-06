@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import {ROUTES} from './app.routes'
 import { RouterModule, PreloadAllModules } from '@angular/router';
 
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopoComponent } from './topo/topo.component';
 
@@ -47,6 +45,7 @@ import {SpinnerModule} from 'primeng/spinner';
 
 import {IndicadoresService} from 'src/app/indicadores/indicadores.service';
 import { RecindComponent } from './indicadores/recind/recind.component';
+
 import { FiscassertComponent } from './indicadores/fiscassert/fiscassert.component';
 import { FiscprodComponent } from './indicadores/fiscprod/fiscprod.component';
 import { LigacoesexecComponent } from './indicadores/ligacoesexec/ligacoesexec.component';
@@ -67,11 +66,17 @@ import {Constants} from './importcsv/importcsv.constants';
 import { CedocComponent } from './indicadores/cedoc/cedoc.component';
 import { NoticiasComponent } from './indicadores/noticias/noticias.component';
 import { VeiculoutilizacaoComponent } from './indicadores/veiculoutilizacao/veiculoutilizacao.component';
-import { GestaodeliberacaoComponent } from './gestaodeliberacao/gestaodeliberacao.component';
 import { PainelprocessoComponent } from './gestaodeliberacao/painelprocesso/painelprocesso.component';
 import {GestaoDeliberacaoService} from './gestaodeliberacao/gestaodeliberacao.service';
 import { PrintdeliberacaoComponent } from './gestaodeliberacao/printdeliberacao/printdeliberacao.component';
 import { LoginComponent } from './login/login.component'; 
+import{AuthService} from './login/auth.service';
+import { AuthGuard } from './guards/auth.guard.service';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
+import { EnergiaeteComponent } from './indicadores/energiaete/energiaete.component';
+import { VolumesComponent } from './indicadores/volumes/volumes.component';
+import { VolumeeteComponent } from './indicadores/volumeete/volumeete.component';
 
 
 @NgModule({
@@ -109,14 +114,15 @@ import { LoginComponent } from './login/login.component';
     CedocComponent,
     NoticiasComponent,
     VeiculoutilizacaoComponent,
-    GestaodeliberacaoComponent,
     PainelprocessoComponent,
     PrintdeliberacaoComponent,
     LoginComponent,
+    EnergiaeteComponent,
+    VolumesComponent,
+    VolumeeteComponent,
   ],
   imports: [
-  BrowserModule,
-    AppRoutingModule,
+BrowserModule,
     BrowserAnimationsModule,
     ButtonModule,
     MenubarModule, 
@@ -127,6 +133,7 @@ import { LoginComponent } from './login/login.component';
     AutoCompleteModule,
     FieldsetModule,
     InputTextModule,
+    DynamicDialogModule,
     InputTextareaModule,
     CurrencyMaskModule,
     HttpClientModule,
@@ -152,7 +159,10 @@ import { LoginComponent } from './login/login.component';
     IndicadoresService,
     GestaoDeliberacaoService,
     PrintdeliberacaoComponent,
+    AuthService,
+    AuthGuard,
     Constants,
+    MessageService,
     FileUtil
   ],
   bootstrap: [

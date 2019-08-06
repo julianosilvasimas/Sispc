@@ -7,7 +7,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-ligacoesexec',
   templateUrl: './ligacoesexec.component.html',
-  styleUrls: ['./ligacoesexec.component.css'],
   providers: [MessageService]
 })
 export class LigacoesexecComponent implements OnInit{
@@ -75,7 +74,7 @@ export class LigacoesexecComponent implements OnInit{
           this.forecast = 0
 
         //Enviando dados para o Backend
-        this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+        this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
         .subscribe(
           response => {
             if(response === null){

@@ -61,7 +61,7 @@ export class IndicadoresService{
   }
 
   // Método put para tabela de indicadores diário
-  indicadoresByDay(id: any, orcado: Number, real: Number, pdd: Number, atendente: Number, atendimento: Number, coment: string, forecast: Number): Observable<any>{
+  indicadoresByDay(id: any, orcado: Number, real: Number, pdd: Number, atendente: Number, atendimento: Number, coment: string, forecast: Number, colaborador: string): Observable<any>{
         const headers = new HttpHeaders()
         .set("Content-Type", "application/json",
         );
@@ -72,7 +72,8 @@ export class IndicadoresService{
                     "atendente": atendente,
                     "atendimento": atendimento,
                     "comentario": coment,
-                    "forecast": forecast
+                    "forecast": forecast,
+                    "colaborador": colaborador
           };
        
     return this.http.put(`${API_CONFIG}/inddiarios/${id}`,JSON.stringify(bodyObj) , {headers},)

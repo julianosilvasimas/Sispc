@@ -6,8 +6,7 @@ import { Constants }                    from './importcsv.constants';
 
 @Component({
   selector: 'app-importcsv',
-  templateUrl: './importcsv.component.html',
-  styleUrls: ['./importcsv.component.css']
+  templateUrl: './importcsv.component.html'
 })
 export class ImportcsvComponent implements OnInit {
 

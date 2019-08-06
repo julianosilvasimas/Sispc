@@ -7,7 +7,6 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-recdir',
   templateUrl: './recdir.component.html',
-  styleUrls: ['./recdir.component.css'],
   providers: [MessageService]
 })
 export class RecdirComponent implements OnInit{
@@ -88,7 +87,7 @@ enviar(orc, real, com, fcst){
 
 
   //Enviando dados para o Backend
-  this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+  this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
   .subscribe(
       response => {
         if(response === null){

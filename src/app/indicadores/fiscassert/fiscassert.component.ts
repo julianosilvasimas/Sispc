@@ -7,7 +7,6 @@ import { API_BLOCK } from '../../app.api';
 @Component({
   selector: 'app-fiscassert',
   templateUrl: './fiscassert.component.html',
-  styleUrls: ['./fiscassert.component.css'],
   providers: [MessageService]
 })
 export class FiscassertComponent implements OnInit {
@@ -66,14 +65,14 @@ export class FiscassertComponent implements OnInit {
         this.id = indicadores[0].id
         this.orcado = orc.valueOf()/100
         this.realizado = real.valueOf()/100
-        this.pdd = 0
+        this.pdd = indicadores[0].pecld
         this.atendente = 0
         this.atendimento = 0
         this.coment = com
-        this.forecast = 0
+        this.forecast = indicadores[0].forecast
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){

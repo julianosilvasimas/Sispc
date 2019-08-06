@@ -1,3 +1,64 @@
-<p>
-  login works!
-</p>
+     
+     <div style="text-align:center">
+        <br>
+        <img width="120" alt="Sispc Logo" src="assets/images/SisPCLogo.png">
+      </div>
+     
+     <!-- INÍCIO DO CONTEÚDO -->
+     <p-toast [style]="{marginTop: '80px'}"></p-toast>
+      <section class="content login-content">
+          <div class="jumbotronLogin welcome-jumbotronLogin">
+  		  <div class="login-logo">
+            <img id="logoLogin" style="align-content: left !important;" src="assets/images/prolagos.png"/>
+  		  </div>
+  		  <div class="login-box-body">
+  			<p class="login-box-msg">Por favor, efetue o login para continuar</p>
+
+          <form > <!--	<form [formGroup]="loginForm">-->
+          <!--<sispc-input-container>-->
+              <input type="text"  [(ngModel)]="usuario.email" name="email" class="form-control" placeholder="Email" style="margin-bottom: 10px; text-align: center;">  <!--formControlName="email"-->
+              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          <!--</sispc-input-container>-->
+
+          <!--<sispc-input-container>-->
+              <input type="password"  [(ngModel)]="usuario.senha" name="senha" class="form-control" placeholder="Password" style="margin-bottom: 10px; text-align: center;"> <!--formControlName="password"-->
+              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          <!--</sispc-input-container>-->
+  			  
+  			  <div class="row">
+  				<!-- /.col -->
+  				<div class="col-xs-offset-8 col-xs-4">
+  				  <button type="submit"  class="btn btn-primary btn-block btn-flat" (click)= "logar()" >Entrar</button> <!--[disabled] = "loginForm.invalid"-->
+  				</div>
+  				<!-- /.col -->
+          </div>
+         
+         <div *ngIf="senhapad" >
+          <br>
+          <p class="login-box-msg">Por favor, Altere a senha e faça o login novamente.</p>
+           <!--<sispc-input-container>-->
+            <input type="password"  [(ngModel)]="novasenha"  name="novasenha" class="form-control" placeholder="Nova senha" style="margin-bottom: 10px; text-align: center;">  <!--formControlName="email"-->
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <!--</sispc-input-container>-->
+
+        <!--<sispc-input-container>-->
+            <input type="password"  [(ngModel)]="novasenhaconfirm" name="novasenhaconfirm" class="form-control" placeholder="Confirme a nova senha" style="margin-bottom: 10px; text-align: center;"> <!--formControlName="password"-->
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <!--</sispc-input-container>-->
+        
+        <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-offset-8 col-xs-4">
+          <button type="submit"  class="btn btn-primary btn-block btn-flat" (click)= "alterarsenha()" >Alterar</button> <!--[disabled] = "loginForm.invalid"-->
+        </div>
+        <!-- /.col -->
+        </div>
+      </div>
+
+  			</form>
+        </div>
+        </div>
+		  </section>
+      <!-- FIM DO CONTEÚDO -->
+
+      

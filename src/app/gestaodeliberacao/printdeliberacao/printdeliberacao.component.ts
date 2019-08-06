@@ -112,10 +112,6 @@ export class PrintdeliberacaoComponent implements OnInit {
   }
   
 
-  
-  
-  
-
   // numResid: string, compl: string, cep: string,
 
   criaPDF(modelo: string, delib: string, rua :string, bairro: string, cidade: string, 
@@ -123,11 +119,12 @@ export class PrintdeliberacaoComponent implements OnInit {
     irreg1: string,   irreg2: string, irreg3: string,nome: string, multa: string, meses:number,
     datDefesa: Date, checkOcorrencia: number,hd: string, rua2: string,
     ruaEntrega: string, nroEntrega: string, complementoEntrega: string, bairroEntrega: string,
-    cidadeEntrega: string) {
+    cidadeEntrega: string, checkPresenca: number, dataAR: Date) {
 
     this.modelo = modelo;
 
-
+    console.log(datNotificacao)
+    
     var blank = document.getElementById('branco').innerHTML;
     var img = document.getElementById('img').innerHTML;
     var img2 = document.getElementById('img2').innerHTML;
@@ -221,13 +218,13 @@ export class PrintdeliberacaoComponent implements OnInit {
     '<p><b>Matrícula: </b>'+matricula+'</p>'+
     '<p><b>Termo de Ocorrência: </b>'+termo+'</p>'+
     '<p><b>Endereço: </b>'+capitalizar(rua2+' - '+bairro+' - '+cidade)+' - RJ'+'</p>'+
-    '<p><b>Nome: </b>'+capitalizar(nome)+'</p>');
+    '<p><b>Nome: </b>'+capitalizar(nome)+'</p>'); 
     win.document.write('</div>');
-    if(modelo==='DF' || modelo==='DI'){
+    if(modelo==='DP' || modelo==='DI'){
       win.document.write('<div class="marcapa">'+
         '<spam>X</spam>'+
         '<spam class="dia">'+("00" + datNotificacao.getDate()).slice(-2)+'</spam>'+
-        '<spam class="mesano">'+("00" + datNotificacao.getMonth()).slice(-2)+'</spam>'+
+        '<spam class="mesano">'+("00" + (datNotificacao.getMonth().valueOf()+1).toString()).slice(-2)+'</spam>'+
         '<spam class="mesano">'+datNotificacao.getFullYear()+'</spam>'+
         '<p>'+
         '<spam>X</spam>'+
@@ -242,7 +239,7 @@ export class PrintdeliberacaoComponent implements OnInit {
       win.document.write('<div class="marcapa">'+
         '<spam>X</spam>'+
         '<spam class="dia">'+("00" + datNotificacao.getDate()).slice(-2)+'</spam>'+
-        '<spam class="mesano">'+("00" + datNotificacao.getMonth()).slice(-2)+'</spam>'+
+        '<spam class="mesano">'+("00" + (datNotificacao.getMonth().valueOf()+1).toString()).slice(-2)+'</spam>'+
         '<spam class="mesano">'+datNotificacao.getFullYear()+'</spam>'+
         '<p><spam class="direita">X</spam>'+
         '<spam class="dia">'+("00" + datJulgado.getDate()).slice(-2)+'</spam>'+
@@ -250,6 +247,7 @@ export class PrintdeliberacaoComponent implements OnInit {
         '<spam class="mesano">'+datJulgado.getFullYear()+'</spam></p>');
     }
     win.document.write('</div>');
+    console.log(datNotificacao.getMonth())
     //*********************************** Pg Branco************************************************************
     win.document.write(blank);
     win.document.write('<div class="titulo">');
@@ -331,12 +329,6 @@ export class PrintdeliberacaoComponent implements OnInit {
 
     if(this.modelo === 'DP'){
       win.document.write(img2);
-      //*********************************** Pg Branco************************************************************
-     win.document.write(blank);
-     win.document.write('<div class="titulo">');
-     win.document.write('</div>');
-     win.document.write('<div class="corpo">');
-     win.document.write('</div>');
     }else{
       win.document.write(img);
     }
@@ -409,15 +401,23 @@ export class PrintdeliberacaoComponent implements OnInit {
     ' V.S.(ª) compareceu em uma das unidades da Prolagos S.A. e'+
     ' protocolizou defesa administrativa a respeito da irregularidade detectada no imóvel sob análise de '+
     '<b><u>Matrícula nº '+matricula+'.</u></b>'+ // Aqui entra a Variável n° da matrícula
-    ' Deve-se consignar que, no momento da constatação, encontrava-se presente no local o(a) '+
-    'Sr.º(ª) '+capitalizar(nome)+''+ //Aqui entra a variável nome do cliente
-    ', que assinou o respectivo Auto de Infração e cientificando-se da possibilidade de apresentar defesa no '+
-    'prazo de 15 (quinze) dias¹ a contar do recebimento da notificação constante no Auto de infração, conforme '+
-    'determina o Decreto Estadual nº 22.872/96.'+
-    '</p>');
+    ' Deve-se consignar que, no momento da constatação,');
+    if(checkPresenca == 1){
+      win.document.write(' encontrava-se presente no local o(a) '+
+      'Sr.º(ª) '+capitalizar(nome)+''+ //Aqui entra a variável nome do cliente
+      ', que assinou o respectivo Auto de Infração e cientificando-se da possibilidade de apresentar defesa no '+
+      'prazo de 15 (quinze) dias¹ a contar do recebimento da notificação constante no Auto de infração, conforme '+
+      'determina o Decreto Estadual nº 22.872/96.'+
+      '</p>');
+    }else{
+      win.document.write(' encontrava-se ausente no local o Morador,'+
+      ' o respectivo Auto de Infração foi enviado por correspondência com Aviso de Recebimento, pelos Correios, '+
+      'tendo sido recebida no dia '+("00" + dataAR.getDate()).slice(-2)+' de '+months[dataAR.getMonth()]+' de '+dataAR.getFullYear()+
+      ', oportunidade na qual tomou ciência da possibilidade de apresentar defesa,'+
+      ' no prazo de até 15 (Quinze) dias[4], a contar do recebimento da notificação, conforme determina o Decreto Estadual nº 22.872/96.');
+    }
   }
 
-    
     //Terceiro Parágrafo
     win.document.write('<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;');
 
@@ -446,7 +446,7 @@ export class PrintdeliberacaoComponent implements OnInit {
 
     //Quarto Parágrafo
     win.document.write('<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
-    if(this.modelo === 'DP'){win.document.write('Sem mais para o momento, colocamo-nos à disposição para maiores esclarecimentos que se fizerem necessários. '+
+    if(this.modelo === 'DP'){win.document.write('Sem mais para o momento, colocamo-nos à disposição para quaisquer esclarecimentos e negociação dos valores referentes a notificação em condições flexíveis.'+
       '</p>');
     }else if(this.modelo === 'A'){
       win.document.write('Ressalte-se, ainda, que é obrigação do usuário contribuir para a permanência das boas condições dos bens públicos,'+
@@ -565,7 +565,7 @@ export class PrintdeliberacaoComponent implements OnInit {
     win.document.write('<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;'+
     'Para conhecimento, informamos que o Decreto supramencionado encontra-se'+
     ' disponível no site da empresa <u>http://www.prolagos.com.br/a-concessao/.</u> Sem mais para o momento, colocamo-nos à disposição'+
-    ' para maiores esclarecimentos que se fizerem necessários. '+
+    ' para quaisquer esclarecimentos e negociação dos valores referentes a notificação em condições flexíveis.'+
     '</p>');
     
     
@@ -577,7 +577,14 @@ export class PrintdeliberacaoComponent implements OnInit {
     
     
     win.document.write('</div>');
-  }  
+  }else{
+    //*********************************** Pg Branco************************************************************
+   win.document.write(blank);
+   win.document.write('<div class="titulo">');
+   win.document.write('</div>');
+   win.document.write('<div class="corpo">');
+   win.document.write('</div>');
+  } 
   i++;
 }// fechamento do while
   

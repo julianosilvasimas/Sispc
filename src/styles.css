@@ -1,5 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
 
+/*Jumbotrons do login*/
+
+.jumbotronLogin {
+  margin:auto; 
+  text-align:center;
+  width: 500px;
+  height: 300px;
+  background-color: #D0D0D0 !important;
+}
+.jumbotronLogin  h2 {
+  font-size: 40px;
+}
+
+/* Contains the password input and the login button */
+.lockscreen-credentials {
+  margin-left: 70px;
+}
+.lockscreen-credentials .form-control {
+  border: 0;
+}
+.lockscreen-credentials .btn {
+  background-color: #fff;
+  border: 0;
+  padding: 0 10px;
+}
+.lockscreen-footer {
+  margin-top: 10px;
+}
+
+/*
+ * Page: Login & Register
+ * ----------------------
+ */
+ .login-logo,
+ .register-logo {
+   font-size: 35px;
+   text-align: center;
+   margin-bottom: 25px;
+   font-weight: 300;
+ }
+ .login-logo a,
+ .register-logo a {
+   color: #444;
+ }
+ .login-page,
+ .register-page {
+   background: #d2d6de;
+   width: 90%;
+ }
+ .login-box,
+ .register-box {
+   width: 90%;
+   
+ }
+
+ .login-box-body{
+   margin-left: 25px;
+   margin-right: 25px;
+ }
+
+ .login-box-body,
+ .register-box-body {
+   background: #fff;
+   padding: 20px;
+   border-top: 0;
+   color: #666;
+ }
+ .login-box-body .form-control-feedback,
+ .register-box-body .form-control-feedback {
+   color: #777;
+   position: relative !important;
+   top: -26px !important;
+   height: 0px !important;
+   line-height: 0px !important;
+ }
+ .login-box-msg,
+ .register-box-msg {
+   margin: 0;
+   text-align: center;
+   padding: 0 20px 20px 20px;
+ }
+ .social-auth-links {
+   margin: 10px 0;
+ }
+
 .ppcal{
     width: 30px;
 }
@@ -270,6 +355,17 @@ body {
 
 /*Jumbotrons*/
 
+.jumbotrondif {
+  margin:auto; 
+  text-align:center;
+  width: 950px;
+  padding-left: 10px!important;
+  padding-top: 20px !important;
+  padding-right: 10px !important;
+  padding-bottom: 20px !important;
+  background-color: #D0D0D0 !important;
+}
+
 .jumbotron {
   margin:auto; 
   text-align:center;
@@ -441,6 +537,12 @@ h6, .h6{
   padding-left:200px !important;
 }
 
+img#logoLogin{
+  left:0;
+  width:150px;
+  top: 7px;
+}
+
 img#logo {
   position:absolute;
   left:0;
@@ -462,12 +564,14 @@ body .ui-corner-all {
 .ui-widget, .ui-widget * {
     box-sizing: border-box;
 }
+
 legend {
-  width: 20% !important;
+  width: 200px !important;
   border-bottom: 2px solid #fffcfc !important;
   text-align: left !important;
   /*float: left !important;*/
 }
+
 
 .ui-fieldset-legend a{
   /*width: 100% !important;*/

@@ -13,7 +13,7 @@
               [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Selecione a data" ></p-calendar>
            <p-toast [style]="{marginTop: '80px'}"></p-toast>
           </div>
-          
+           
           <div class="grid-item">
             <p-dropdown [options]="items"  (onHide)="pesquisar(date6, item.supervisao)" filter="true"
             [(ngModel)]="item" placeholder="Por favor, selecione o setor" optionLabel="supervisao"></p-dropdown>

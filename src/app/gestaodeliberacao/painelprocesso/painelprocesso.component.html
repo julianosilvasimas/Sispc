@@ -11,7 +11,7 @@
     
     <div class="divisa">
       <p-fieldset legend="Info Processo" [toggleable]="true">
-            <div class="ui-g-4">N° Termo de Ocorrência</div>
+            <div class="ui-g-4">N° Termo de Ocorrência</div> 
             <div class="ui-g-4">N° do Processo</div>
             <div class="ui-g-4">Status Notificação</div>
 
@@ -68,7 +68,7 @@
             <div class="ui-g-3">Cidade</div>
 
             <div class="ui-g-3">
-                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="nome"/>
+                <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="cliente"/>
             </div>
             <div class="ui-g-3">
                 <input type="text" pInputText style="width: 100% !important;" [(ngModel)]="rua"/>
@@ -138,8 +138,9 @@
               </p-table>
           </div>
           <div class="ui-g-6">
-                 Desconto<br>
-                <input type="text" pInputText  style="width: 40% !important;" [(ngModel)]="valDesconto"/><br><br>
+                 Data AR<br>
+                 <p-calendar class="ppcal" [(ngModel)]="dataAR" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+                 [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true"  ></p-calendar><br><br>
               <p-checkbox name="group3" value=1 label="Clientes apresentou a carta defesa?" [(ngModel)]="checkCarta" inputId="cart"></p-checkbox><br><br>
               <div *ngIf="checkCarta == 1">
                     <p-calendar class="ppcal" [(ngModel)]="dataDefesa" [monthNavigator]="true" dateFormat="dd/mm/yy" 

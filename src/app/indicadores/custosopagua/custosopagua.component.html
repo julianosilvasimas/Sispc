@@ -74,10 +74,19 @@
                               id="prevagua" type="text" size="30" [(ngModel)]="sal"
                               style="background: white !important;" pInputText pKeyFilter="num" style= "width: 180px !important"/>
                           </div>
+                          <div class="grid-item-aba">
+                                <h6>Polimero em pó:</h6>
+                            </div>
+                        <div class="grid-item-aba">
+                                <input id = 7 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                                currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                                id="prevagua" type="text" size="30" [(ngModel)]="polimeropo"
+                                style="background: white !important;" pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                            </div>
                   </div>
 
               <div Style="padding-top: 10px !important;">
-                  <p-button icon="pi pi-check" label="Enviar" (click)="enviarPreco(pac, fluor, cal, cloro, polimero, sal)" ></p-button>
+                  <p-button icon="pi pi-check" label="Enviar" (click)="enviarPreco(pac, fluor, cal, cloro, polimero, sal, polimeropo)" ></p-button>
                </div>
 
            </p-tabPanel>
@@ -129,7 +138,7 @@
                   </div>
                   <div>
                   <h6>Comentários</h6>
-                  <textarea id= "com" [rows]="8" [cols]="90" pInputTextarea 
+                  <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
                   style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                 </div>
                 </div>
@@ -186,7 +195,7 @@
                     </div>
                     <div>
                     <h6>Comentários</h6>
-                    <textarea id= "com" [rows]="8" [cols]="90" pInputTextarea 
+                    <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
                     style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                   </div>
                 </div>
@@ -242,7 +251,7 @@
                     </div>
                     <div>
                     <h6>Comentários</h6>
-                    <textarea id= "com" [rows]="8" [cols]="90" pInputTextarea 
+                    <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
                     style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                   </div>
                 </div>
@@ -298,7 +307,7 @@
                     </div>
                     <div>
                     <h6>Comentários</h6>
-                    <textarea id= "com" [rows]="8" [cols]="90" pInputTextarea 
+                    <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
                     style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                   </div>
                 </div>
@@ -354,7 +363,7 @@
                     </div>
                     <div>
                     <h6>Comentários</h6>
-                    <textarea id= "com" [rows]="8" [cols]="90" pInputTextarea 
+                    <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
                     style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                   </div>
                 </div>
@@ -363,6 +372,63 @@
                     <p-button icon="pi pi-check" label="Enviar"  (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
                  </div>
           </p-tabPanel>
+
+
+          <p-tabPanel header="Polímero em pó" rightIcon="pi pi-fw pi-filter">
+                <div class="grid-containerop" >
+                    <div class="grid-containerop" >
+                    <div class="grid-item-aba">
+                        <h6>Orçado:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="orcado" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                    </div>
+  
+                    <div class="grid-item-aba">
+                        <h6>Meta:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="meta" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                    </div>
+  
+                    <div class="grid-item-aba">
+                          <h6>Realizado Kg:</h6>
+                      </div>
+                      <div class="grid-item-aba" >
+                          <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'PolimeroPo')"
+                          currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                          id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
+                           pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                      </div>
+    
+                      <div class="grid-item-aba">
+                            <h6>Realizado R$:</h6>
+                        </div>
+                        <div class="grid-item-aba" >
+                            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                            id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                             pInputText pKeyFilter="num" style= "width: 180px !important" />
+                        </div>
+    
+                      </div>
+                      <div>
+                      <h6>Comentários</h6>
+                      <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
+                      style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+                    </div>
+                  </div>
+                  
+                  <div Style="padding-top: 10px !important;">
+                      <p-button icon="pi pi-check" label="Enviar"  (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
+                   </div>
+            </p-tabPanel>
 
           <p-tabPanel header="Turbidez" rightIcon="pi pi-fw pi-clock">
                 <div class="grid-item">
@@ -408,7 +474,7 @@
                   </div>
                   <div>
                   <h6>Comentários</h6>
-                  <textarea id= "com" [rows]="5" [cols]="90" pInputTextarea 
+                  <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
                   style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                 </div>
                 </div>
@@ -462,7 +528,7 @@
                   </div>
                   <div>
                   <h6>Comentários</h6>
-                  <textarea id= "com" [rows]="5" [cols]="90" pInputTextarea 
+                  <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
                   style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                 </div>
                 </div>
@@ -516,7 +582,7 @@
                   </div>
                   <div>
                   <h6>Comentários</h6>
-                  <textarea id= "com" [rows]="5" [cols]="90" pInputTextarea 
+                  <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
                   style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                 </div>
                 </div>
@@ -562,7 +628,7 @@
                   </div>
                   <div>
                   <h6>Comentários</h6>
-                  <textarea id= "com" [rows]="5" [cols]="90" pInputTextarea 
+                  <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
                   style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                 </div>
                 </div>
@@ -608,7 +674,7 @@
                   </div>
                   <div>
                   <h6>Comentários</h6>
-                  <textarea id= "com" [rows]="5" [cols]="90" pInputTextarea 
+                  <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
                   style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
                 </div>
                 </div>
@@ -618,10 +684,11 @@
                  </div>
           </p-tabPanel>
 
+          <!--
           <p-tabPanel header="Metas" rightIcon="pi pi-fw pi-calendar-times">
               Em Construção
           </p-tabPanel>
-
+        -->
       </p-tabView>
 
        

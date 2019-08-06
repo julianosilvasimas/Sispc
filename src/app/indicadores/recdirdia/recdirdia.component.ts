@@ -10,7 +10,6 @@ import { API_BLOCK, API_BLOCK_REC } from '../../app.api';
 @Component({
   selector: 'app-recdirdia',
   templateUrl: './recdirdia.component.html',
-  styleUrls: ['./recdirdia.component.css'],
   providers: [MessageService]
 })
 
@@ -79,7 +78,7 @@ export class RecdirdiaComponent implements OnInit  {
 
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast)
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
     .subscribe(
         response => {
           if(response === null){

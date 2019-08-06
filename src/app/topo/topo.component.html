@@ -2,12 +2,17 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
-<p-menubar [model]="items" class="menuPerson"  >
+<p-menubar *ngIf="mostrarMenu" [model]="items" class="menuPerson"  >
 
     <img id="logo" style="align-content: left !important;" src="assets/images/prolagos.png"/>
     <!--<i class="glyphicon glyphicon-search"></i>
         
   <input type="text" pInputText placeholder="Procurar" style="text-align:left !important">-->
-  <button pButton label="Sair" Style="float:right !important; height: 27px !important; width: 72px !important;" icon="fa fa-sign-out"></button>
+  <p-button label="Sair" Style="float:right !important; height: 27px !important; width: 72px !important;"  (click)="sair()" icon="fa fa-sign-out"></p-button>
 </p-menubar>
+
+<div style="text-align:center" *ngIf="mostrarMenu">
+    <br>
+    <img width="120" alt="Sispc Logo" src="assets/images/SisPCLogo.png">
+  </div>
         

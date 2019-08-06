@@ -33,6 +33,7 @@ export class PainelprocessoComponent implements OnInit {
   @Input() deliberacao: Delib
   modelo: string;
   dataDefesa: Date;
+  dataAR;
   dataJulgado: Date;
 
   processo: string;
@@ -177,12 +178,11 @@ export class PainelprocessoComponent implements OnInit {
         }
       }
     }
-    
-   
+
     this.print.criaPDF(this.modelo,  ("000000" + this.ndeliberacao).slice(-6)+'/'+this.ano ,this.rua, this.bairro, this.cidade,
      this.dataJulgado,this.processo, this.termo, new Date(this.dataNotificacao), this.matricula.toString(), this.irreg1,this.irreg2 , this.irreg3 ,
      this.cliente ,this.textoMulta,  this.mesRetroativo,this.dataDefesa, this.checkOcorrencia, this.hd,this.ruaResumida, 
-     this.ruaEntrega, this.numeroEntrega, this.complementoEntrega, this.bairroEntrega, this.cidadeEntrega
+     this.ruaEntrega, this.numeroEntrega, this.complementoEntrega, this.bairroEntrega, this.cidadeEntrega, this.checkPresenca, this.dataAR
      );
   }
 
@@ -237,11 +237,11 @@ export class PainelprocessoComponent implements OnInit {
               this.rua = delib[0].contrato["nom_logradouro"] +" , "+ delib[0].contrato["nro"] 
               + " "+ delib[0].contrato["dsc_complemento"].trim()
               
+              this.dataNotificacao = delib[0].dat_notificacao
               this.ruaResumida = delib[0].contrato["nom_logradouro"] +" , "+ delib[0].contrato["nro"] 
               this.bairro = delib[0].contrato["nom_bairro"]
               this.cidade = delib[0].contrato["cidade"]
               //verificar como fazer a data notificaçao
-              this.dataNotificacao = delib[0].dat_notificacao
 
               this.valCusto = delib[0].val_custos
               this.valMulta = delib[0].val_multa
@@ -279,6 +279,11 @@ export class PainelprocessoComponent implements OnInit {
                 this.mesRetroativo = processo[0].mesRetroativo;
                 this.checkOcorrencia = processo[0].ro;
                 this.dataDefesa = new Date(processo[0].dataAviso3);
+
+                if(processo[0].dataAviso1 != null){
+                  this.dataAR = new Date(processo[0].dataAviso1) 
+                }
+
                 if(this.cliente === processo[0].titular){
                 this.checkTitular = 1;
                 }else{
@@ -290,6 +295,10 @@ export class PainelprocessoComponent implements OnInit {
               }catch(e){}
               },
             );
+
+            if(this.dataAR == null){
+              this.dataAR = new Date(delib[0].dat_notificacao);
+            }
 
           }catch(e){
             this.messageService.add({severity:'error', summary: 'Notificação não encontrada!', 
@@ -361,7 +370,7 @@ export class PainelprocessoComponent implements OnInit {
 
               this.service.InputDeliberacao(this.idIrregularidade,	null,	null,	 this.dataDefesa,	
                 this.mesRetroativo,
-                n,	p,	this.contrato,	this.matricula, c, cp, this.checkOcorrencia.toString(), this.termo)
+                n,	p,	this.contrato,	this.matricula, c, cp, this.checkOcorrencia.toString(), this.termo, sessionStorage.getItem('nome'))
               .subscribe(
                 response => {
                   if(response.status === 201){
@@ -441,6 +450,7 @@ export class PainelprocessoComponent implements OnInit {
     this.deliberacao = null;
     this.modelo = null;
     this.dataDefesa = null;
+    this.dataAR = null;
 
     this.processo = null;
     this.idIrregularidade = null;

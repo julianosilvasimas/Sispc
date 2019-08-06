@@ -7,7 +7,6 @@ import { IndicadoresService } from './../indicadores.service';
 @Component({
   selector: 'app-custosopagua',
   templateUrl: './custosopagua.component.html',
-  styleUrls: ['./custosopagua.component.css'],
   providers: [MessageService]
 })
 export class CustosopaguaComponent implements OnInit {
@@ -24,6 +23,7 @@ export class CustosopaguaComponent implements OnInit {
   cloro: number;
   polimero: number;
   sal: number;
+  polimeropo: number;
   orcado:number;
   meta:number;
   realizado: number;
@@ -57,8 +57,8 @@ export class CustosopaguaComponent implements OnInit {
   ngOnInit() {
       
     this.indicadore = ["Preços","Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero",
-     "Turbidez", "Cor", "pH", "Cloro Ind", "Fluor Ind","Metas"];
-    this.precoPQ = ["Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero","Sal"];
+    "PolimeroPo", "Turbidez", "Cor", "pH", "Cloro Ind", "Fluor Ind"];
+    this.precoPQ = ["Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero","Sal", "PolimeroPo"];
     
     let today = new Date();
     let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
@@ -79,6 +79,7 @@ export class CustosopaguaComponent implements OnInit {
         this.cloro = precos[3].preco
         this.polimero = precos[4].preco
         this.sal = precos[5].preco
+        this.polimeropo = precos[6].preco
       
         console.log("requisicao bem sucedida!", precos);
       },
@@ -130,6 +131,10 @@ export class CustosopaguaComponent implements OnInit {
       valorPQ = this.sal;
       break; 
      }
+     case "PolimeroPo": { 
+      valorPQ = this.polimeropo;
+      break; 
+     }
     }
 
     this.reali =  valorFinal * valorPQ;
@@ -153,7 +158,7 @@ export class CustosopaguaComponent implements OnInit {
       );
   }
 
-  enviarPreco(pac, fluor, cal, cloro, polimero, sal){
+  enviarPreco(pac, fluor, cal, cloro, polimero, sal, polimeropo){
     var i = 1;
 
     for (var n in this.precoPQ){
@@ -181,6 +186,10 @@ export class CustosopaguaComponent implements OnInit {
         }
         case 6: { 
           this.escreverPreco(6, "produto", sal.valueOf());
+          break; 
+        }
+        case 7: { 
+          this.escreverPreco(7, "produto", polimeropo.valueOf());
           break; 
         } 
      } 
@@ -242,7 +251,7 @@ export class CustosopaguaComponent implements OnInit {
 //*********************************************************************************************************************************************//
 
   gravarDados(orc, forecast, reali, coment){
-    this.IndicadoresService.indicadoresByDay(this.id, orc, reali, this.Kg, 0, 0, coment, forecast)
+    this.IndicadoresService.indicadoresByDay(this.id, orc, reali, this.Kg, 0, 0, coment, forecast, sessionStorage.getItem('nome'))
     .subscribe(
       response => {
         if(response === null){
