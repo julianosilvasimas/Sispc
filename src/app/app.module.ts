@@ -12,9 +12,6 @@ import {MenubarModule} from 'primeng/menubar';
 import { HttpClientModule } from '@angular/common/http';
 import { RecdirComponent } from './indicadores/recdir/recdir.component';
 import { FaturamentocobrancaComponent } from './indicadores/faturamentocobranca/faturamentocobranca.component';
-import { LigacoesqtdComponent } from './indicadores/ligacoesqtd/ligacoesqtd.component';
-import { LigacoesvendasComponent } from './indicadores/ligacoesvendas/ligacoesvendas.component';
-import { LigacoescvComponent } from './indicadores/ligacoescv/ligacoescv.component';
 import { AtendimentoComponent } from './indicadores/atendimento/atendimento.component';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {AutoCompleteModule} from 'primeng/autocomplete';
@@ -40,7 +37,7 @@ import {IndicadoresService} from 'src/app/indicadores/indicadores.service';
 import { FiscassertComponent } from './indicadores/fiscassert/fiscassert.component';
 import { FiscprodComponent } from './indicadores/fiscprod/fiscprod.component';
 import { LigacoesexecComponent } from './indicadores/ligacoesexec/ligacoesexec.component';
-import { CorteComponent } from './indicadores/corte/corte.component';
+import { ServcomercialComponent } from './indicadores/servcomercial/servcomercial.component';
 import { ReligacaoComponent } from './indicadores/religacao/religacao.component';
 import { PercentprazoComponent } from './indicadores/percentprazo/percentprazo.component';
 import { EnergiaComponent } from './indicadores/energia/energia.component';
@@ -74,14 +71,11 @@ import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopes
     TopoComponent,
     RecdirComponent,
     FaturamentocobrancaComponent,
-    LigacoesqtdComponent,
-    LigacoesvendasComponent,
-    LigacoescvComponent,
     AtendimentoComponent,
     FiscassertComponent,
     FiscprodComponent,
     LigacoesexecComponent,
-    CorteComponent,
+    ServcomercialComponent,
     ReligacaoComponent,
     PercentprazoComponent,
     EnergiaComponent,

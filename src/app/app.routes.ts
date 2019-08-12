@@ -2,14 +2,11 @@ import {Routes, RouterModule} from '@angular/router'
 
 import { RecdirComponent } from './indicadores/recdir/recdir.component';
 import { FaturamentocobrancaComponent } from './indicadores/faturamentocobranca/faturamentocobranca.component';
-import { LigacoesqtdComponent } from './indicadores/ligacoesqtd/ligacoesqtd.component';
-import { LigacoesvendasComponent } from './indicadores/ligacoesvendas/ligacoesvendas.component';
-import { LigacoescvComponent } from './indicadores/ligacoescv/ligacoescv.component';
 import { AtendimentoComponent } from './indicadores/atendimento/atendimento.component';
 import { FiscassertComponent } from './indicadores/fiscassert/fiscassert.component';
 import { FiscprodComponent } from './indicadores/fiscprod/fiscprod.component';
 import { LigacoesexecComponent } from './indicadores/ligacoesexec/ligacoesexec.component';
-import { CorteComponent } from './indicadores/corte/corte.component';
+import { ServcomercialComponent } from './indicadores/servcomercial/servcomercial.component';
 import { ReligacaoComponent } from './indicadores/religacao/religacao.component';
 import { PercentprazoComponent } from './indicadores/percentprazo/percentprazo.component';
 import { EnergiaComponent } from './indicadores/energia/energia.component';
@@ -35,14 +32,11 @@ export const ROUTES: Routes = [
     {path: '', component: AppComponent, canActivate: [AuthGuard] },
     {path: 'recdir', component: RecdirComponent, canActivate: [AuthGuard] },
     {path: 'fatcobranca', component: FaturamentocobrancaComponent, canActivate: [AuthGuard] },
-    {path: 'ligacoesqtd', component: LigacoesqtdComponent, canActivate: [AuthGuard] },
-    {path: 'ligacoesvendas', component: LigacoesvendasComponent, canActivate: [AuthGuard] },
-    {path: 'ligacoescv', component: LigacoescvComponent, canActivate: [AuthGuard] },
     {path: 'atendimento', component: AtendimentoComponent, canActivate: [AuthGuard] },
     {path: 'fiscassert', component: FiscassertComponent, canActivate: [AuthGuard] },
     {path: 'fiscprod', component: FiscprodComponent, canActivate: [AuthGuard] },
     {path: 'ligacoesexec', component: LigacoesexecComponent, canActivate: [AuthGuard] },
-    {path: 'corte', component: CorteComponent, canActivate: [AuthGuard] },
+    {path: 'servcomercial', component: ServcomercialComponent, canActivate: [AuthGuard] },
     {path: 'religacao', component: ReligacaoComponent, canActivate: [AuthGuard] },
     {path: 'percentprazo', component: PercentprazoComponent, canActivate: [AuthGuard] },
     {path: 'energia', component: EnergiaComponent, canActivate: [AuthGuard] },

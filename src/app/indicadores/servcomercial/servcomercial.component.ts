@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Indicadores } from './../indicadores.model';
-import { IndicadoresService } from './../indicadores.service';
-import { MessageService } from 'primeng/api';
+import { Indicadores } from '../indicadores.model';
+import { IndicadoresService } from '../indicadores.service';
+import { MessageService, SelectItem } from 'primeng/api';
 import { API_BLOCK } from '../../app.api';
 
 @Component({
-  selector: 'app-corte',
-  templateUrl: './corte.component.html',
+  selector: 'app-servcomercial',
+  templateUrl: './servcomercial.component.html',
   providers: [MessageService]
 })
-export class CorteComponent implements OnInit {
+export class ServcomercialComponent implements OnInit {
 
   indicador: string;
   date6: Date;
@@ -33,21 +33,71 @@ export class CorteComponent implements OnInit {
   forecast: Number;
   acao: string;
   analise: string;
+  usuario: string;
+  checkAdmin: number = 0;
+  disabled: boolean = true;
+  permissao: string;
+  corte: boolean = true;
+
+  items: SelectItem[];
+  item: string;
+  caracteresComent: number = 0 
+  caracteresAcao: number = 0  
 
 
   constructor(private IndicadoresService: IndicadoresService,
               private messageService: MessageService
-    ) {}
+    ) {
+      if(sessionStorage.getItem('permissao1')==='ROLE_INDICADOR_COMERCIAL_USER'){
+        this.items = [
+          {label: 'Cortes', value: 'Cortes'}
+        ];
+        this.item = 'Cortes'
+      }else if(sessionStorage.getItem('permissao1')==='ROLE_INDICADOR_COMERCIAL_CONSULTA'){
+        this.items = [
+          {label: 'Ligações', value: 'Ligacoes Qtd'},
+          {label: 'Lig.Vendas', value: 'Ligacoes - vendas Qtd'},
+          {label: 'Lig.Cres.Vegetativo', value: 'Ligacoes - vegetativo Qtd'},
+        ];
+        this.item = 'Ligacoes Qtd'
+      }else{
+        this.items = [
+          {label: 'Cortes', value: 'Cortes'},
+          {label: 'Ligações', value: 'Ligacoes Qtd'},
+          {label: 'Lig.Vendas', value: 'Ligacoes - vendas Qtd'},
+          {label: 'Lig.Cres.Vegetativo', value: 'Ligacoes - vegetativo Qtd'},
+        ];
+        this.item = 'Cortes'
+      }
+    }
 
   ngOnInit() {
-      
+    this.usuario = sessionStorage.getItem('nome')
+    this.permissao = sessionStorage.getItem('permissao1')
+    if(this.permissao === 'ROLE_ADMIN'){
+      this.disabled = !this.disabled;
+      this.checkAdmin = 1;
+    }   
+
     let today = new Date();
     let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
     let dataajustada= new Date(dataInicio.getFullYear() +"-"+ (dataInicio.getMonth() + 1)  +"-"+ dataInicio.getDate());
     this.date6 = dataajustada;
 
-    this.indicador = "Cortes"
+    this.indicador = this.item
     this.pesquisar(this.date6);
+  }
+
+  onKeyComent(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresComent = this.coment.length+1
+    }
+  }
+
+  onKeyAcao(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresAcao = this.acao.length+1
+    }
   }
 
 //**************************************************************//
@@ -100,6 +150,12 @@ export class CorteComponent implements OnInit {
   pesquisar(date6){
 
     this.filtro = date6.toISOString().substr(0,10)
+    this.indicador = this.item
+    if(this.indicador==='Cortes'){
+      this.corte = true
+    }else{
+      this.corte =false
+    }
 
   //********************************************************************//
     this.IndicadoresService.indicadores(this.filtro, this.indicador)
