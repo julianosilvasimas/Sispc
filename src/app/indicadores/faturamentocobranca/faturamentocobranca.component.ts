@@ -139,7 +139,6 @@ export class FaturamentocobrancaComponent implements OnInit  {
 
  //*****************************************************************//
 
-
  pesquisar(date6){
 
   this.indicador = this.item
@@ -155,6 +154,9 @@ export class FaturamentocobrancaComponent implements OnInit  {
       this.realizado = indicadores[0].reali
       this.coment = indicadores[0].comentario
       this.forecast = indicadores[0].forecast
+      this.acao = indicadores[0].acao
+      this.analise = indicadores[0].analise
+      //console.log("requisicao bem sucedida!", indicadores[0]);
       },
       
       error  => {

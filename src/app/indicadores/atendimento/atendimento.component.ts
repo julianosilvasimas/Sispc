@@ -185,7 +185,9 @@ export class AtendimentoComponent implements OnInit{
       this.atendente = indicadores[0].atendente
       this.atendimento = indicadores[0].atendimento
       this.coment = indicadores[0].comentario
-      console.log("requisicao bem sucedida!", indicadores[0]);
+      this.acao = indicadores[0].acao
+      this.analise = indicadores[0].analise
+      //console.log("requisicao bem sucedida!", indicadores[0]);
       },
       
       error  => {

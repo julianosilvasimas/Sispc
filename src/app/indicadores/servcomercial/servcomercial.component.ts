@@ -167,7 +167,9 @@ export class ServcomercialComponent implements OnInit {
         this.realizado = indicadores[0].reali
         this.pdd = indicadores[0].pecld
         this.coment = indicadores[0].comentario
-        console.log("requisicao bem sucedida!", indicadores[0]);
+        this.acao = indicadores[0].acao
+        this.analise = indicadores[0].analise
+        //console.log("requisicao bem sucedida!", indicadores[0]);
         },
       
       error  => {

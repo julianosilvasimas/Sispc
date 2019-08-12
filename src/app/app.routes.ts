@@ -3,15 +3,13 @@ import {Routes, RouterModule} from '@angular/router'
 import { RecdirComponent } from './indicadores/recdir/recdir.component';
 import { FaturamentocobrancaComponent } from './indicadores/faturamentocobranca/faturamentocobranca.component';
 import { AtendimentoComponent } from './indicadores/atendimento/atendimento.component';
-import { FiscassertComponent } from './indicadores/fiscassert/fiscassert.component';
-import { FiscprodComponent } from './indicadores/fiscprod/fiscprod.component';
-import { LigacoesexecComponent } from './indicadores/ligacoesexec/ligacoesexec.component';
+import { AssertividadeComponent } from './indicadores/assertividade/assertividade.component';
+import { ProdutividadeComponent } from './indicadores/produtividade/produtividade.component';
+import { ServicosComponent } from './indicadores/servicos/servicos.component';
 import { ServcomercialComponent } from './indicadores/servcomercial/servcomercial.component';
-import { ReligacaoComponent } from './indicadores/religacao/religacao.component';
-import { PercentprazoComponent } from './indicadores/percentprazo/percentprazo.component';
+import { PrazosComponent } from './indicadores/prazos/prazos.component';
 import { EnergiaComponent } from './indicadores/energia/energia.component';
 import { EnergiavalComponent } from './indicadores/energiaval/energiaval.component';
-import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component';
 import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
 import { ImportcsvComponent } from './importcsv/importcsv.component';
 import { CedocComponent } from './indicadores/cedoc/cedoc.component';
@@ -33,15 +31,13 @@ export const ROUTES: Routes = [
     {path: 'recdir', component: RecdirComponent, canActivate: [AuthGuard] },
     {path: 'fatcobranca', component: FaturamentocobrancaComponent, canActivate: [AuthGuard] },
     {path: 'atendimento', component: AtendimentoComponent, canActivate: [AuthGuard] },
-    {path: 'fiscassert', component: FiscassertComponent, canActivate: [AuthGuard] },
-    {path: 'fiscprod', component: FiscprodComponent, canActivate: [AuthGuard] },
-    {path: 'ligacoesexec', component: LigacoesexecComponent, canActivate: [AuthGuard] },
+    {path: 'assertividade', component: AssertividadeComponent, canActivate: [AuthGuard] },
+    {path: 'produtividade', component: ProdutividadeComponent, canActivate: [AuthGuard] },
+    {path: 'servicos', component: ServicosComponent, canActivate: [AuthGuard] },
     {path: 'servcomercial', component: ServcomercialComponent, canActivate: [AuthGuard] },
-    {path: 'religacao', component: ReligacaoComponent, canActivate: [AuthGuard] },
-    {path: 'percentprazo', component: PercentprazoComponent, canActivate: [AuthGuard] },
+    {path: 'prazos', component: PrazosComponent, canActivate: [AuthGuard] },
     {path: 'energia', component: EnergiaComponent, canActivate: [AuthGuard] },
     {path: 'energiaval', component: EnergiavalComponent, canActivate: [AuthGuard] },
-    {path: 'manutagua', component: ManutaguaComponent, canActivate: [AuthGuard] },
     {path: 'custosopa', component: CustosopaguaComponent, canActivate: [AuthGuard] },
     {path: 'import',   component: ImportcsvComponent, canActivate: [AuthGuard] },
     {path: 'cedoc',   component: CedocComponent, canActivate: [AuthGuard] },

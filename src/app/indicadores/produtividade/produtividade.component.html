@@ -1,0 +1,81 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+  </section>
+  
+  <section class="content">
+  
+    <div class="jumbotron welcome-jumbotron">
+       <h3>Produtividade</h3>
+       <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+       <div class="grid-containert"  >
+            <div class="grid-item">
+                <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+                [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+            </div>  
+            <div class="grid-item">
+                <p-dropdown [options]="items"   filter="true" [(ngModel)]="item" (onHide)="pesquisar(date6)"></p-dropdown> 
+            </div> 
+         </div>
+       <br>
+
+       <div class="fieldatual">
+            <p-fieldset legend="Dados" [toggleable]="true" >
+            <div class="ui-g">
+
+        <div class="ui-g-6">
+            <h6>Orçado:</h6>
+        </div>
+        <div class="ui-g-6" >
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+            size="30" pInputText disabled="disabled" [(ngModel)]="orcado" readonly="readonly"  />
+        </div>
+        <div class="ui-g-6">
+            <h6>Realizado:</h6>
+        </div>
+        <div class="ui-g-6">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2}" 
+            id="real" type="text" size="30" [(ngModel)]="realizado" style="background: white !important;" />
+        </div>
+        <div class="ui-g-6">
+            <h6>Qtd.Equipes:</h6>
+        </div>
+        <div class="ui-g-6">
+            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0}" 
+            id="real" type="text" size="30" [(ngModel)]="eqp" style="background: white !important;" />
+        </div>
+        </div>
+        </p-fieldset>
+        <br>
+           <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+               <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="coment" (keydown)="onKeyComent($event)" ></textarea>
+               <br>
+               <span >Nº de Caracteres = {{caracteresComent}} de 255</span>
+           </p-fieldset>
+           
+           <br>
+           <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+               <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="acao" (keydown)="onKeyAcao($event)" ></textarea>
+               <br>
+               <span >Nº de Caracteres = {{caracteresAcao}} de 255</span>
+           </p-fieldset>
+           <br>
+           <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+           <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analise" style="margin-bottom: 20px;"></textarea>
+           </p-fieldset>
+           <br>
+      </div>
+
+      
+      <div Style="padding-top: 10px !important;">
+          <p-button icon="pi pi-check" label="Enviar"  (click)="enviar(orcado, realizado, coment, eqp)"></p-button>
+     </div>
+
+    </div>
+  <!--</form>-->
+  
+  </section>
+  <!-- FIM DO CONTEÚDO -->

@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Indicadores } from './../indicadores.model';
-import { IndicadoresService } from './../indicadores.service';
-import { MessageService } from 'primeng/api';
+import { Indicadores } from '../indicadores.model';
+import { IndicadoresService } from '../indicadores.service';
+import { MessageService, SelectItem } from 'primeng/api';
 import { API_BLOCK } from '../../app.api';
 
 @Component({
-  selector: 'app-percentprazo',
-  templateUrl: './percentprazo.component.html',
+  selector: 'app-prazos',
+  templateUrl: './prazos.component.html',
   providers: [MessageService]
 })
-export class PercentprazoComponent implements OnInit {
+export class PrazosComponent implements OnInit {
 
   indicador: string;
   date6: Date;
@@ -33,12 +33,32 @@ export class PercentprazoComponent implements OnInit {
   forecast: Number;
   acao: string;
   analise: string;
+  usuario: string;
+  checkAdmin: number = 0;
+  disabled: boolean = true;
+  permissao: string;
+
+  items: SelectItem[];
+  item: string;
+  caracteresComent: number = 0  
+  caracteresAcao: number = 0 
 
   constructor(private IndicadoresService: IndicadoresService,
               private messageService: MessageService
-    ) {}
+    ) {
+      this.items = [
+        {label: 'Serv. Regulados', value: 'Prazo Servicos'}
+      ];
+      this.item = 'Prazo Servicos'
+    }
 
   ngOnInit() {
+    this.usuario = sessionStorage.getItem('nome')
+    this.permissao = sessionStorage.getItem('permissao1')
+    if(this.permissao === 'ROLE_ADMIN'){
+      this.disabled = !this.disabled;
+      this.checkAdmin = 1;
+    }
       
     let today = new Date();
     let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
@@ -49,6 +69,17 @@ export class PercentprazoComponent implements OnInit {
     this.pesquisar(this.date6);
   }
 
+  onKeyComent(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresComent = this.coment.length+1
+    }
+  }
+
+  onKeyAcao(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresAcao = this.acao.length+1
+    }
+  }
 
 //**************************************************************//
 
@@ -112,6 +143,8 @@ export class PercentprazoComponent implements OnInit {
       this.pdd = indicadores[0].pecld * 100
       this.coment = indicadores[0].comentario
       this.forecast = indicadores[0].forecast * 100
+      this.acao = indicadores[0].acao
+      this.analise = indicadores[0].analise
       console.log("requisicao bem sucedida!", indicadores[0]);
       },
       

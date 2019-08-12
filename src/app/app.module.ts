@@ -34,15 +34,13 @@ import {TableModule} from 'primeng/table';
 import {SpinnerModule} from 'primeng/spinner';
 
 import {IndicadoresService} from 'src/app/indicadores/indicadores.service';
-import { FiscassertComponent } from './indicadores/fiscassert/fiscassert.component';
-import { FiscprodComponent } from './indicadores/fiscprod/fiscprod.component';
-import { LigacoesexecComponent } from './indicadores/ligacoesexec/ligacoesexec.component';
+import { AssertividadeComponent } from './indicadores/assertividade/assertividade.component';
+import { ProdutividadeComponent } from './indicadores/produtividade/produtividade.component';
+import { ServicosComponent } from './indicadores/servicos/servicos.component';
 import { ServcomercialComponent } from './indicadores/servcomercial/servcomercial.component';
-import { ReligacaoComponent } from './indicadores/religacao/religacao.component';
-import { PercentprazoComponent } from './indicadores/percentprazo/percentprazo.component';
+import { PrazosComponent } from './indicadores/prazos/prazos.component';
 import { EnergiaComponent } from './indicadores/energia/energia.component';
 import { EnergiavalComponent } from './indicadores/energiaval/energiaval.component';
-import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component';
 import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
 import { ImportcsvComponent } from './importcsv/importcsv.component';
 import { FileUtil } from './importcsv/file.util';
@@ -72,15 +70,13 @@ import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopes
     RecdirComponent,
     FaturamentocobrancaComponent,
     AtendimentoComponent,
-    FiscassertComponent,
-    FiscprodComponent,
-    LigacoesexecComponent,
+    AssertividadeComponent,
+    ProdutividadeComponent,
+    ServicosComponent,
     ServcomercialComponent,
-    ReligacaoComponent,
-    PercentprazoComponent,
+    PrazosComponent,
     EnergiaComponent,
     EnergiavalComponent,
-    ManutaguaComponent,
     CustosopaguaComponent,
     ImportcsvComponent,
     CedocComponent,
