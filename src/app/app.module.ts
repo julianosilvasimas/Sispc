@@ -10,19 +10,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import { HttpClientModule } from '@angular/common/http';
-import { IndicadoresComponent } from './indicadores/indicadores.component';
 import { RecdirComponent } from './indicadores/recdir/recdir.component';
-import { RecdirdiaComponent } from './indicadores/recdirdia/recdirdia.component';
-import { ArrecadacaoComponent } from './indicadores/arrecadacao/arrecadacao.component';
-import { LigacoesvalComponent } from './indicadores/ligacoesval/ligacoesval.component';
+import { FaturamentocobrancaComponent } from './indicadores/faturamentocobranca/faturamentocobranca.component';
 import { LigacoesqtdComponent } from './indicadores/ligacoesqtd/ligacoesqtd.component';
 import { LigacoesvendasComponent } from './indicadores/ligacoesvendas/ligacoesvendas.component';
 import { LigacoescvComponent } from './indicadores/ligacoescv/ligacoescv.component';
-import { TelecobrancaComponent } from './indicadores/telecobranca/telecobranca.component';
-import { TmaatendimentoComponent } from './indicadores/tmaatendimento/tmaatendimento.component';
-import { TmeatendimentoComponent } from './indicadores/tmeatendimento/tmeatendimento.component';
-import { TmacallComponent } from './indicadores/tmacall/tmacall.component';
-import { TmecallComponent } from './indicadores/tmecall/tmecall.component';
+import { AtendimentoComponent } from './indicadores/atendimento/atendimento.component';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CalendarModule} from 'primeng/calendar';
@@ -44,19 +37,14 @@ import {TableModule} from 'primeng/table';
 import {SpinnerModule} from 'primeng/spinner';
 
 import {IndicadoresService} from 'src/app/indicadores/indicadores.service';
-import { RecindComponent } from './indicadores/recind/recind.component';
-
 import { FiscassertComponent } from './indicadores/fiscassert/fiscassert.component';
 import { FiscprodComponent } from './indicadores/fiscprod/fiscprod.component';
 import { LigacoesexecComponent } from './indicadores/ligacoesexec/ligacoesexec.component';
 import { CorteComponent } from './indicadores/corte/corte.component';
 import { ReligacaoComponent } from './indicadores/religacao/religacao.component';
-import { CortevalComponent } from './indicadores/corteval/corteval.component';
-import { ReligacaovalComponent } from './indicadores/religacaoval/religacaoval.component';
 import { PercentprazoComponent } from './indicadores/percentprazo/percentprazo.component';
 import { EnergiaComponent } from './indicadores/energia/energia.component';
 import { EnergiavalComponent } from './indicadores/energiaval/energiaval.component';
-import { FiscvalComponent } from './indicadores/fiscval/fiscval.component';
 import { ManutaguaComponent } from './indicadores/manutagua/manutagua.component';
 import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
 import { ImportcsvComponent } from './importcsv/importcsv.component';
@@ -77,37 +65,27 @@ import { MessageService } from 'primeng/api';
 import { EnergiaeteComponent } from './indicadores/energiaete/energiaete.component';
 import { VolumesComponent } from './indicadores/volumes/volumes.component';
 import { VolumeeteComponent } from './indicadores/volumeete/volumeete.component';
+import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopesgoto.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TopoComponent,
-    IndicadoresComponent,
     RecdirComponent,
-    RecdirdiaComponent,
-    ArrecadacaoComponent,
-    LigacoesvalComponent,
+    FaturamentocobrancaComponent,
     LigacoesqtdComponent,
     LigacoesvendasComponent,
     LigacoescvComponent,
-    TelecobrancaComponent,
-    TmaatendimentoComponent,
-    TmeatendimentoComponent,
-    TmacallComponent,
-    TmecallComponent,
-    RecindComponent,
+    AtendimentoComponent,
     FiscassertComponent,
     FiscprodComponent,
     LigacoesexecComponent,
     CorteComponent,
     ReligacaoComponent,
-    CortevalComponent,
-    ReligacaovalComponent,
     PercentprazoComponent,
     EnergiaComponent,
     EnergiavalComponent,
-    FiscvalComponent,
     ManutaguaComponent,
     CustosopaguaComponent,
     ImportcsvComponent,
@@ -120,6 +98,7 @@ import { VolumeeteComponent } from './indicadores/volumeete/volumeete.component'
     EnergiaeteComponent,
     VolumesComponent,
     VolumeeteComponent,
+    CustosopesgotoComponent,
   ],
   imports: [
 BrowserModule,

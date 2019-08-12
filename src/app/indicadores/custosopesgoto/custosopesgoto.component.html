@@ -1,0 +1,700 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+</section>
+
+<section class="content">
+
+   <!--</form>-->  
+  <div class="jumbotronop welcome-jumbotron">
+     <h3>Custos Operacionais Esgoto</h3>
+     
+     <div style="padding-bottom: 20px; padding-top: 10px"> 
+     <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="gravarData(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+        [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+     <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    </div>
+
+     <p-tabView (onChange)="handleChange($event)">
+
+        <p-tabPanel header="Preços" rightIcon="pi pi-fw pi-dollar" >
+
+            <div class="grid-containeraba" >
+                    <div class="grid-item-aba" style="width: 200px !important;">
+                        <h6>Cal-hidratado:  </h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input id = 1 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                        size="30"  [(ngModel)]="cal"  style= "width: 180px !important"  />
+                    </div>
+                    <div class="grid-item-aba" style="width: 200px !important;">
+                        <h6>Cal-micropul.:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input id = 2 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                        size="30"  [(ngModel)]="calM" 
+                        style= "width: 180px !important" />
+                    </div>
+                    <div class="grid-item-aba" style="width: 200px !important;">
+                        <h6>Polimero-emulsão:</h6>
+                    </div>
+                    <div class="grid-item-aba">
+                        <input id = 3 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="real" type="text" size="30" [(ngModel)]="polimero" 
+                        style="background: white !important;" style= "width: 180px !important"/>
+                    </div>
+                    <div class="grid-item-aba" style="width: 200px !important;">
+                        <h6>Polimero-pó:</h6>
+                    </div>
+                    <div class="grid-item-aba">
+                        <input id = 4 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="real" type="text" size="30" [(ngModel)]="polimeropo" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important" />
+                    </div>
+            
+                    <div class="grid-item-aba" style="width: 200px !important;">
+                            <h6>Pac:</h6>
+                        </div>
+                    <div class="grid-item-aba">
+                            <input id = 5 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                            id="prevagua" type="text" size="30" [(ngModel)]="pac" 
+                            style="background: white !important;" pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                        </div>
+
+                        <div class="grid-item-aba" style="width: 200px !important;">
+                            <h6>Pastilha-Cloro:</h6>
+                        </div>
+                    <div class="grid-item-aba">
+                            <input id = 6 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                            id="prevagua" type="text" size="30" [(ngModel)]="pastilhaCl"
+                            style="background: white !important;" pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                        </div>
+                        <div class="grid-item-aba" style="width: 200px !important;">
+                              <h6>Anti-Espumante:</h6>
+                          </div>
+                      <div class="grid-item-aba">
+                              <input id = 7 class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                              currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                              id="prevagua" type="text" size="30" [(ngModel)]="antiespuma"
+                              style="background: white !important;" pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                          </div>
+                </div>
+
+            <div Style="padding-top: 10px !important;">
+                <p-button icon="pi pi-check" label="Enviar" (click)="enviarPreco(pac, antiespuma, cal, calM, polimero, pastilhaCl, polimeropo)" ></p-button>
+             </div>
+
+         </p-tabPanel>
+
+        <p-tabPanel header="Pac" rightIcon="pi pi-fw pi-filter"  >
+          
+            <div class="grid-containerop" >
+                <div class="grid-containerop">
+                <div class="grid-item-aba">
+                    <h6>Orçado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="orcado" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Meta:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="meta" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Realizado Kg:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Pac(Sulfato)')"
+                    currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                    id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                      <h6>Realizado R$:</h6>
+                  </div>
+                  <div class="grid-item-aba" >
+                      <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                      currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                      id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                       pInputText pKeyFilter="num" style= "width: 180px !important" />
+                  </div>
+
+                </div>
+                <div>
+                <h6>Comentários</h6>
+                <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
+                style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+              </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar " (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
+               </div>
+
+        </p-tabPanel>
+
+        <p-tabPanel header="Fluor" rightIcon="pi pi-fw pi-filter">
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Orçado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="orcado" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Meta:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="meta" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                      <h6>Realizado Kg:</h6>
+                  </div>
+                  <div class="grid-item-aba" >
+                      <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Fluor')"
+                      currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                      id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
+                       pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                  </div>
+
+                  <div class="grid-item-aba">
+                        <h6>Realizado R$:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important" />
+                    </div>
+
+                  </div>
+                  <div>
+                  <h6>Comentários</h6>
+                  <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
+                  style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+                </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar" (click)= "gravarDados(orc, forecast, reali, coment)" ></p-button>
+               </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Cal" rightIcon="pi pi-fw pi-filter">
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Orçado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="orcado" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Meta:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="meta" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                      <h6>Realizado Kg:</h6>
+                  </div>
+                  <div class="grid-item-aba" >
+                      <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Cal')"
+                      currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                      id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
+                       pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                  </div>
+
+                  <div class="grid-item-aba">
+                        <h6>Realizado R$:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important" />
+                    </div>
+
+                  </div>
+                  <div>
+                  <h6>Comentários</h6>
+                  <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
+                  style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+                </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar" (click)= "gravarDados(orc, forecast, reali, coment)" ></p-button>
+               </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Cloro" rightIcon="pi pi-fw pi-filter">
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Orçado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="orcado" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Meta:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="meta" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                      <h6>Realizado Kg:</h6>
+                  </div>
+                  <div class="grid-item-aba" >
+                      <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Cloro')"
+                      currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                      id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
+                       pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                  </div>
+
+                  <div class="grid-item-aba">
+                        <h6>Realizado R$:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important" />
+                    </div>
+
+                  </div>
+                  <div>
+                  <h6>Comentários</h6>
+                  <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
+                  style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+                </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar"  (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
+               </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Polímero" rightIcon="pi pi-fw pi-filter">
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Orçado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="orcado" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Meta:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="meta" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                      <h6>Realizado Kg:</h6>
+                  </div>
+                  <div class="grid-item-aba" >
+                      <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'Polimero')"
+                      currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                      id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
+                       pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                  </div>
+
+                  <div class="grid-item-aba">
+                        <h6>Realizado R$:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                        id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important" />
+                    </div>
+
+                  </div>
+                  <div>
+                  <h6>Comentários</h6>
+                  <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
+                  style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+                </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar"  (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
+               </div>
+        </p-tabPanel>
+
+
+        <p-tabPanel header="Polímero em pó" rightIcon="pi pi-fw pi-filter">
+              <div class="grid-containerop" >
+                  <div class="grid-containerop" >
+                  <div class="grid-item-aba">
+                      <h6>Orçado:</h6>
+                  </div>
+                  <div class="grid-item-aba" >
+                      <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                      currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                      id="orcado" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                       pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                  </div>
+
+                  <div class="grid-item-aba">
+                      <h6>Meta:</h6>
+                  </div>
+                  <div class="grid-item-aba" >
+                      <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                      currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                      id="meta" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                       pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                  </div>
+
+                  <div class="grid-item-aba">
+                        <h6>Realizado Kg:</h6>
+                    </div>
+                    <div class="grid-item-aba" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" (keyup)="onKey($event, 'PolimeroPo')"
+                        currencyMask [options]="{ prefix: '', thousands: '', decimal: ',', align: 'center' , precision: 2 , suffix:' Kg'}" 
+                        id="prodKg" type="text" size="30" [(ngModel)]="Kg" style="background: white !important;"
+                         pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                    </div>
+  
+                    <div class="grid-item-aba">
+                          <h6>Realizado R$:</h6>
+                      </div>
+                      <div class="grid-item-aba" >
+                          <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                          currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                          id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                           pInputText pKeyFilter="num" style= "width: 180px !important" />
+                      </div>
+  
+                    </div>
+                    <div>
+                    <h6>Comentários</h6>
+                    <textarea id= "com" [rows]="8" [cols]="80" pInputTextarea 
+                    style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+                  </div>
+                </div>
+                
+                <div Style="padding-top: 10px !important;">
+                    <p-button icon="pi pi-check" label="Enviar"  (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
+                 </div>
+          </p-tabPanel>
+
+        <p-tabPanel header="Turbidez" rightIcon="pi pi-fw pi-clock">
+              <div class="grid-item">
+                      <p-dropdown [options]="items" (onHide)="combo($event)" [(ngModel)]="item" [style]="{'width':'200px'}">
+                       <ng-template let-item pTemplate="selectedItem">
+                              <span >{{item.label}}</span>
+                          </ng-template>
+                      </p-dropdown>
+                     
+                    </div> 
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Mínimo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="min" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Máximo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="max" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Realizado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                </div>
+                <div>
+                <h6>Comentários</h6>
+                <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
+                style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+              </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar"  (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
+               </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Cor" rightIcon="pi pi-fw pi-clock">
+              <div class="grid-item">
+                      <p-dropdown [options]="items" (onHide)="combo($event)" [(ngModel)]="item" [style]="{'width':'200px'}">
+                       <ng-template let-item pTemplate="selectedItem">
+                              <span >{{item.label}}</span>
+                          </ng-template>
+                      </p-dropdown>
+                     
+                    </div> 
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Mínimo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="min" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Máximo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="max" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Realizado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                </div>
+                <div>
+                <h6>Comentários</h6>
+                <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
+                style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+              </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar"  (click)= "gravarDados(orc, forecast, reali, coment)"></p-button>
+               </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Ph" rightIcon="pi pi-fw pi-clock">
+              <div class="grid-item">
+                      <p-dropdown [options]="items" (onHide)="combo($event)" [(ngModel)]="item" [style]="{'width':'200px'}">
+                       <ng-template let-item pTemplate="selectedItem">
+                              <span >{{item.label}}</span>
+                          </ng-template>
+                      </p-dropdown>
+                     
+                    </div> 
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Mínimo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="min" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Máximo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="max" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Realizado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                </div>
+                <div>
+                <h6>Comentários</h6>
+                <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
+                style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+              </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar" (click)= "gravarDados(orc, forecast, reali, coment)" ></p-button>
+               </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Cloro" rightIcon="pi pi-fw pi-clock">
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Mínimo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="min" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Máximo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="max" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Realizado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                </div>
+                <div>
+                <h6>Comentários</h6>
+                <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
+                style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+              </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar" (click)= "gravarDados(orc, forecast, reali, coment)" ></p-button>
+               </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Flúor" rightIcon="pi pi-fw pi-clock">
+            <div class="grid-containerop" >
+                <div class="grid-containerop" >
+                <div class="grid-item-aba">
+                    <h6>Mínimo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="min" type="text" size="30" [(ngModel)]="orc" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Máximo:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id="max" type="text" size="30" [(ngModel)]="forecast" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                <div class="grid-item-aba">
+                    <h6>Realizado:</h6>
+                </div>
+                <div class="grid-item-aba" >
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
+                    id= "realizado" type="text" size="30" [(ngModel)]="reali" style="background: white !important;"
+                     pInputText pKeyFilter="num" style= "width: 180px !important"/>
+                </div>
+
+                </div>
+                <div>
+                <h6>Comentários</h6>
+                <textarea id= "com" [rows]="5" [cols]="80" pInputTextarea 
+                style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+              </div>
+              </div>
+              
+              <div Style="padding-top: 10px !important;">
+                  <p-button icon="pi pi-check" label="Enviar" (click)= "gravarDados(orc, forecast, reali, coment)" ></p-button>
+               </div>
+        </p-tabPanel>
+
+        <!--
+        <p-tabPanel header="Metas" rightIcon="pi pi-fw pi-calendar-times">
+            Em Construção
+        </p-tabPanel>
+      -->
+    </p-tabView>
+
+     
+     
+  </div>
+   <!--</form>-->  
+
+</section>
+<!-- FIM DO CONTEÚDO -->

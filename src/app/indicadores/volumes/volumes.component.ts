@@ -37,6 +37,10 @@ export class VolumesComponent implements OnInit {
   comentvazao: string;
   forecastvolume: Number;
   forecastvazao: Number;
+  acaovolume: string;
+  analisevolume: string;
+  acaovazao: string;
+  analisevazao: string;
 
 
   constructor(private IndicadoresService: IndicadoresService,
@@ -80,7 +84,8 @@ enviar(orcvolume, orcvazao, realivolume, realivazao, comentvolume, comentvazao, 
       this.forecastvolume = forevolume.valueOf()
 
   //Enviando dados para o Backend
-  this.IndicadoresService.indicadoresByDay(this.id, this.orcvolume, this.realivolume, this.pdd, this.atendente, this.atendimento, this.comentvolume, this.forecastvolume, sessionStorage.getItem('nome'))
+  this.IndicadoresService.indicadoresByDay(this.id, this.orcvolume, this.realivolume, this.pdd, this.atendente, 
+    this.atendimento, this.comentvolume, this.forecastvolume, sessionStorage.getItem('nome'), this.acaovolume, this.analisevolume)
   .subscribe(
       response => {
         if(response === null){
@@ -111,7 +116,8 @@ enviar(orcvolume, orcvazao, realivolume, realivazao, comentvolume, comentvazao, 
       this.forecastvazao =  forevazao.valueOf()
 
   //Enviando dados para o Backend
-  this.IndicadoresService.indicadoresByDay(this.id, this.orcvazao, this.realivazao, this.pdd, this.atendente, this.atendimento, this.comentvazao, this.forecastvazao, sessionStorage.getItem('nome'))
+  this.IndicadoresService.indicadoresByDay(this.id, this.orcvazao, this.realivazao, this.pdd, this.atendente, 
+    this.atendimento, this.comentvazao, this.forecastvazao, sessionStorage.getItem('nome'), this.acaovazao, this.analisevazao)
   .subscribe(
       response => {
         if(response === null){

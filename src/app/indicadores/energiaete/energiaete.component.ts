@@ -37,6 +37,10 @@ export class EnergiaeteComponent implements OnInit {
   comentcusto: string;
   forecastconsumo: Number;
   forecastcusto: Number;
+  acaoconsumo: string;
+  analiseconsumo: string;
+  acaocusto: string;
+  analisecusto: string;
 
   items: SelectItem[];
   item: string;
@@ -94,7 +98,8 @@ enviar(orcconsumo, orccusto, realiconsumo, realicusto, comentconsumo, comentcust
       this.forecastconsumo = foreconsumo.valueOf()
 
   //Enviando dados para o Backend
-  this.IndicadoresService.indicadoresByDay(this.id, this.orcconsumo, this.realiconsumo, this.pdd, this.atendente, this.atendimento, this.comentconsumo, this.forecastconsumo, sessionStorage.getItem('nome'))
+  this.IndicadoresService.indicadoresByDay(this.id, this.orcconsumo, this.realiconsumo, this.pdd, this.atendente, 
+    this.atendimento, this.comentconsumo, this.forecastconsumo, sessionStorage.getItem('nome'), this.acaoconsumo, this.analiseconsumo)
   .subscribe(
       response => {
         if(response === null){
@@ -125,7 +130,8 @@ enviar(orcconsumo, orccusto, realiconsumo, realicusto, comentconsumo, comentcust
       this.forecastcusto =  forecusto.valueOf()
 
   //Enviando dados para o Backend
-  this.IndicadoresService.indicadoresByDay(this.id, this.orccusto, this.realicusto, this.pdd, this.atendente, this.atendimento, this.comentcusto, this.forecastcusto, sessionStorage.getItem('nome'))
+  this.IndicadoresService.indicadoresByDay(this.id, this.orccusto, this.realicusto, this.pdd, this.atendente, 
+    this.atendimento, this.comentcusto, this.forecastcusto, sessionStorage.getItem('nome'), this.acaocusto, this.analisecusto)
   .subscribe(
       response => {
         if(response === null){

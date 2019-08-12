@@ -38,6 +38,8 @@ export class NoticiasComponent implements OnInit{
   coment: string;
   forecast: Number;
   convertido: any;
+  acao: string;
+  analise: string;
 
   hora: number;
   minutos: any;
@@ -99,7 +101,8 @@ export class NoticiasComponent implements OnInit{
         this.forecast = fcst.valueOf()
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente,
+       this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'), this.acao, this.analise)
     .subscribe(
         response => {
           if(response === null){

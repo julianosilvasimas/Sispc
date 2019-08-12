@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Indicadores } from './../indicadores.model';
-import { IndicadoresService } from './../indicadores.service';
-import { MessageService } from 'primeng/api';
+import { Indicadores } from '../indicadores.model';
+import { IndicadoresService } from '../indicadores.service';
+import { MessageService, SelectItem } from 'primeng/api';
 import { API_BLOCK } from '../../app.api';
 
 @Component({
-  selector: 'app-tmeatendimento',
-  templateUrl: './tmeatendimento.component.html',
+  selector: 'app-atendimento',
+  templateUrl: './atendimento.component.html',
   providers: [MessageService]
 })
-export class TmeatendimentoComponent implements OnInit {
-
+export class AtendimentoComponent implements OnInit{
+ 
   indicador: string;
   date6: Date;
   
@@ -30,8 +30,19 @@ export class TmeatendimentoComponent implements OnInit {
   atendente : number;
   atendimento : number;
   coment: string;
-  forecast: number;
+  forecast: Number;
   convertido: any;
+  acao: string;
+  analise: string;
+  usuario: string;
+  checkAdmin: number = 0;
+  disabled: boolean = true;
+  permissao: string;
+
+  items: SelectItem[];
+  item: string;
+  caracteresComent: number = 0  
+  caracteresAcao: number = 0  
 
   hora: number;
   minutos: any;
@@ -45,17 +56,44 @@ export class TmeatendimentoComponent implements OnInit {
 
   constructor(private IndicadoresService: IndicadoresService,
               private messageService: MessageService
-    ) {}
+    ) {
+      this.items = [
+        {label: 'TMA Atendimento', value: 'TMA Atendimento'},
+        {label: 'TME Atendimento', value: 'TME Atendimento'},
+        {label: 'TMA Call Center', value: 'TMA Call Center'},
+        {label: 'TME Call Center', value: 'TME Call Center'}
+      ];
+      this.item = 'TMA Atendimento'
+    }
 
   ngOnInit() {
-      
+    this.usuario = sessionStorage.getItem('nome')
+    this.permissao = sessionStorage.getItem('permissao1')
+    if(this.permissao === 'ROLE_ADMIN'){
+      this.disabled = !this.disabled;
+      this.checkAdmin = 1;
+    }
+
     let today = new Date();
     let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
     let dataajustada= new Date(dataInicio.getFullYear() +"-"+ (dataInicio.getMonth() + 1)  +"-"+ dataInicio.getDate());
-    this.date6 = dataajustada;;
+    this.date6 = dataajustada;
 
-    this.indicador = "TME Atendimento"
+    this.indicador = this.item
     this.pesquisar(this.date6);
+    
+  }
+
+  onKeyComent(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresComent = this.coment.length+1
+    }
+  }
+
+  onKeyAcao(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresAcao = this.acao.length+1
+    }
   }
 
   // recebe formato hora e converte em segundos
@@ -107,7 +145,8 @@ export class TmeatendimentoComponent implements OnInit {
         this.forecast = 0
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, 
+      this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'), this.acao, this.analise)
     .subscribe(
         response => {
           if(response === null){
@@ -131,6 +170,7 @@ export class TmeatendimentoComponent implements OnInit {
  pesquisar(date6){
 
   this.filtro = date6.toISOString().substr(0,10)
+  this.indicador = this.item
 
   //********************************************************************//
   this.IndicadoresService.indicadores(this.filtro, this.indicador)
@@ -160,3 +200,4 @@ export class TmeatendimentoComponent implements OnInit {
   
 
 }
+

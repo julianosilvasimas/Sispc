@@ -12,10 +12,10 @@
               [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
           </div>  
           <div class="grid-item">
-              <p-dropdown [options]="items"   filter="true"
-              [(ngModel)]="item" placeholder="Selecione a ETE" ></p-dropdown> <!--(onHide)="" -->
+              <p-dropdown [options]="items"   filter="true" (onHide)="pesquisar(date6)"
+              [(ngModel)]="item" placeholder="Selecione a ETE" ></p-dropdown> 
           </div> 
-       </div>   
+       </div>
        
        <p-toast [style]="{marginTop: '80px'}"></p-toast>
 

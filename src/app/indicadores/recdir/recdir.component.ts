@@ -11,6 +11,8 @@ import { MessageService } from 'primeng/api';
 })
 export class RecdirComponent implements OnInit{
 
+  permissao: string;
+
   brands: string[] = ['1','2','3','4','5','6','7','8','9','10', '11','12','13',
     '14','15','16','17','18','19','20','21'];
   filteredBrands: any[];
@@ -27,6 +29,7 @@ export class RecdirComponent implements OnInit{
   response: any;
   erro: any;
   hoje: Date;
+  dataInicio: Date;
 
   id : any;
   tempo: any;
@@ -37,6 +40,14 @@ export class RecdirComponent implements OnInit{
   atendimento : Number;
   coment: string;
   forecast: Number;
+  acao: string;
+  analise: string;
+  usuario: string;
+  checkAdmin: number = 0;
+  disabled: boolean = true;
+  caracteresComent: number = 0  
+  caracteresAcao: number = 0  
+
 
 
   constructor(private IndicadoresService: IndicadoresService,
@@ -44,12 +55,30 @@ export class RecdirComponent implements OnInit{
     ) {}
 
   ngOnInit() {
+    this.usuario = sessionStorage.getItem('nome')
+    this.permissao = sessionStorage.getItem('permissao1')
+    if(this.permissao === 'ROLE_ADMIN'){
+      this.disabled = !this.disabled;
+      this.checkAdmin = 1;
+    }
     let today = new Date();
-    let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
-    let dataajustada= new Date(dataInicio.getFullYear() +"-"+ (dataInicio.getMonth() +1)  +"- 01");
+    this.dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
+    let dataajustada= new Date(this.dataInicio.getFullYear() +"-"+ (this.dataInicio.getMonth() +1)  +"- 01");
     this.referencia = dataajustada.toISOString().substr(0,10)
-    console.log('Referência: '+this.referencia)  
     this.indicador = "Receita Direta - Ciclo"
+    
+  }
+
+  onKeyComent(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresComent = this.coment.length+1
+    }
+  }
+
+  onKeyAcao(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresAcao = this.acao.length+1
+    }
   }
 
 
@@ -77,17 +106,21 @@ enviar(orc, real, com, fcst){
   .subscribe(
     indicadores  => {
       this.id = indicadores[0].id
-      this.orcado = orc.valueOf()
+      this.orcado = orc.valueOf() //desnecessario caso queira passar sem parametro
       this.realizado = real.valueOf()
       this.pdd = 0
       this.atendente = 0
       this.atendimento = 0
       this.coment = com
       this.forecast = fcst.valueOf()
+      if(this.checkAdmin == 1){
+        this.usuario = indicadores[0].colaborador
+      }
 
 
   //Enviando dados para o Backend
-  this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento, this.coment, this.forecast, sessionStorage.getItem('nome'))
+  this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, this.atendimento,
+     this.coment, this.forecast, this.usuario, this.acao, this.analise)
   .subscribe(
       response => {
         if(response === null){
@@ -98,9 +131,9 @@ enviar(orc, real, com, fcst){
       error =>  { 
         this.messageService.add({severity:'error', summary: "Dados não Enviados!", detail:error.message, life: 5000});
         console.log(error)
-  }
-      );
-    })
+      }
+    );
+  })
 
   
   }
@@ -109,6 +142,8 @@ enviar(orc, real, com, fcst){
 
 
 pesquisar(brands){
+  let dataajustada= new Date(this.dataInicio.getFullYear() +"-"+ (this.dataInicio.getMonth() +1)  +"- 01");
+    this.referencia = dataajustada.toISOString().substr(0,10)
 
 this.filtro = brands
 //********************************************************************//
@@ -121,7 +156,8 @@ this.IndicadoresService.indicadoresCiclo(brands, this.indicador, this.referencia
     this.realizado = indicadores[0].reali
     this.coment = indicadores[0].comentario
     this.forecast = indicadores[0].forecast
-    console.log("requisicao bem sucedida!", indicadores[0]);
+    this.acao= indicadores[0].acao
+    this.analise = indicadores[0].analise
     },
     
     error  => {

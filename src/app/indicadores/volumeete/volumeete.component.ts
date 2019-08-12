@@ -37,6 +37,10 @@ export class VolumeeteComponent implements OnInit {
   comentvazao: string;
   forecastvolume: Number;
   forecastvazao: Number;
+  acaovolume: string;
+  analisevolume: string;
+  acaovazao: string;
+  analisevazao: string;
 
   items: SelectItem[];
   item: string;
@@ -94,7 +98,8 @@ enviar(orcvolume, orcvazao, realivolume, realivazao, comentvolume, comentvazao, 
       this.forecastvolume = forevolume.valueOf()
 
   //Enviando dados para o Backend
-  this.IndicadoresService.indicadoresByDay(this.id, this.orcvolume, this.realivolume, this.pdd, this.atendente, this.atendimento, this.comentvolume, this.forecastvolume, sessionStorage.getItem('nome'))
+  this.IndicadoresService.indicadoresByDay(this.id, this.orcvolume, this.realivolume, this.pdd, this.atendente, this.atendimento, 
+    this.comentvolume, this.forecastvolume, sessionStorage.getItem('nome'), this.acaovolume, this.analisevolume)
   .subscribe(
       response => {
         if(response === null){

@@ -39,29 +39,11 @@ export class TopoComponent implements OnInit {
                             {label: 'Receita Direta Ciclo',
                             routerLink: '/recdir',
                             icon: 'pi pi-fw pi-plus'},
-                            {label: 'Receita Direta Dia',
-                            routerLink: '/recdirdia',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Receita Indireta',
-                            routerLink: '/recind',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Arrecadação',
-                            routerLink: '/arrecadacao',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Fiscalização $',
-                            routerLink: '/fiscval',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Corte $',
-                            routerLink: '/corteval',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Religação $',
-                            routerLink: '/religacaoval',
+                            {label: 'Faturamento e Cobrança',
+                            routerLink: '/fatcobranca',
                             icon: 'pi pi-fw pi-plus'},
                             {label: 'Cortes - Execução ',
                             routerLink: '/corte',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Ligações ($)',
-                            routerLink: '/ligacoesval',
                             icon: 'pi pi-fw pi-plus'},
                             {label: 'Ligações (Qtd.)',
                             routerLink: '/ligacoesqtd',
@@ -72,20 +54,8 @@ export class TopoComponent implements OnInit {
                             {label: 'Ligações - Crescimento Vegetativo(Qtd.)',
                             routerLink: '/ligacoescv',
                             icon: 'pi pi-fw pi-plus'},
-                            {label: 'Telecobrança ($)',
-                            routerLink: '/telecobranca',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'TMA Atendimento ',
-                            routerLink: '/tmaatendimento',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'TME Atendimento ',
-                            routerLink: '/tmeatendimento',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'TMA Call Center ',
-                            routerLink: '/tmacall',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'TME Call Center ',
-                            routerLink: '/tmecall',
+                            {label: 'Atendimento ',
+                            routerLink: '/atendimento',
                             icon: 'pi pi-fw pi-plus'}
                         ]
                     },
@@ -103,6 +73,9 @@ export class TopoComponent implements OnInit {
                             icon: 'pi pi-fw pi-plus'},
                             {label: 'Custos Op. Água',
                             routerLink: '/custosopa',
+                            icon: 'pi pi-fw pi-plus'},
+                            {label: 'Custos Op. Esgoto',
+                            routerLink: '/custosope',
                             icon: 'pi pi-fw pi-plus'},
                             {label: 'Volume ETA',
                             routerLink: '/volumes',
@@ -222,37 +195,19 @@ export class TopoComponent implements OnInit {
               }
             ];
 
-        }else if(this.permissoes === 'ROLE_INDICADOR_COMERCIAL_USER'){
-          this.items = [{
-            label: 'Comercial', 
-            icon: 'pi pi-fw pi-dollar',
-            items: [
+        }else if(this.permissoes === 'ROLE_INDICADOR_ADMIN'){//comercial admin
+            this.items = [{
+              label: 'Comercial', 
+              icon: 'pi pi-fw pi-dollar',
+              items: [
                 {label: 'Receita Direta Ciclo',
                 routerLink: '/recdir',
                 icon: 'pi pi-fw pi-plus'},
-                {label: 'Receita Direta Dia',
-                routerLink: '/recdirdia',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'Receita Indireta',
-                routerLink: '/recind',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'Arrecadação',
-                routerLink: '/arrecadacao',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'Fiscalização $',
-                routerLink: '/fiscval',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'Corte $',
-                routerLink: '/corteval',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'Religação $',
-                routerLink: '/religacaoval',
+                {label: 'Faturamento e Cobrança',
+                routerLink: '/fatcobranca',
                 icon: 'pi pi-fw pi-plus'},
                 {label: 'Cortes - Execução ',
                 routerLink: '/corte',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'Ligações ($)',
-                routerLink: '/ligacoesval',
                 icon: 'pi pi-fw pi-plus'},
                 {label: 'Ligações (Qtd.)',
                 routerLink: '/ligacoesqtd',
@@ -263,43 +218,106 @@ export class TopoComponent implements OnInit {
                 {label: 'Ligações - Crescimento Vegetativo(Qtd.)',
                 routerLink: '/ligacoescv',
                 icon: 'pi pi-fw pi-plus'},
-                {label: 'Telecobrança ($)',
-                routerLink: '/telecobranca',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'TMA Atendimento ',
-                routerLink: '/tmaatendimento',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'TME Atendimento ',
-                routerLink: '/tmeatendimento',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'TMA Call Center ',
-                routerLink: '/tmacall',
-                icon: 'pi pi-fw pi-plus'},
-                {label: 'TME Call Center ',
-                routerLink: '/tmecall',
+                {label: 'Atendimento ',
+                routerLink: '/atendimento',
                 icon: 'pi pi-fw pi-plus'}
+              ]
+          },
+
+            {label: 'Imports',
+            icon: 'pi pi-fw pi-upload',
+            items: [
+                    {label: 'Update via Csv',
+                    routerLink: '/import',
+                    icon: 'pi pi-fw pi-plus'},
+            ]
+          },
+
+
+          {label: 'Configurações',
+          icon: 'pi pi-fw pi-cog',
+          items: [
+                  {label: 'Alterar Senha',
+                  routerLink: '/',
+                  icon: 'pi pi-fw pi-pencil'},
+            ]
+          }
+        ];
+        }else if(this.permissoes === 'ROLE_INDICADOR_COMERCIAL_USER'){//plinio
+          this.items = [{
+            label: 'Comercial', 
+            icon: 'pi pi-fw pi-dollar',
+            items: [
+                {label: 'Receita Direta Ciclo',
+                routerLink: '/recdir',
+                icon: 'pi pi-fw pi-plus'},
+                {label: 'Faturamento e Cobrança',
+                routerLink: '/fatcobranca',
+                icon: 'pi pi-fw pi-plus'},
+                {label: 'Cortes - Execução ',
+                routerLink: '/corte',
+                icon: 'pi pi-fw pi-plus'},
             ]
         },
 
-        {label: 'Imports',
-        icon: 'pi pi-fw pi-upload',
+          {label: 'Imports',
+          icon: 'pi pi-fw pi-upload',
+          items: [
+                  {label: 'Update via Csv',
+                  routerLink: '/import',
+                  icon: 'pi pi-fw pi-plus'},
+          ]
+        },
+
+
+        {label: 'Configurações',
+        icon: 'pi pi-fw pi-cog',
         items: [
-                {label: 'Update via Csv',
-                routerLink: '/import',
-                icon: 'pi pi-fw pi-plus'},
-        ]
-      },
+                {label: 'Alterar Senha',
+                routerLink: '/',
+                icon: 'pi pi-fw pi-pencil'},
+          ]
+        }
+      ];
+        }else if(this.permissoes === 'ROLE_INDICADOR_COMERCIAL_CONSULTA'){//atendimento
+            this.items = [{
+              label: 'Comercial', 
+              icon: 'pi pi-fw pi-dollar',
+              items: [
+                  {label: 'Ligações (Qtd.)',
+                  routerLink: '/ligacoesqtd',
+                  icon: 'pi pi-fw pi-plus'},
+                  {label: 'Ligações - Vendas(Qtd.)',
+                  routerLink: '/ligacoesvendas',
+                  icon: 'pi pi-fw pi-plus'},
+                  {label: 'Ligações - Crescimento Vegetativo(Qtd.)',
+                  routerLink: '/ligacoescv',
+                  icon: 'pi pi-fw pi-plus'},
+                  {label: 'Atendimento ',
+                  routerLink: '/atendimento',
+                  icon: 'pi pi-fw pi-plus'}
+              ]
+          },
+
+            {label: 'Imports',
+            icon: 'pi pi-fw pi-upload',
+            items: [
+                    {label: 'Update via Csv',
+                    routerLink: '/import',
+                    icon: 'pi pi-fw pi-plus'},
+            ]
+          },
 
 
-      {label: 'Configurações',
-      icon: 'pi pi-fw pi-cog',
-      items: [
-              {label: 'Alterar Senha',
-              routerLink: '/',
-              icon: 'pi pi-fw pi-pencil'},
-        ]
-      }
-    ];
+          {label: 'Configurações',
+          icon: 'pi pi-fw pi-cog',
+          items: [
+                  {label: 'Alterar Senha',
+                  routerLink: '/',
+                  icon: 'pi pi-fw pi-pencil'},
+            ]
+          }
+        ];
         }else if(this.permissoes === 'ROLE_INDICADOR_SERVICO_USER'){
           this.items = [{
         label: 'Serviços',

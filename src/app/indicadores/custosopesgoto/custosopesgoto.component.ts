@@ -5,11 +5,12 @@ import { IndicadoresService } from './../indicadores.service';
 
 
 @Component({
-  selector: 'app-custosopagua',
-  templateUrl: './custosopagua.component.html',
+  selector: 'app-custosopesgoto',
+  templateUrl: './custosopesgoto.component.html',
   providers: [MessageService]
 })
-export class CustosopaguaComponent implements OnInit {
+export class CustosopesgotoComponent implements OnInit {
+
 
   indicadore: string[];
   precoPQ: string[];
@@ -18,11 +19,11 @@ export class CustosopaguaComponent implements OnInit {
 
   id: number;
   pac: number;
-  fluor: number;
+  antiespuma: number;
   cal: number;
-  cloro: number;
+  calM: number;
   polimero: number;
-  sal: number;
+  pastilhaCl: number;
   polimeropo: number;
   orcado:number;
   meta:number;
@@ -60,7 +61,7 @@ export class CustosopaguaComponent implements OnInit {
       
     this.indicadore = ["Preços","Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero",
     "PolimeroPo", "Turbidez", "Cor", "pH", "Cloro Ind", "Fluor Ind"];
-    this.precoPQ = ["Pac(Sulfato)", "Fluor", "Cal", "Cloro", "Polimero","Sal", "PolimeroPo"];
+    this.precoPQ = ["Pac(Sulfato)", "Antiespumante", "Cal", "CalMicropulverizado", "Polimero","PastilhaCloro", "PolimeroPo"];
     
     let today = new Date();
     let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
@@ -76,11 +77,11 @@ export class CustosopaguaComponent implements OnInit {
         precos => this.indicadores = precos.data
       
         this.pac = precos[0].preco
-        this.fluor = precos[1].preco
+        this.antiespuma = precos[9].preco
         this.cal = precos[2].preco
-        this.cloro = precos[3].preco
+        this.calM = precos[7].preco
         this.polimero = precos[4].preco
-        this.sal = precos[5].preco
+        this.pastilhaCl = precos[8].preco
         this.polimeropo = precos[6].preco
       
         console.log("requisicao bem sucedida!", precos);
@@ -114,7 +115,7 @@ export class CustosopaguaComponent implements OnInit {
          break; 
       }
       case "Fluor": { 
-        valorPQ = this.fluor;
+        valorPQ = this.antiespuma;
         break; 
      }
      case "Cal": { 
@@ -122,7 +123,7 @@ export class CustosopaguaComponent implements OnInit {
       break; 
      }
      case "Cloro": { 
-      valorPQ = this.cloro;
+      valorPQ = this.calM;
       break; 
      }
      case "Polimero": { 
@@ -130,7 +131,7 @@ export class CustosopaguaComponent implements OnInit {
       break; 
      }
      case "Sal": { 
-      valorPQ = this.sal;
+      valorPQ = this.pastilhaCl;
       break; 
      }
      case "PolimeroPo": { 
@@ -160,7 +161,7 @@ export class CustosopaguaComponent implements OnInit {
       );
   }
 
-  enviarPreco(pac, fluor, cal, cloro, polimero, sal, polimeropo){
+  enviarPreco(pac, antiespuma, cal, calM, polimero, pastilhaCl, polimeropo){
     var i = 1;
 
     for (var n in this.precoPQ){
@@ -171,7 +172,7 @@ export class CustosopaguaComponent implements OnInit {
            break; 
         } 
         case 2: { 
-          this.escreverPreco(2, "produto", fluor.valueOf());
+          this.escreverPreco(10, "produto", antiespuma.valueOf());
            break; 
         }
         case 3: { 
@@ -179,7 +180,7 @@ export class CustosopaguaComponent implements OnInit {
           break; 
         }
         case 4: { 
-          this.escreverPreco(4, "produto", cloro.valueOf());
+          this.escreverPreco(8, "produto", calM.valueOf());
           break; 
         } 
         case 5: { 
@@ -187,7 +188,7 @@ export class CustosopaguaComponent implements OnInit {
           break; 
         }
         case 6: { 
-          this.escreverPreco(6, "produto", sal.valueOf());
+          this.escreverPreco(9, "produto", pastilhaCl.valueOf());
           break; 
         }
         case 7: { 

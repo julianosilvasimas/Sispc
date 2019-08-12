@@ -38,6 +38,10 @@ export class EnergiaComponent implements OnInit {
   comentesgoto: string;
   forecastagua: Number;
   forecastesgoto: Number;
+  acaoagua: string;
+  analiseagua: string;
+  acaoesgoto: string;
+  analiseesgoto: string;
 
   constructor(private IndicadoresService: IndicadoresService,
               private messageService: MessageService
@@ -81,7 +85,8 @@ export class EnergiaComponent implements OnInit {
 
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcagua, this.realiagua, this.pdd, this.atendente, this.atendimento, this.comentagua, this.forecastagua, sessionStorage.getItem('nome'))
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcagua, this.realiagua, this.pdd, this.atendente,
+       this.atendimento, this.comentagua, this.forecastagua, sessionStorage.getItem('nome'), this.acaoagua, this.analiseagua)
     .subscribe(
         response => {
           if(response === null){
@@ -112,7 +117,8 @@ export class EnergiaComponent implements OnInit {
         this.forecastesgoto =  foreesgoto.valueOf()
 
     //Enviando dados para o Backend
-    this.IndicadoresService.indicadoresByDay(this.id, this.orcesgoto, this.realiesgoto, this.pdd, this.atendente, this.atendimento, this.comentesgoto, this.forecastesgoto, sessionStorage.getItem('nome'))
+    this.IndicadoresService.indicadoresByDay(this.id, this.orcesgoto, this.realiesgoto, this.pdd, this.atendente, 
+      this.atendimento, this.comentesgoto, this.forecastesgoto, sessionStorage.getItem('nome'), this.acaoesgoto, this.analiseesgoto)
     .subscribe(
         response => {
           if(response === null){

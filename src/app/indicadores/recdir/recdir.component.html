@@ -7,53 +7,80 @@
   <div class="jumbotron welcome-jumbotron">
      <h3>Receita Direta - Ciclo</h3>
      <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+     <div class="grid-containert"  >
+            <div class="grid-item">
+                <p-calendar class="ppcal" [(ngModel)]="dataInicio"  [monthNavigator]="true" dateFormat="dd/mm/yy" (onSelect)="pesquisar(brand)"
+                [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Referencia" ></p-calendar>  <!--(onSelect)="pesquisar(date6)"-->
+            </div>  
+            <div class="grid-item">
+                    <p-autoComplete [(ngModel)]="brand" [suggestions]="filteredBrands" (completeMethod)="filterBrands($event)" [size]="25"
+                    [minLength]="1"  [dropdown]="true" (onSelect)="pesquisar(brand)" placeholder="Ciclo"> 
+                    <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                           <div style="font-size:18px ;float:right ;margin:10px 10px 0 0">{{brand}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+                </div>
+         </div>
+    <br>
      
-     <div class="grid-container">
-      <div class="grid-item">
-        <h6>Ciclo:</h6>
-      </div>
-      
-      <div class="grid-item">
-          <p-autoComplete [(ngModel)]="brand" [suggestions]="filteredBrands" (completeMethod)="filterBrands($event)" [size]="25"
-          [minLength]="1"  [dropdown]="true" (onSelect)="pesquisar(brand)"> 
-          <ng-template let-brand pTemplate="item">
-              <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                 <div style="font-size:18px ;float:right ;margin:10px 10px 0 0">{{brand}}</div>
-              </div>
-          </ng-template>
-      </p-autoComplete>
-      </div>
-     <div class="grid-item">
+
+     <div class="fieldatual">
+     <p-fieldset legend="Dados" [toggleable]="true" >
+     
+      <div class="ui-g">
+        <div class="ui-g-6">
           <h6>Orçado:</h6>
       </div>
-      <div class="grid-item">
+      <div class="ui-g-6">
             <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
             currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" 
             size="30" disabled="disabled" [(ngModel)]="orcado" readonly="readonly"  />
       </div>
-      <div class="grid-item">
+    </div> 
+    <div class="ui-g">
+      <div class="ui-g-6">
           <h6>Realizado:</h6>
       </div>
-      <div class="grid-item">
+      <div class="ui-g-6">
             <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched"
             currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" 
             size="30" [(ngModel)]="realizado" style="background: white !important;" />
       </div>
-
-      <div class="grid-item">
+    </div>
+      <div class="ui-g-6">
             <h6>Previsão(Mês):</h6>
         </div>
-        <div class="grid-item">
+        <div class="ui-g-6">
               <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched"
               currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" 
               size="30" [(ngModel)]="forecast" style="background: white !important;" />
         </div>
-      
-    </div>
-    <h6>Comentários</h6>
-    <textarea [rows]="5" [cols]="90" pInputTextarea autoResize="autoResize" [(ngModel)]="coment"></textarea>
     
-    <div Style="padding-top: 10px !important;">
+    </p-fieldset>
+    <br>
+    <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+        <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="coment" (keydown)="onKeyComent($event)" ></textarea>
+        <br>
+        <span >Nº de Caracteres = {{caracteresComent}} de 255</span>
+    </p-fieldset>
+    <br>
+    <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+        <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="acao" (keydown)="onKeyAcao($event)" ></textarea>
+        <br>
+        <span >Nº de Caracteres = {{caracteresAcao}} de 255</span>
+    </p-fieldset>
+    <br>
+    <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+    <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analise" style="margin-bottom: 20px;"></textarea>
+    </p-fieldset>
+    <br>
+    </div>
+
+    
+    <div style="padding-top: 10px !important;">
             <p-button icon="pi pi-check" label="Enviar"  (click)="enviar(orcado, realizado, coment, forecast)"></p-button>
        </div>
 

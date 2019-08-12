@@ -155,6 +155,7 @@ export class AuthService {
 
   permissoes(){
     var permissao1 = this.auth[0]
+    sessionStorage.setItem("permissao1", permissao1)
     //console.log(permissao1)
     return permissao1
   }
