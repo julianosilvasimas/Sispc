@@ -9,7 +9,6 @@ import { ServicosComponent } from './indicadores/servicos/servicos.component';
 import { ServcomercialComponent } from './indicadores/servcomercial/servcomercial.component';
 import { PrazosComponent } from './indicadores/prazos/prazos.component';
 import { EnergiaComponent } from './indicadores/energia/energia.component';
-import { EnergiavalComponent } from './indicadores/energiaval/energiaval.component';
 import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
 import { ImportcsvComponent } from './importcsv/importcsv.component';
 import { CedocComponent } from './indicadores/cedoc/cedoc.component';
@@ -20,7 +19,6 @@ import { PainelprocessoComponent } from './gestaodeliberacao/painelprocesso/pain
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth.guard.service';
-import { EnergiaeteComponent } from './indicadores/energiaete/energiaete.component';
 import { VolumesComponent } from './indicadores/volumes/volumes.component';
 import { VolumeeteComponent } from './indicadores/volumeete/volumeete.component';
 import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopesgoto.component';
@@ -37,7 +35,6 @@ export const ROUTES: Routes = [
     {path: 'servcomercial', component: ServcomercialComponent, canActivate: [AuthGuard] },
     {path: 'prazos', component: PrazosComponent, canActivate: [AuthGuard] },
     {path: 'energia', component: EnergiaComponent, canActivate: [AuthGuard] },
-    {path: 'energiaval', component: EnergiavalComponent, canActivate: [AuthGuard] },
     {path: 'custosopa', component: CustosopaguaComponent, canActivate: [AuthGuard] },
     {path: 'import',   component: ImportcsvComponent, canActivate: [AuthGuard] },
     {path: 'cedoc',   component: CedocComponent, canActivate: [AuthGuard] },
@@ -45,7 +42,6 @@ export const ROUTES: Routes = [
     {path: 'veiculosutil',   component: VeiculoutilizacaoComponent, canActivate: [AuthGuard] },
     {path: 'painelprocess',   component: PainelprocessoComponent, canActivate: [AuthGuard] },
     {path: 'printdelib',   component: PrintdeliberacaoComponent, canActivate: [AuthGuard] },
-    {path: 'energiaete',   component: EnergiaeteComponent, canActivate: [AuthGuard] },
     {path: 'volumeete',   component: VolumeeteComponent, canActivate: [AuthGuard] },
     {path: 'volumes',   component: VolumesComponent, canActivate: [AuthGuard] },
     {path: 'custosope',   component: CustosopesgotoComponent, canActivate: [AuthGuard] }

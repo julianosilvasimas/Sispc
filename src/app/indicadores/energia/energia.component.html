@@ -4,94 +4,101 @@
   
   <section class="content">
   
-    <div class="jumbotron welcome-jumbotron">
-       <h3>Energia Consumo</h3>
-       <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
-          [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+    <div class="jumbotronop welcome-jumbotron">
+       <h3>Eficiência Energética</h3>
+       <div class="ui-g"  >
+          <div class="ui-g-4">
+              <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+              [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+          </div>  
+          <div class="ui-g-4">
+                <p-dropdown [options]="items1"   filter="true" (onHide)="alteraIndicador(item1)"
+                [(ngModel)]="item1" ></p-dropdown> 
+            </div>
+          <div class="ui-g-4">
+              <p-dropdown [options]="items"   filter="true" (onHide)="pesquisar(date6)"
+              [(ngModel)]="item" ></p-dropdown> 
+          </div> 
+       </div>
+       
        <p-toast [style]="{marginTop: '80px'}"></p-toast>
 
        <div class="grid-containert"  >
         <div class="grid-item">
-          <h6>Energia Água</h6>
-        </div>
-        
-        <div class="grid-item">
-            <h6>Energia Esgoto</h6>
-        </div>
-        
-
-      </div>
-        <div class="grid-container2"  >
-       <div class="grid-item">
-            <h6>Orçado:</h6>
-        </div>
-        <div class="grid-item" >
-            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
-            size="30" pInputText disabled="disabled" [(ngModel)]="orcagua" readonly="readonly"  />
-        </div>
-        <div class="grid-item">
-            <h6>Orçado:</h6>
-        </div>
-        <div class="grid-item" >
-            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
-            size="30" pInputText disabled="disabled" [(ngModel)]="orcesgoto" readonly="readonly"  />
-        </div>
-        <div class="grid-item">
-            <h6>Realizado:</h6>
-        </div>
-        <div class="grid-item">
-            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
-            id="real" type="text" size="30" [(ngModel)]="realiagua" style="background: white !important;" />
-        </div>
-        <div class="grid-item">
-            <h6>Realizado:</h6>
-        </div>
-        <div class="grid-item">
-            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
-            id="real" type="text" size="30" [(ngModel)]="realiesgoto" style="background: white !important;" />
-        </div>
-
-        <div class="grid-item">
-                <h6>Previsão:</h6>
-            </div>
-        <div class="grid-item">
-                <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-                currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
-                id="prevagua" type="text" size="30" [(ngModel)]="forecastagua" style="background: white !important;" />
-            </div>
-
-            <div class="grid-item">
-                    <h6>Previsão:</h6>
-                </div>
-            <div class="grid-item">
+            <p-fieldset  legend="Energia Kwh" [toggleable]="true">
+                <div class="ui-g-12">Orçado</div>
+                <div class="ui-g-12">
                     <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-                    currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 }" 
-                    id="prevesgoto" type="text" size="30" [(ngModel)]="forecastesgoto" style="background: white !important;" />
+                    currencyMask [options]="{ prefix: '', suffix:' kWh', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30" pInputText disabled="disabled" [(ngModel)]="orcconsumo" /> <!--readonly="readonly"-->
                 </div>
-
-      </div>
-      <h6>Comentários</h6>
-
-      <div class="grid-containerc"  >
-          <div class="grid-item">
-              <textarea id= "com" [rows]="5" [cols]="45" pInputTextarea autoResize="autoResize" 
-              style="text-align: center; background: white !important;" [(ngModel)]="comentagua"> </textarea>
-          </div>
-          
-          <div class="grid-item">
-              <textarea id= "com" [rows]="5" [cols]="45" pInputTextarea autoResize="autoResize" 
-              style="text-align: center; background: white !important;" [(ngModel)]="comentesgoto"> </textarea>
-          </div>
-
-      </div>
+                <div class="ui-g-12">Realizado</div>
+                <div class="ui-g-12" style="padding-bottom: 20px;">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', suffix:' kWh', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30"  [(ngModel)]="realiconsumo" [disabled]="disabledreal" />
+                </div>
+                
+       <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+           <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="comentconsumo" (keydown)="onKeyComent($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresComent}} de 255</span>
+       </p-fieldset>
+       
+       <br>
+       <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+           <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="acaoconsumo" (keydown)="onKeyAcao($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresAcao}} de 255</span>
+       </p-fieldset>
+       <br>
+       <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+       <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analiseconsumo" style="margin-bottom: 20px;"></textarea>
+       </p-fieldset>
+       <br>
+            </p-fieldset>
+        </div>
+        
+        <div class="grid-item">
+            <p-fieldset legend="Energia Custo" [toggleable]="true">
+                <div class="ui-g-12">Orçado</div>
+                <div class="ui-g-12">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30" pInputText disabled="disabled" [(ngModel)]="orccusto" /> <!--readonly="readonly"-->
+                </div>
+                <div class="ui-g-12">Realizado</div>
+                <div class="ui-g-12" style="padding-bottom: 20px;">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30"  [(ngModel)]="realicusto" [disabled]="disabledreal" />
+                </div>
+                <br>
+                <br>
+       <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+           <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="comentcusto" (keydown)="onKeyComent($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresComent}} de 255</span>
+       </p-fieldset>
+       
+       <br>
+       <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+           <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="acaocusto" (keydown)="onKeyAcao($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresAcao}} de 255</span>
+       </p-fieldset>
+       <br>
+       <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+       <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analisecusto" style="margin-bottom: 20px;"></textarea>
+       </p-fieldset>
+       <br>
+            </p-fieldset>
+        </div>
+       </div>
 
       <div Style="padding-top: 10px !important;">
           <p-button icon="pi pi-check" label="Enviar" 
-          (click)="enviar(orcagua, orcesgoto, realiagua, realiesgoto, comentagua, comentesgoto, forecastagua, forecastesgoto)"></p-button>
+          (click)="enviar(orcconsumo, orccusto, realiconsumo, realicusto, comentconsumo, comentcusto, forecastconsumo, forecastcusto)"></p-button>
      </div>
 
     </div>

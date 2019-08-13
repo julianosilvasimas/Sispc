@@ -53,14 +53,8 @@ export class TopoComponent implements OnInit {
                     {label: 'Operacional',
                     icon: 'pi pi-fw pi-users',
                     items: [
-                            {label: 'Energia Custo',
-                            routerLink: '/energiaval',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Energia Kwh',
+                            {label: 'Energia',
                             routerLink: '/energia',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Energia ETEs',
-                            routerLink: '/energiaete',
                             icon: 'pi pi-fw pi-plus'},
                             {label: 'Custos Op. Água',
                             routerLink: '/custosopa',
@@ -385,15 +379,9 @@ export class TopoComponent implements OnInit {
             label: 'Operacional',
             icon: 'pi pi-fw pi-users',
             items: [
-                    {label: 'Energia Custo',
-                    routerLink: '/energiaval',
-                    icon: 'pi pi-fw pi-plus'},
-                    {label: 'Energia Kwh',
+                    {label: 'Energia',
                     routerLink: '/energia',
-                    icon: 'pi pi-fw pi-plus'},
-                    {label: 'Energia ETEs',
-                    routerLink: '/energiaete',
-                    icon: 'pi pi-fw pi-plus'},
+                    icon: 'pi pi-fw pi-plus'}
             ]
           },
             
@@ -423,6 +411,9 @@ export class TopoComponent implements OnInit {
             items: [
                     {label: 'Custos Op. Água',
                     routerLink: '/custosopa',
+                    icon: 'pi pi-fw pi-plus'},
+                    {label: 'Energia',
+                    routerLink: '/energia',
                     icon: 'pi pi-fw pi-plus'},
             ]
           },
@@ -513,8 +504,8 @@ export class TopoComponent implements OnInit {
                     {label: 'Volumes ETEs ',
                     routerLink: '/volumeete',
                     icon: 'pi pi-fw pi-plus'},
-                    {label: 'Energia ETEs',
-                    routerLink: '/energiaete',
+                    {label: 'Energia',
+                    routerLink: '/energia',
                     icon: 'pi pi-fw pi-plus'},
             ]
           },

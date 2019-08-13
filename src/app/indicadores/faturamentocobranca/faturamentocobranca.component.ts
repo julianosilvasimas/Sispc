@@ -108,7 +108,7 @@ export class FaturamentocobrancaComponent implements OnInit  {
         this.id = indicadores[0].id
         this.orcado = orc.valueOf()
         this.realizado = real.valueOf()
-        this.pdd = 0
+        this.pdd = indicadores[0].pecld
         this.atendente = 0
         this.atendimento = 0
         this.coment = com

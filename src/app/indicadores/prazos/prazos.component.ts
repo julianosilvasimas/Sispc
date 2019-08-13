@@ -97,13 +97,13 @@ export class PrazosComponent implements OnInit {
     .subscribe(
       indicadores  => {
         this.id = indicadores[0].id
-        this.orcado = meta.valueOf()/100             //meta 
-        this.realizado = dentroexec.valueOf()/100    //dentro executado
-        this.pdd = dentropend.valueOf()/100          //dentro pendente
+        this.orcado = meta.valueOf()/100             //fora regulado
+        this.realizado = dentroexec.valueOf()/100    //dentro regulado
+        this.pdd = dentropend.valueOf()/100          //dentro não regulado
         this.atendente = 0
         this.atendimento = 0
         this.coment = coment
-        this.forecast = fora.valueOf()/100          //fora pendente
+        this.forecast = fora.valueOf()/100          //fora não regulados
 
     //Enviando dados para o Backend
     this.IndicadoresService.indicadoresByDay(this.id, this.orcado, this.realizado, this.pdd, this.atendente, 

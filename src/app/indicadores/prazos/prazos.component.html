@@ -8,26 +8,20 @@
         <h3>% Cumprimento de prazo</h3>
         <p-toast [style]="{marginTop: '80px'}"></p-toast>
 
-        <div class="grid-containert"  >
-                <div class="grid-item">
+                <div style="padding-bottom: 20px;">
                     <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
                     [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
-                </div>  
-                <div class="grid-item">
-                    <p-dropdown [options]="items"   filter="true" [(ngModel)]="item" (onHide)="pesquisar(date6)"></p-dropdown> 
-                </div> 
-             </div>
-           <br>
- 
+                </div>
+           
            <div class="fieldatual">
                 <p-fieldset legend="Dados" [toggleable]="true" >   
         <div class="ui-g"  >
          <div class="ui-g-6">
-           <h6>Serviços Pendentes</h6>
+           <h6>Serviços não regulados</h6>
          </div>
          
          <div class="ui-g-6">
-             <h6>Serviços Executados</h6>
+             <h6>Serviços Regulados</h6>
          </div>
          
  
@@ -58,7 +52,7 @@
           id="fora" type="text" size="12" [(ngModel)]="forecast" style="background: white !important;" />
          </div>
          <div class="ui-g-3">
-             <h6>Meta:</h6>
+             <h6>Fora:</h6>
          </div>
          <div class="ui-g-3">
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 

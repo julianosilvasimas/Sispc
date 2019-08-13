@@ -40,7 +40,6 @@ import { ServicosComponent } from './indicadores/servicos/servicos.component';
 import { ServcomercialComponent } from './indicadores/servcomercial/servcomercial.component';
 import { PrazosComponent } from './indicadores/prazos/prazos.component';
 import { EnergiaComponent } from './indicadores/energia/energia.component';
-import { EnergiavalComponent } from './indicadores/energiaval/energiaval.component';
 import { CustosopaguaComponent } from './indicadores/custosopagua/custosopagua.component';
 import { ImportcsvComponent } from './importcsv/importcsv.component';
 import { FileUtil } from './importcsv/file.util';
@@ -57,7 +56,6 @@ import{AuthService} from './login/auth.service';
 import { AuthGuard } from './guards/auth.guard.service';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
-import { EnergiaeteComponent } from './indicadores/energiaete/energiaete.component';
 import { VolumesComponent } from './indicadores/volumes/volumes.component';
 import { VolumeeteComponent } from './indicadores/volumeete/volumeete.component';
 import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopesgoto.component';
@@ -76,7 +74,6 @@ import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopes
     ServcomercialComponent,
     PrazosComponent,
     EnergiaComponent,
-    EnergiavalComponent,
     CustosopaguaComponent,
     ImportcsvComponent,
     CedocComponent,
@@ -85,7 +82,6 @@ import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopes
     PainelprocessoComponent,
     PrintdeliberacaoComponent,
     LoginComponent,
-    EnergiaeteComponent,
     VolumesComponent,
     VolumeeteComponent,
     CustosopesgotoComponent,
