@@ -40,6 +40,13 @@ export class NoticiasComponent implements OnInit{
   convertido: any;
   acao: string;
   analise: string;
+  usuario: string;
+  checkAdmin: number = 0;
+  disabled: boolean = true;
+  permissao: string;
+
+  caracteresComent: number = 0  
+  caracteresAcao: number = 0 
 
   hora: number;
   minutos: any;
@@ -56,6 +63,12 @@ export class NoticiasComponent implements OnInit{
     ) {}
 
   ngOnInit() {
+    this.usuario = sessionStorage.getItem('nome')
+    this.permissao = sessionStorage.getItem('permissao1')
+    if(this.permissao === 'ROLE_ADMIN'){
+      this.disabled = !this.disabled;
+      this.checkAdmin = 1;
+    }
       
     let today = new Date();
     let dataInicio = new Date(today.getTime() + (-1 * 24 * 60 * 60 * 1000));
@@ -72,6 +85,18 @@ export class NoticiasComponent implements OnInit{
     this.minuto = parseInt(hora.substring(3,6)) * 60
     this.segundo = parseInt(hora.substring(6,9))
     this.convertido = this.hora.valueOf()  + this.minuto.valueOf() + this.segundo.valueOf()
+  }
+
+  onKeyComent(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresComent = this.coment.length+1
+    }
+  }
+
+  onKeyAcao(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresAcao = this.acao.length+1
+    }
   }
 
 
@@ -137,7 +162,9 @@ export class NoticiasComponent implements OnInit{
       this.forecast = indicadores[0].forecast
       this.pdd = indicadores[0].pecld
       this.coment = indicadores[0].comentario
-      console.log("requisicao bem sucedida!", indicadores[0]);
+      this.acao = indicadores[0].acao
+      this.analise = indicadores[0].analise
+      //console.log("requisicao bem sucedida!", indicadores[0]);
       },
       
       error  => {

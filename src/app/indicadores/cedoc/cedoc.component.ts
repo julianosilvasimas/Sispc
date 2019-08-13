@@ -34,9 +34,15 @@ export class CedocComponent implements OnInit {
   forecast: Number;
   acao: string;
   analise: string;
+  usuario: string;
+  checkAdmin: number = 0;
+  disabled: boolean = true;
+  permissao: string;
 
   items: SelectItem[];
   item: Supervisoes;
+  caracteresComent: number = 0  
+  caracteresAcao: number = 0 
 
 
   constructor(private IndicadoresService: IndicadoresService,
@@ -58,7 +64,26 @@ export class CedocComponent implements OnInit {
     //********************************************************************************************************** */
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usuario = sessionStorage.getItem('nome')
+    this.permissao = sessionStorage.getItem('permissao1')
+    if(this.permissao === 'ROLE_ADMIN'){
+      this.disabled = !this.disabled;
+      this.checkAdmin = 1;
+    }
+  }
+
+  onKeyComent(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresComent = this.coment.length+1
+    }
+  }
+
+  onKeyAcao(event: any) {
+    if(event.key != 'Backspace'){
+      this.caracteresAcao = this.acao.length+1
+    }
+  }
 
   enviar(dentroprazo, foraprazo, foraprazo2018, dentroprazo2018, indicador, coment){    
 
@@ -125,7 +150,9 @@ export class CedocComponent implements OnInit {
           this.pdd = indicadores[0].pecld 
           this.coment = indicadores[0].comentario
           this.forecast = indicadores[0].forecast 
-          console.log("requisicao bem sucedida!", indicadores[0]);
+          this.acao = indicadores[0].acao
+          this.analise = indicadores[0].analise
+          //console.log("requisicao bem sucedida!", indicadores[0]);
         },
         error  => {
           console.log("Erro: ", error);

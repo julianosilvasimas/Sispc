@@ -65,19 +65,30 @@
  </div>
 
      </div>
-     <h6>Comentários</h6>
-
-     <div class="grid-containerc"  >
-         <div class="grid-item">
-             <textarea id= "com" [rows]="5" [cols]="100" pInputTextarea autoResize="autoResize" 
-             style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
-         </div>
-
-     </div>
-
+     <div class="fieldatual">
+     <br>
+       <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+           <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="coment" (keydown)="onKeyComent($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresComent}} de 255</span>
+       </p-fieldset>
+       
+       <br>
+       <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+           <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="acao" (keydown)="onKeyAcao($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresAcao}} de 255</span>
+       </p-fieldset>
+       <br>
+       <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+       <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analise" style="margin-bottom: 20px;"></textarea>
+       </p-fieldset>
+       <br>
+    
      <div Style="padding-top: 10px !important;">
          <p-button icon="pi pi-check" label="Enviar" 
          (click)="enviar(orcado , realizado, pdd , forecast, item.supervisao , coment )"></p-button>
+    </div>
     </div>
 
 </div>

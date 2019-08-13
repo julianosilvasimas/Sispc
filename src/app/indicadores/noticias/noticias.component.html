@@ -11,41 +11,61 @@
         <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
         [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
      </div>
-     <div class="grid-container2"  >
-      <div class="grid-item">
+     <br>
+     <div class="fieldatual">
+            <p-fieldset legend="Dados" [toggleable]="true" > 
+     <div class="ui-g"  >
+      <div class="ui-g-3"> 
         <h6>Meta:</h6>
       </div>
       
-      <div class="grid-item">
+      <div class="ui-g-3">
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-          size="30" pInputText disabled="disabled" [(ngModel)]="orcado" readonly="readonly"  />
+          size="12" pInputText disabled="disabled" [(ngModel)]="orcado" readonly="readonly"  />
       </div>
       
-     <div class="grid-item">
+     <div class="ui-g-3">
           <h6>Negativo:</h6>
       </div>
-      <div class="grid-item" >
+      <div class="ui-g-3" >
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-          size="30"  [(ngModel)]="forecast" />
+          size="12"  [(ngModel)]="forecast" />
       </div>
-      <div class="grid-item">
+      <div class="ui-g-3">
           <h6>Positivo:</h6>
       </div>
-      <div class="grid-item">
+      <div class="ui-g-3">
         <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-           id="real" type="text" size="30" [(ngModel)]="realizado"  />
+           id="real" type="text" size="12" [(ngModel)]="realizado"  />
       </div>
-      <div class="grid-item">
+      <div class="ui-g-3">
           <h6>Neutro:</h6>
       </div>
-      <div class="grid-item">
+      <div class="ui-g-3">
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-          size="30"  [(ngModel)]="pdd" />
+          size="12"  [(ngModel)]="pdd" />
       </div>
     </div>
-    <h6>Comentários</h6>
-    <textarea id= "com" [rows]="5" [cols]="100" pInputTextarea autoResize="autoResize" 
-    style="text-align: center; background: white !important;" [(ngModel)]="coment"> </textarea>
+    </p-fieldset>
+    <br>
+       <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+           <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="coment" (keydown)="onKeyComent($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresComent}} de 255</span>
+       </p-fieldset>
+       
+       <br>
+       <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+           <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="acao" (keydown)="onKeyAcao($event)" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresAcao}} de 255</span>
+       </p-fieldset>
+       <br>
+       <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+       <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analise" style="margin-bottom: 20px;"></textarea>
+       </p-fieldset>
+       <br>
+    </div>
 
     <div Style="padding-top: 10px !important;">
           <p-button icon="pi pi-check" label="Enviar"  (click)="enviar(orcado, realizado, coment, forecast, pdd)"></p-button>

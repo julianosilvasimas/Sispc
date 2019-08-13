@@ -9,11 +9,11 @@
         <p-toast [style]="{marginTop: '80px'}"></p-toast>
 
         <div class="grid-containert"  >
-                <div class="grid-ite">
+                <div class="grid-item">
                     <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
                     [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
                 </div>  
-                <div class="grid-ite">
+                <div class="grid-item">
                     <p-dropdown [options]="items"   filter="true" [(ngModel)]="item" (onHide)="pesquisar(date6)"></p-dropdown> 
                 </div> 
              </div>
@@ -32,14 +32,14 @@
          
  
        </div>
-         <div class="grid-container2"  >
+         <div class="ui-g"  >
         <div class="ui-g-3">
              <h6>Dentro:</h6>
          </div>
          <div class="ui-g-3" >
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
           currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="dentropend" type="text" size="17" [(ngModel)]="pdd" style="background: white !important;" />
+          id="dentropend" type="text" size="12" [(ngModel)]="pdd" style="background: white !important;" />
          </div>
          <div class="ui-g-3">
              <h6>Dentro:</h6>
@@ -47,7 +47,7 @@
          <div class="ui-g-3" >
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
           currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="dentroexec" type="text" size="17" [(ngModel)]="realizado" style="background: white !important;" />
+          id="dentroexec" type="text" size="12" [(ngModel)]="realizado" style="background: white !important;" />
          </div>
          <div class="ui-g-3">
              <h6>Fora:</h6>
@@ -55,7 +55,7 @@
          <div class="ui-g-3">
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
           currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="fora" type="text" size="17" [(ngModel)]="forecast" style="background: white !important;" />
+          id="fora" type="text" size="12" [(ngModel)]="forecast" style="background: white !important;" />
          </div>
          <div class="ui-g-3">
              <h6>Meta:</h6>
@@ -63,7 +63,7 @@
          <div class="ui-g-3">
           <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
           currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="meta" type="text" size="17" [(ngModel)]="orcado" style="background: white !important;" />
+          id="meta" type="text" size="12" [(ngModel)]="orcado" style="background: white !important;" />
          </div>
          </div>
          </p-fieldset>
