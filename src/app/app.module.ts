@@ -56,8 +56,7 @@ import{AuthService} from './login/auth.service';
 import { AuthGuard } from './guards/auth.guard.service';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
-import { VolumesComponent } from './indicadores/volumes/volumes.component';
-import { VolumeeteComponent } from './indicadores/volumeete/volumeete.component';
+import { VolumeComponent } from './indicadores/volume/volume.component';
 import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopesgoto.component';
 
 
@@ -82,8 +81,7 @@ import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopes
     PainelprocessoComponent,
     PrintdeliberacaoComponent,
     LoginComponent,
-    VolumesComponent,
-    VolumeeteComponent,
+    VolumeComponent,
     CustosopesgotoComponent,
   ],
   imports: [

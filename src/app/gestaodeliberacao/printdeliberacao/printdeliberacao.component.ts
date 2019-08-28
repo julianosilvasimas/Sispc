@@ -304,7 +304,7 @@ export class PrintdeliberacaoComponent implements OnInit {
     '<br>'+capitalizar(ruaEntrega+' nº '+nroEntrega+' '+comp)+
     '<br>'+capitalizar(bairroEntrega)+
     '<br>'+capitalizar(cidadeEntrega)+
-    '<br>' + delib+
+    '<br>' + processo+
     '<br>'+hd);
     win.document.write('</div>');
     win.document.write('<div class="infoaviso2">'+
@@ -312,7 +312,7 @@ export class PrintdeliberacaoComponent implements OnInit {
     '<br>'+capitalizar(ruaEntrega+' nº '+nroEntrega+' '+comp)+
     '<br>'+capitalizar(bairroEntrega)+
     '<br>'+capitalizar(cidadeEntrega)+
-    '<br>' + delib+
+    '<br>' + processo+
     '<br>'+hd);
     win.document.write('</div>');
      //*********************************** Pg Branco************************************************************

@@ -50,7 +50,8 @@ export class ServcomercialComponent implements OnInit {
     ) {
       if(sessionStorage.getItem('permissao1')==='ROLE_INDICADOR_COMERCIAL_USER'){
         this.items = [
-          {label: 'Cortes', value: 'Cortes'}
+          {label: 'Cortes', value: 'Cortes'},
+          {label: 'Religações', value: 'Religacao'},
         ];
         this.item = 'Cortes'
       }else if(sessionStorage.getItem('permissao1')==='ROLE_INDICADOR_COMERCIAL_CONSULTA'){
@@ -63,6 +64,7 @@ export class ServcomercialComponent implements OnInit {
       }else{
         this.items = [
           {label: 'Cortes', value: 'Cortes'},
+          {label: 'Religações', value: 'Religacao'},
           {label: 'Ligações', value: 'Ligacoes Qtd'},
           {label: 'Lig.Vendas', value: 'Ligacoes - vendas Qtd'},
           {label: 'Lig.Cres.Vegetativo', value: 'Ligacoes - vegetativo Qtd'},

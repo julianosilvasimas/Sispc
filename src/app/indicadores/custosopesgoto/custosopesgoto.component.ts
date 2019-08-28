@@ -43,6 +43,10 @@ export class CustosopesgotoComponent implements OnInit {
    
   items: SelectItem[];
   item: String;
+  setores: SelectItem[];
+  setor: String;
+
+  
 
 
   @Input() indicadores : Indicadores
@@ -54,6 +58,10 @@ export class CustosopesgotoComponent implements OnInit {
     this.items = [
       {label: 'Água Tratada', value: ''},
       {label: 'Água Bruta', value: 'Bruta'}
+    ];
+    this.setores = [
+      {label: 'Água', value: ''},
+      {label: 'Esgoto', value: 'Bruta'}
     ];
   }
 
@@ -231,7 +239,7 @@ export class CustosopesgotoComponent implements OnInit {
     );
 
   }
-
+ 
   
   //Método "Vigia" Alteração da aba
   handleChange(e) {

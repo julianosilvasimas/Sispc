@@ -62,11 +62,8 @@ export class TopoComponent implements OnInit {
                             {label: 'Custos Op. Esgoto',
                             routerLink: '/custosope',
                             icon: 'pi pi-fw pi-plus'},
-                            {label: 'Volume ETA',
-                            routerLink: '/volumes',
-                            icon: 'pi pi-fw pi-plus'},
-                            {label: 'Volumes ETEs',
-                            routerLink: '/volumeete',
+                            {label: 'Volume/Vazão',
+                            routerLink: '/volume',
                             icon: 'pi pi-fw pi-plus'},
                     ]
                   },
@@ -79,9 +76,9 @@ export class TopoComponent implements OnInit {
                             {label: 'Assertividade',
                             routerLink: '/assertividade',
                             icon: 'pi pi-fw pi-plus'},
-                            {label: 'Execução',
+                            /*{label: 'Execução',
                             routerLink: '/servicos',
-                            icon: 'pi pi-fw pi-plus'},
+                            icon: 'pi pi-fw pi-plus'},*/
                             {label: 'Prazos',
                             routerLink: '/prazos',
                             icon: 'pi pi-fw pi-plus'},
@@ -290,9 +287,9 @@ export class TopoComponent implements OnInit {
           {label: 'Assertividade',
           routerLink: '/assertividade',
           icon: 'pi pi-fw pi-plus'},
-          {label: 'Execução',
+          /*{label: 'Execução',
           routerLink: '/servicos',
-          icon: 'pi pi-fw pi-plus'},
+          icon: 'pi pi-fw pi-plus'},*/
           {label: 'Prazos',
           routerLink: '/prazos',
           icon: 'pi pi-fw pi-plus'},
@@ -415,6 +412,9 @@ export class TopoComponent implements OnInit {
                     {label: 'Energia',
                     routerLink: '/energia',
                     icon: 'pi pi-fw pi-plus'},
+                    {label: 'Volume/Vazão',
+                    routerLink: '/volume',
+                    icon: 'pi pi-fw pi-plus'},
             ]
           },
             
@@ -442,9 +442,9 @@ export class TopoComponent implements OnInit {
             label: 'Operacional',
             icon: 'pi pi-fw pi-users',
             items: [
-                    {label: 'Volume ETA',
-                    routerLink: '/volumes',
-                    icon: 'pi pi-fw pi-plus'},
+              {label: 'Volume/Vazão',
+              routerLink: '/volume',
+              icon: 'pi pi-fw pi-plus'},
             ]
           },
             
@@ -501,8 +501,8 @@ export class TopoComponent implements OnInit {
             label: 'Operacional',
             icon: 'pi pi-fw pi-users',
             items: [
-                    {label: 'Volumes ETEs ',
-                    routerLink: '/volumeete',
+                    {label: 'Volume/Vazão',
+                    routerLink: '/volume',
                     icon: 'pi pi-fw pi-plus'},
                     {label: 'Energia',
                     routerLink: '/energia',

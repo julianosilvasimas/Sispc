@@ -1,0 +1,107 @@
+<!-- INÍCIO DO CONTEÚDO -->
+<section class="content-header">
+  </section>
+  
+  <section class="content">
+  
+        <div class="jumbotronop welcome-jumbotron">
+                <h3>Volume e Vazão</h3>
+                <div class="ui-g"  >
+                   <div class="ui-g-4">
+                       <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+                       [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+                   </div>  
+                   <div class="ui-g-4">
+                         <p-dropdown [options]="items1"   filter="true" (onHide)="alteraIndicador(item1)"
+                         [(ngModel)]="item1" ></p-dropdown> 
+                     </div>
+                   <div class="ui-g-4">
+                       <p-dropdown [options]="items"   filter="true" (onHide)="pesquisar(date6)"
+                       [(ngModel)]="item" ></p-dropdown> 
+                   </div> 
+                </div>
+       <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+       <div class="grid-containert"  >
+        <div class="grid-item">
+            <p-fieldset  legend="Volume" [toggleable]="true">
+                <div class="ui-g-12">Orçado</div>
+                <div class="ui-g-12">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', suffix:' m³', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30" pInputText disabled="disabled" [(ngModel)]="orcvolume" /> <!--readonly="readonly"-->
+                </div>
+                <div class="ui-g-12">Realizado</div>
+                <div class="ui-g-12" style="padding-bottom: 20px;">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', suffix:' m³', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30"  [(ngModel)]="realivolume"  />
+                </div>
+                <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+                    <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="comentvolume" (keydown)="onKeyComent($event)" ></textarea>
+                    <br>
+                    <span >Nº de Caracteres = {{caracteresComent}} de 255</span>
+                </p-fieldset>
+                
+                <br>
+                <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+                    <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="acaovolume" (keydown)="onKeyAcao($event)" ></textarea>
+                    <br>
+                    <span >Nº de Caracteres = {{caracteresAcao}} de 255</span>
+                </p-fieldset>
+                <br>
+                <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+                <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analisevolume" style="margin-bottom: 20px;"></textarea>
+                </p-fieldset>
+                <br>
+            </p-fieldset>
+        </div>
+        
+        <div class="grid-item">
+            <p-fieldset legend="Vazão" [toggleable]="true">
+                <div class="ui-g-12">Orçado</div>
+                <div class="ui-g-12">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', suffix:' l/s', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30" pInputText disabled="disabled" [(ngModel)]="orcvazao" /> <!--readonly="readonly"-->
+                </div>
+                <div class="ui-g-12">Realizado</div>
+                <div class="ui-g-12" style="padding-bottom: 20px;">
+                    <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                    currencyMask [options]="{ prefix: '', suffix:' l/s', thousands: '.', decimal: ',', align: 'center', precision: 2 }" 
+                    size="30" pInputText  [(ngModel)]="realivazao" [disabled]="disabledreal" />
+                </div>
+                <br>
+                <br>
+       <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
+           <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="comentvazao" (keydown)="onKeyComentVazao($event)" [disabled]="disabledreal"></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresComentVazao}} de 255</span>
+       </p-fieldset>
+       
+       <br>
+       <p-fieldset legend="Ações" [toggleable]="true" collapsed="true" >
+           <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [(ngModel)]="acaovazao" (keydown)="onKeyAcaoVazao($event)" [disabled]="disabledreal" ></textarea>
+           <br>
+           <span >Nº de Caracteres = {{caracteresAcaoVazao}} de 255</span>
+       </p-fieldset>
+       <br>
+       <p-fieldset legend="Análise" [toggleable]="true" collapsed="true">
+       <textarea [rows]="5" [cols]="65" pInputTextarea autoResize="autoResize" [disabled]="disabled" [(ngModel)]="analisevazao" style="margin-bottom: 20px;"></textarea>
+       </p-fieldset>
+       <br>
+            </p-fieldset>
+        </div>
+       </div>
+
+      <div Style="padding-top: 10px !important;">
+          <p-button icon="pi pi-check" label="Enviar" 
+          (click)="enviar()"></p-button>
+     </div>
+
+    </div>
+  <!--</form>-->
+  
+  </section>
+  <!-- FIM DO CONTEÚDO -->
+

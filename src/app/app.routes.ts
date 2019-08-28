@@ -19,8 +19,7 @@ import { PainelprocessoComponent } from './gestaodeliberacao/painelprocesso/pain
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth.guard.service';
-import { VolumesComponent } from './indicadores/volumes/volumes.component';
-import { VolumeeteComponent } from './indicadores/volumeete/volumeete.component';
+import { VolumeComponent } from './indicadores/volume/volume.component';
 import { CustosopesgotoComponent } from './indicadores/custosopesgoto/custosopesgoto.component';
 
 export const ROUTES: Routes = [
@@ -42,7 +41,6 @@ export const ROUTES: Routes = [
     {path: 'veiculosutil',   component: VeiculoutilizacaoComponent, canActivate: [AuthGuard] },
     {path: 'painelprocess',   component: PainelprocessoComponent, canActivate: [AuthGuard] },
     {path: 'printdelib',   component: PrintdeliberacaoComponent, canActivate: [AuthGuard] },
-    {path: 'volumeete',   component: VolumeeteComponent, canActivate: [AuthGuard] },
-    {path: 'volumes',   component: VolumesComponent, canActivate: [AuthGuard] },
+    {path: 'volume',   component: VolumeComponent, canActivate: [AuthGuard] },
     {path: 'custosope',   component: CustosopesgotoComponent, canActivate: [AuthGuard] }
 ]

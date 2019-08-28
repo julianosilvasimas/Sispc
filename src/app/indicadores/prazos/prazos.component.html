@@ -5,62 +5,109 @@
   <section class="content">
   
     <div class="jumbotron welcome-jumbotron">
-        <h3>% Cumprimento de prazo</h3>
+        <h3>Cumprimento de prazo</h3>
         <p-toast [style]="{marginTop: '80px'}"></p-toast>
 
-                <div style="padding-bottom: 20px;">
-                    <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
-                    [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
-                </div>
+                <div class="grid-containert"  >
+            <div class="grid-item">
+                <p-calendar class="ppcal" [(ngModel)]="date6" (onSelect)="pesquisar(date6)" [monthNavigator]="true" dateFormat="dd/mm/yy" 
+                [yearNavigator]="true" yearRange="2008:2041" [showIcon]="true" placeholder="Data" ></p-calendar>
+            </div>  
+            <div class="grid-item">
+                <p-dropdown [options]="items"   [(ngModel)]="item" (onHide)="pesquisar(date6)"></p-dropdown> 
+            </div> 
+         </div>
+       <br>
+       
            
-           <div class="fieldatual">
-                <p-fieldset legend="Dados" [toggleable]="true" >   
-        <div class="ui-g"  >
-         <div class="ui-g-6">
-           <h6>Serviços não regulados</h6>
-         </div>
-         
-         <div class="ui-g-6">
-             <h6>Serviços Regulados</h6>
-         </div>
-         
- 
-       </div>
-         <div class="ui-g"  >
-        <div class="ui-g-3">
-             <h6>Dentro:</h6>
-         </div>
-         <div class="ui-g-3" >
-          <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-          currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="dentropend" type="text" size="12" [(ngModel)]="pdd" style="background: white !important;" />
-         </div>
-         <div class="ui-g-3">
-             <h6>Dentro:</h6>
-         </div>
-         <div class="ui-g-3" >
-          <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-          currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="dentroexec" type="text" size="12" [(ngModel)]="realizado" style="background: white !important;" />
-         </div>
-         <div class="ui-g-3">
-             <h6>Fora:</h6>
-         </div>
-         <div class="ui-g-3">
-          <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-          currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="fora" type="text" size="12" [(ngModel)]="forecast" style="background: white !important;" />
-         </div>
-         <div class="ui-g-3">
-             <h6>Fora:</h6>
-         </div>
-         <div class="ui-g-3">
-          <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
-          currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
-          id="meta" type="text" size="12" [(ngModel)]="orcado" style="background: white !important;" />
-         </div>
-         </div>
-         </p-fieldset>
+    <div class="fieldatual">
+        <p-fieldset legend="Dados" [toggleable]="true" >   
+                <div class="grid-containert"  >
+                        <div class="grid-item">
+                           <h6>Serviços não regulados</h6> 
+                        </div>  
+                        <div class="grid-item">
+                                <h6>Serviços regulados</h6> 
+                        </div> 
+                     </div>
+
+            <div *ngIf="checkItem; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                    <div class="ui-g">
+                        <div class="ui-g-3">
+                            <h6>Dentro:</h6>
+                        </div>
+                        <div class="ui-g-3" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
+                        id="dentropend" type="text" size="12" [(ngModel)]="pdd" style="background: white !important;" />
+                        </div>
+                        <div class="ui-g-3">
+                            <h6>Dentro:</h6>
+                        </div>
+                        <div class="ui-g-3" >
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
+                        id="dentroexec" type="text" size="12" [(ngModel)]="realizado" style="background: white !important;" />
+                        </div>
+                        <div class="ui-g-3">
+                            <h6>Fora:</h6>
+                        </div>
+                        <div class="ui-g-3">
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
+                        id="fora" type="text" size="12" [(ngModel)]="forecast" style="background: white !important;" />
+                        </div>
+                        <div class="ui-g-3">
+                            <h6>Fora:</h6>
+                        </div>
+                        <div class="ui-g-3">
+                        <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                        currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 2 , suffix: ' %'}" 
+                        id="meta" type="text" size="12" [(ngModel)]="orcado" style="background: white !important;" />
+                        </div>
+                    </div>    
+            </ng-template>
+            <ng-template #elseBlock>
+                    <div class="ui-g">
+                        <div class="ui-g-3">
+                            <h6>Dentro:</h6>
+                        </div>
+                        <div class="ui-g-3" >
+                            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0}" 
+                            id="dentropend" type="text" size="12" [(ngModel)]="pdd" style="background: white !important;" />
+                        </div>
+                        <div class="ui-g-3">
+                            <h6>Dentro:</h6>
+                        </div>
+                        <div class="ui-g-3" >
+                            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0}" 
+                            id="dentroexec" type="text" size="12" [(ngModel)]="realizado" style="background: white !important;" />
+                        </div>
+                        <div class="ui-g-3">
+                            <h6>Fora:</h6>
+                        </div>
+                        <div class="ui-g-3">
+                            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0}" 
+                            id="fora" type="text" size="12" [(ngModel)]="forecast" style="background: white !important;" />
+                         </div>
+                        <div class="ui-g-3">
+                            <h6>Fora:</h6>
+                        </div>
+                        <div class="ui-g-3">
+                            <input class="ng-pristine ng-valid ui-inputtext ui-corner-all ui-state-default ui-widget ng-touched" 
+                            currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',', align: 'center' , precision: 0}" 
+                            id="meta" type="text" size="12" [(ngModel)]="orcado" style="background: white !important;" />
+                        </div>
+                    </div>
+            </ng-template>
+
+            
+        </p-fieldset>
+
        <br>
        <p-fieldset legend="Comentários" [toggleable]="true" collapsed="true">
            <textarea [rows]="5" [cols]="70" pInputTextarea autoResize="autoResize" [(ngModel)]="coment" (keydown)="onKeyComent($event)" ></textarea>
@@ -83,7 +130,7 @@
  
        <div Style="padding-top: 10px !important;">
            <p-button icon="pi pi-check" label="Enviar" 
-           (click)="enviar(pdd , realizado, forecast, orcado, coment)"></p-button>
+           (click)="enviar()"></p-button>
       </div>
  
      </div>
