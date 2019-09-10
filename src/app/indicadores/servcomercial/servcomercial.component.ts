@@ -52,15 +52,15 @@ export class ServcomercialComponent implements OnInit {
         this.items = [
           {label: 'Cortes', value: 'Cortes'},
           {label: 'Religações', value: 'Religacao'},
+          {label: 'Ligações', value: 'Ligacoes Qtd'},
         ];
         this.item = 'Cortes'
       }else if(sessionStorage.getItem('permissao1')==='ROLE_INDICADOR_COMERCIAL_CONSULTA'){
         this.items = [
-          {label: 'Ligações', value: 'Ligacoes Qtd'},
           {label: 'Lig.Vendas', value: 'Ligacoes - vendas Qtd'},
           {label: 'Lig.Cres.Vegetativo', value: 'Ligacoes - vegetativo Qtd'},
         ];
-        this.item = 'Ligacoes Qtd'
+        this.item = 'Ligacoes - vendas Qtd'
       }else{
         this.items = [
           {label: 'Cortes', value: 'Cortes'},

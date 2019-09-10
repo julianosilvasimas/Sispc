@@ -154,31 +154,60 @@ export class PainelprocessoComponent implements OnInit {
     }else{
       meses = 'meses'
     }
-
+    
     // Definindo texto do valor da multa
-    if(this.valMulta == this.valTotal){
-      this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),' 
+    if(this.valMulta <= this.valTotal){
+      if(this.valMulta == this.valTotal){
+        this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),' 
+      }else{
+        if(this.valRetro > 0){
+          if(this.valTroca > 0){
+            this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+
+            ' acrescido do valor de R$ '+this.valRetro.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valRetro, numero.estilo.monetario)+'),' +'equivalente a '+this.mesRetroativo+' '+meses+' de consumo retroativo'+
+            ', bem como o valor de R$ '+this.valTroca.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTroca, numero.estilo.monetario)+'),' +' referente ao novo hidrômetro' +
+            'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
+          }else{
+            this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+ 
+            ' acrescido do valor de R$ '+this.valRetro.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valRetro, numero.estilo.monetario)+'),' +'equivalente a '+this.mesRetroativo+' '+meses+' de consumo retroativo '+
+            'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
+          }
+        }else{
+          if(this.valTroca > 0){
+            this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+
+            ', bem como o valor de R$ '+this.valTroca.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTroca, numero.estilo.monetario)+'),' +' referente ao novo hidrômetro' +
+            'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
+          }
+        }
+      }
     }else{
       if(this.valRetro > 0){
         if(this.valTroca > 0){
           this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+
           ' acrescido do valor de R$ '+this.valRetro.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valRetro, numero.estilo.monetario)+'),' +'equivalente a '+this.mesRetroativo+' '+meses+' de consumo retroativo'+
           ', bem como o valor de R$ '+this.valTroca.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTroca, numero.estilo.monetario)+'),' +' referente ao novo hidrômetro' +
+          'e aplicado um desconto de '+this.valDesconto.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valDesconto, numero.estilo.monetario)+'),' +
           'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
         }else{
           this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+ 
           ' acrescido do valor de R$ '+this.valRetro.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valRetro, numero.estilo.monetario)+'),' +'equivalente a '+this.mesRetroativo+' '+meses+' de consumo retroativo '+
+          'e aplicado um desconto de '+this.valDesconto.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valDesconto, numero.estilo.monetario)+'),' +
           'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
         }
       }else{
         if(this.valTroca > 0){
           this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),'+
           ', bem como o valor de R$ '+this.valTroca.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTroca, numero.estilo.monetario)+'),' +' referente ao novo hidrômetro' +
+          'e aplicado um desconto de '+this.valDesconto.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valDesconto, numero.estilo.monetario)+'),' +
+          'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
+        }else{
+          this.textoMulta = 'no valor de R$ '+this.valMulta.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valMulta, numero.estilo.monetario)+'),' +
+          'e aplicado um desconto de '+this.valDesconto.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valDesconto, numero.estilo.monetario)+'),' +
           'totalizando R$ '+this.valTotal.toLocaleString('pt-BR')+' ('+numero.porExtenso(this.valTotal, numero.estilo.monetario)+'),' 
         }
       }
-    }
+    }  
 
+    
     this.print.criaPDF(this.modelo,  ("000000" + this.ndeliberacao).slice(-6)+'/'+this.ano ,this.rua, this.bairro, this.cidade,
      this.dataJulgado,this.processo, this.termo, new Date(this.dataNotificacao), this.matricula.toString(), this.irreg1,this.irreg2 , this.irreg3 ,
      this.cliente ,this.textoMulta,  this.mesRetroativo,this.dataDefesa, this.checkOcorrencia, this.hd,this.ruaResumida, 
@@ -248,8 +277,8 @@ export class PainelprocessoComponent implements OnInit {
               this.valTroca = delib[0].val_troca_hd
               this.valRetro = delib[0].val_dif_consumo
               this.valTotal = delib[0].val_total
-              this.valDesconto = this.valTotal - (this.valCusto + this.valMulta + this.valTroca + 
-                this.valRetro)
+              this.valDesconto = (this.valCusto + this.valMulta + this.valTroca + 
+                this.valRetro)-this.valTotal 
               this.fraudes = [];
               for (var i in this.irregs){
                 if(delib[0].cod_ocorrencia_1.toString() === this.irregs[i].codigo.toString()){
